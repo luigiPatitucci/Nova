@@ -1,114 +1,82 @@
 "use strict";
 const SequelizeAdapter = require('moleculer-db-adapter-sequelize');
-const dbConfig = require ('../dbConfig');
-const model = require ('../models/User')
+const {User} = require ('../models/User')
+const {Token} = require ('../models/token')
 const { MoleculerError } = require("moleculer").Errors;
+const dbConfig = require ('../dbConfig');
+const bcrypt = require('bcrypt');
+
 /**
  * @typedef {import('moleculer').Context} Context Moleculer's Context
  */
 module.exports = {
 	name: "user",
 	adapter: new SequelizeAdapter(dbConfig.db),
-	model:  model.user.sync(),
-	
-	/**
-	 * Settings
-	 */
 	settings: {
-
 	},
 
-	/**
-	 * Dependencies
-	 */
 	dependencies: [],
 
-	/**
-	 * Actions
-	 */
 	actions: {
 
-		/**
-		 * Say a 'Hello' action.
-		 *
-		 */
+
 		list: {
 			rest: {
 				method: "GET",
 				path: "/users"
 			},
 			async handler() {
-				const data = await model.user.findAll()
+				const data = await User.findAll()
+				return data;
+			}
+		},
+		listToken: {
+			rest: {
+				method: "GET",
+				path: "/token"
+			},
+			async handler() {
+				const data = await Token.findAll()
 				return data;
 			}
 		},
 
-		/**
-		 *
-		 * 
-		 */
+	//REGISTRO DE USUARIO		
 		newUser: {
-			rest: {
+ 			rest: {
                 method: "POST",
                 path: "/",
             },
-			params: {
-				email: "string",
-				password:"string",
-				name: "string",
-				surname:"string",
-/* 				birthday:"string",
-				identityType:"string",
-				identityNumber:"string",
-				phone_number:"string",
-				address_street:"string",
-				adress_number:"number|integer|positive",
-				locality:"string",
-				province:"string,
-				country:"string"
-				avatar:"string", */	
-			},
+
+		async handler(ctx) {
+			let data = ctx.params
 			
-			handler(ctx) {
-				let data = ctx.params
-				const newUser = model.user.create({
-					email:data.email,
-					password:data.password,
-					name:data.name,
-					surname:data.surname,
-					birthday:data.birthday,
-					identityType:data.identityType,
-					identityNumber:data.identityNumber,
-					phone_number:data.phone_number,
-					address_street:data.address_street,
-					adress_number:data.adress_number,
-					locality:data.locality,
-					province:data.province,
-					country:data.country,
-					avatar:data.avatar
-				})
-				return "usuario registrado" 
+	//SE VERIFICA SI YA EXISTE EL EMAIL
+			const existe = await User.findOne({
+				where: {email: data.email}})
+			if(existe){
+				throw new MoleculerError("Email en uso !", 422,"");
 			}
-		}
-	},
+	//ENCRIPTAR CONTRASEÑA
+			data.password = bcrypt.hashSync(data.password, 11);
+			
+	//CREO EL USUARIO Y LO RETORNO 		
+			const newModel = await User.create(data)
 
-	/**
-	 * Events
-	 */
+	//GENERAR PIN 
+		Token.create({
+			pin:Math.floor((Math.random() * 1000000)),
+			userId:newModel.id
+			})			
+			return newModel	
+		}  
+	}
+},
+
 	events: {
 
 	},
 
-	/**
-	 * Events
-	 */
-	events: {
-
-	},
-
-	/**
-	 * Methods
-	 */
 	methods: {
 
 	},
@@ -117,7 +85,7 @@ module.exports = {
 	 * Service created lifecycle event handler
 	 */
 	created() {
-	
+		User.hasOne(Token);
 	},
 
 	/**
