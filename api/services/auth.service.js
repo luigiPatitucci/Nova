@@ -45,8 +45,8 @@ module.exports = {
                 }
 
                 const res = { 
-					token:  jwt.sign({id: logUser.id},CLAVE_TOKEN,{expiresIn: "1d"}),
-					id:logUser.id
+				token:  jwt.sign({id: logUser.id},CLAVE_TOKEN,{expiresIn: "1d"}),
+				id:logUser.id
 				};
 				
 				
