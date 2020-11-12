@@ -1,6 +1,7 @@
 "use strict";
 const SequelizeAdapter = require('moleculer-db-adapter-sequelize');
 const {User} = require ('../models/User')
+const {Account} = require ('../models/Account')
 const {Token} = require ('../models/token')
 const { MoleculerError } = require("moleculer").Errors;
 const dbConfig = require ('../dbConfig');
@@ -50,35 +51,81 @@ module.exports = {
 
 		async handler(ctx) {
 			let data = ctx.params
-			
-	//SE VERIFICA SI YA EXISTE EL EMAIL
+			console.log(data)
 			const existe = await User.findOne({
-				where: {email: data.email}})
-			if(existe){
-				throw new MoleculerError("Email en uso !", 422,"");
-			}
+				$or: [
+					{ username: data.username },
+					{ email: data.email },
+				],
+			})
+			console.log(existe)
+	//SE VERIFICA SI EL USUARIO SE ENCUENTRA EN USO
+		if(existe && existe.username && existe.username !== data.username) {
+				throw new MoleculerError("Usuario en uso !", 422,"")}
+				
+	//SE VERIFICA SI EL EMAIL SE ENCUENTRA EN USO
+		if(existe && existe.email && existe.email !== data.email){
+				throw new MoleculerError("Email en uso !", 422,"")}
+				
 	//ENCRIPTAR CONTRASEÑA
-			data.password = bcrypt.hashSync(data.password, 11);
+		data.password = bcrypt.hashSync("12345", 11);
 			
-	//CREO EL USUARIO Y LO RETORNO 		
-			const newModel = await User.create(data)
+	//CREO EL USUARIO Y LO RETORNO (el usuario todavia no esta dado de alta)	
+		const newUser = await User.create(data)
 
-	//GENERAR PIN 
-		Token.create({
+	//GENERAR PIN PARA DAR ALTA DE CLIENTE 
+		const newToken = await Token.create({
 			pin:Math.floor((Math.random() * 1000000)),
-			userId:newModel.id
-			})			
-			return newModel	
+			userId:newUser.id
+			})
+			
+	/* 	ACA SE DEBERIA ENVIAR EL EMAIL CON EL TOKEN AL USUARIO 
+		--> enviarEmail(newToken) <--	
+	*/			
+			return newUser	
 		}  
+	},
+	//BUSCAR USUARIO POR ID USUARIO
+	userById: {
+		rest: {
+			method: "GET",
+			path: "/users"
+		},
+		async handler() {
+		const {id} = ctx.params
+		const data = await User.findByPk(id)
+
+			return data;
+			}
+		},
+	
+	//ACTUALIZAR USUARIO	
+	userUpdate: {
+		rest: {
+			method:"PUT",
+			path:"/update"
+		},   
+		async handler(ctx) {
+			const data = ctx.params;
+			data.password = bcrypt.hashSync(data.password, 11);
+
+		await User.update(
+			data,
+			{
+			where:{
+				id:data.id
+				}
+			}
+		);
+		const user = await User.findByPk(data.id)
+		return user
+
+		},
 	}
 },
-
 	events: {
-
 	},
-
 	methods: {
-
 	},
 
 	/**
@@ -86,6 +133,7 @@ module.exports = {
 	 */
 	created() {
 		User.hasOne(Token);
+		User.hasOne(Account)
 	},
 
 	/**
