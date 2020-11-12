@@ -2,8 +2,14 @@ import * as Font from 'expo-font';
 import React from 'react';
 import { AppLoading } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
-import { Container } from 'native-base';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import MyDrawer from './components/Drawer/drawer.jsx';
+import FirstStart from './components/Start/first_start/first_start.jsx'
+import Login from './components/Start/login/login.jsx'
+import PrincipalScreen from './components/PrincipalScreen/principal_screen.jsx'
+
+const Stack = createStackNavigator();
 
 class App extends React.Component {
   constructor(props) {
@@ -28,9 +34,13 @@ class App extends React.Component {
     }
 
     return (
-      <Container>
-        <MyDrawer/>
-      </Container>
+      < NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Inicio" component={ FirstStart } />
+          <Stack.Screen name="Ingresar" component={ Login } />
+          <Stack.Screen name="Home" component={ PrincipalScreen }/>
+        </Stack.Navigator>
+      </NavigationContainer >
     );
   }
 }

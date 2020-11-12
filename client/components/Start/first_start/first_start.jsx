@@ -14,7 +14,7 @@ const FirstStart = ({navigation}) => {
                 >
                 <Text>Ingresar</Text>
             </Button>
-            <Button block dark style={styles.button}>
+            <Button block dark style={styles.button} onPress={() => navigation.navigate('Home')}>
                 <Text>Registrarme</Text>
             </Button>
         </View>
