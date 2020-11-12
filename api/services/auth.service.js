@@ -44,14 +44,16 @@ module.exports = {
                     throw new MoleculerError('Email o contraseña invalido', 422)
                 }
 
-                const res = await jwt.sign({id: logUser.id},CLAVE_TOKEN,
-					{expiresIn: "1d"});
-
+                const res = { 
+					token:  jwt.sign({id: logUser.id},CLAVE_TOKEN,{expiresIn: "1d"}),
+					id:logUser.id
+				};
+				
+				
                 if(!res) {
                     throw new MoleculerError('algo malir sal',422)
 				}
 				
-				console.log(jwt.verify(res, CLAVE_TOKEN))
                 return res;
 
             }

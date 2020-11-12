@@ -9,20 +9,24 @@ const db = require('../dbConfig');
             allowNull: false,
             unique:true,
             validated:{
-              isEmail: true,
+              isEmail: false,
             }
         },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        name:{
+        username:{
             type:DataTypes.STRING,
             allowNull: false,
         },
+        name:{
+            type:DataTypes.STRING,
+            allowNull: true,
+        },
         surname:{
             type:DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         birthday: {
             type: DataTypes.STRING,
@@ -67,7 +71,11 @@ const db = require('../dbConfig');
         role:{
             type: DataTypes.ENUM('user','admin'),
             defaultValue: 'user'
-        }
+        },
+        verified: {
+			type: DataTypes.BOOLEAN,
+			default: false,
+		},
     })
 module.exports={
     User,
