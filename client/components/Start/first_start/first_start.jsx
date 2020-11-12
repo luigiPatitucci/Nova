@@ -17,6 +17,10 @@ const FirstStart = ({navigation}) => {
             <Button block dark style={styles.button}>
                 <Text>Registrarme</Text>
             </Button>
+            
+            <Button block dark style={styles.button}  onPress={() => navigation.navigate('Client')}>
+                <Text>homeclient</Text>
+            </Button>
         </View>
     );
 };
