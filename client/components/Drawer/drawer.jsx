@@ -1,12 +1,9 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import FirstStart from '../Start/first_start/first_start.jsx';
-import Login from '../Start/login/login.jsx';
 import { View, TouchableOpacity, Image, Text } from 'react-native';
+import PrincipalScreen from '../PrincipalScreen/principal_screen.jsx'
 import s from './style.js'
 import Icon from 'react-native-vector-icons/FontAwesome5';
-
-
 
 const Drawer = createDrawerNavigator();
 
@@ -48,8 +45,7 @@ const MenuDrawer = () => {
 const MyDrawer = () => {
     return (
         <Drawer.Navigator drawerContent={() => <MenuDrawer />}>
-            <Drawer.Screen name="Inicio" component={FirstStart} />
-            <Drawer.Screen name="Ingresar" component={Login} />
+            <Drawer.Screen name="Home" component={PrincipalScreen} />
         </Drawer.Navigator>
     );
 };

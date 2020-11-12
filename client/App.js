@@ -1,49 +1,54 @@
 import * as Font from 'expo-font';
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { AppLoading } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import MyDrawer from './components/Drawer/drawer.jsx';
-import FirstStart from './components/Start/first_start/first_start.jsx'
-import Login from './components/Start/login/login.jsx'
-import PrincipalScreen from './components/PrincipalScreen/principal_screen.jsx'
+import MyDrawer from './components/Drawer/Drawer.jsx';
+import RootStackScreens from './components/RootStackScreens/RootStackScreens.jsx'
+import { ActivityIndicator, View } from 'react-native';
+import { AuthContext } from './components/Context';
 
-const Stack = createStackNavigator();
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isReady: false,
-    };
-  }
+const App = () => {
 
-  async componentDidMount() {
-    await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
-    });
-    this.setState({ isReady: true });
-  }
+  const [isLoading, setIsLoading] = useState (true);
+  const [userToken, setUserToken ] = useState(null);
 
-  render() {
-    if (!this.state.isReady) {
-      return <AppLoading />;
-    }
-
+  /* if(isLoading){
     return (
-      < NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Inicio" component={ FirstStart } />
-          <Stack.Screen name="Ingresar" component={ Login } />
-          <Stack.Screen name="Home" component={ PrincipalScreen }/>
-        </Stack.Navigator>
-      </NavigationContainer >
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size='large'/>
+      </View>
     );
-  }
-}
+  };
 
+  const authContext = useMemo(() => ({
+    register: () =>{
+      setUserToken('algo');
+      setIsLoading(false);
+    },
+    login: () => {
+      setUserToken('algo');
+      setIsLoading(false);
+    },
+    logout: () => {
+      setUserToken(null);
+      setIsLoading(false);
+    }
+  }));
+
+  useEffect(() => {
+    setTimeout(() =>{
+      setIsLoading(false);
+    }, 1000)
+  }, [])
+ */
+  return (
+    < NavigationContainer>
+      {/* <RootStackScreens /> */}
+      <MyDrawer/>
+    </NavigationContainer >
+  );
+};
 
 export default App;

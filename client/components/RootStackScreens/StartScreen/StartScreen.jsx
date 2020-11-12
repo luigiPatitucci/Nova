@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Text, View } from 'native-base';
 
-const FirstStart = ({navigation}) => {
+const StartScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <Text style={styles.icon}>HB</Text>
@@ -14,7 +14,7 @@ const FirstStart = ({navigation}) => {
                 >
                 <Text>Ingresar</Text>
             </Button>
-            <Button block dark style={styles.button} onPress={() => navigation.navigate('Home')}>
+            <Button block dark style={styles.button}>
                 <Text>Registrarme</Text>
             </Button>
         </View>
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default FirstStart;
+export default StartScreen;
