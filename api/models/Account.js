@@ -9,14 +9,14 @@ const db = require('../dbConfig');
     },
     cbu:{
         type: DataTypes.BIGINT,
-        allowNull: false,
-        unique: true,
+        allowNull: true,
+        unique: false,
         validate: {
             isNumeric: true 
         }  
     },
     code:{
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true
     },
     currency:{

@@ -27,7 +27,7 @@ export default {
         color: 'white'
     },
     userImage: {
-        backgroundColor: 'black',
+        backgroundColor: 'transparent',
         width: 70,
         height: 70,
         borderRadius: 35

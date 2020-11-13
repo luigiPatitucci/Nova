@@ -2,13 +2,33 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button, Picker } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useDispatch, useSelector } from 'react-redux';
+import { createUser } from '../../../redux/actions/userActions.js'
+
 
 const CreateUser = ({navigation}) => {
+
+    const dispatch = useDispatch();
   
     const [data, setData] = useState({
-        userName: '',
+        username: '',
         email: ''
     });
+
+    const createUser =  () => {
+        return axios.post("http://192.168.1.12:3000/user/", data)
+        .then(resp=>{
+            console.log('SOY LA RESPUESTA', resp.data)
+        })
+        .then(() => navigation.navigate('Verificacion'))
+        .catch(err=>{
+            console.log('Soy el error', err)
+        })
+    };
+
+    const handleSubmit = () => {
+        createUser();
+    };
 
     return (
         <Container style={styles.container}>
@@ -17,7 +37,7 @@ const CreateUser = ({navigation}) => {
                    
                     <Item floatingLabel>
                         <Label>Nombre de Usuario *</Label>
-                        <Input onChangeText={userName => setData({ ...data, userName })}></Input>
+                        <Input onChangeText={username => setData({ ...data, username })}></Input>
                     </Item>
 
                     <Item floatingLabel>
@@ -29,7 +49,7 @@ const CreateUser = ({navigation}) => {
                     block
                     dark
                     style={styles.button}
-                    onPress={() => navigation.navigate('Validacion Token')}
+                    onPress={() => handleSubmit()}
                 >
                     <Text>Enviar</Text>
                 </Button>
