@@ -52,6 +52,9 @@ const MyDrawer = () => {
     return (
         <Drawer.Navigator drawerContent={(props) => <MenuDrawer {...props} />}>
             <Drawer.Screen name="Home" component={PrincipalScreen} />
+            <Drawer.Screen name="Transacciones" component={Transacciones} />
+            <Drawer.Screen name="Estadisticas" component={Estadisticas} />
+            <Drawer.Screen name="DetalleTransaccion" component={DetalleTransaccion} />
         </Drawer.Navigator>
     );
 };
