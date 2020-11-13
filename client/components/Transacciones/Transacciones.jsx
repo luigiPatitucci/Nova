@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import { Button, Text, View} from 'native-base';
 import { StatusBar, StyleSheet, ScrollView ,  ImageBackground } from "react-native";
 import {  ListItem, Left, Right, Icon } from 'native-base';
+import moment from 'moment';
 const image = { uri: "https://www.10wallpaper.com/wallpaper/1920x1080/1908/2019_Purple_Abstract_4K_HD_Design_1920x1080.jpg" };
-function Transacciones(){
+function Transacciones({navigation}){
     const  [people, setPeople]= useState([
         {name:'holi',email:'123@live', date:'11-2-3', amount:3945, key:'1'},
         {name:'aye', email:'123@live', date:'11-2-3',amount:3945, key:'2'},
@@ -27,17 +28,18 @@ function Transacciones(){
                 <View style={styles.left}>
                 <Text style={styles.name}> {item.name}</Text>
                 <Text style={styles.email}> {item.email}</Text>
-                <Text style={styles.date}> {item.date}</Text>
+                <Text style={styles.date}> {moment().format("MMM Do YY")}</Text>
          
                 </View>
               </Left>
          
      
               <Right>
+
                   <View style={styles.right}>
         
-              <Text style={styles.amount}>$ {item.amount}</Text>
-              <Icon name="arrow-forward" />
+              <Text style={styles.amount}> + $ {item.amount}</Text>
+              <Icon name="arrow-forward" onPress={() => navigation.navigate('DetalleTransaccion')}/>
              
                 </View>
               </Right>
@@ -63,6 +65,7 @@ const styles = StyleSheet.create({
         justifyContent: "center"
       },
       title:{
+        marginTop:20,
           marginBottom:20,
         color:'white',
         textAlign: 'center',
@@ -84,8 +87,7 @@ const styles = StyleSheet.create({
 
     },
     right:{
-        width:120,
-        backgroundColor:'red',
+        width:110,
         justifyContent: 'space-between',
         flexDirection: 'row',
         alignItems:'center'
@@ -97,5 +99,8 @@ const styles = StyleSheet.create({
 
       fontSize: 32,
     },
+    amount:{
+      fontSize: 20,
+    }
   });
 export default Transacciones;
