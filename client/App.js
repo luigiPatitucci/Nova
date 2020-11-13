@@ -6,7 +6,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import FirstStart from './components/Start/first_start/first_start.jsx';
 import Login from './components/Start/login/login.jsx';
-
+import CreateUser from './components/Start/Create-user/Create-user'
+import FirstRegister from './components/Start/Create-user/First-register'
+import ValidateToken from './components/Start/Create-user/ValidationToken'
 
 const Stack = createStackNavigator();
 
@@ -24,6 +26,9 @@ const App = () => {
       <Container>
         <Stack.Navigator>
           <Stack.Screen name="Inicio" component={ FirstStart } />
+          <Stack.Screen name="Validacion Token" component={ ValidateToken } />
+          <Stack.Screen name="Registrarse" component={ FirstRegister } />
+          <Stack.Screen name="Crear Usuario" component={ CreateUser } />
           <Stack.Screen name="Ingresar" component={ Login } />
         </Stack.Navigator>
       </Container>
