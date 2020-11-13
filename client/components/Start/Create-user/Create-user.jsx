@@ -4,7 +4,7 @@ import { Container, Form, Item, Input, Label, Text, Button, Picker } from 'nativ
 import { ScrollView } from 'react-native-gesture-handler';
 import { useFormik } from "formik";
 
-const CreateUser = () => {
+const CreateUser = ({navigation}) => {
     const {values, setFieldValue} = useFormik({
         initialValues: {
             tipoDoc:""
@@ -91,7 +91,7 @@ const CreateUser = () => {
                     block
                     dark
                     style={styles.button}
-                    onPress={() => handleSubmit()}
+                    onPress={() => navigation.navigate('Home')}
                 >
                     <Text>Registrarme</Text>
                 </Button>
