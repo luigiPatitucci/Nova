@@ -3,16 +3,18 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { AppLoading } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
-import MyDrawer from './components/Drawer/Drawer.jsx';
+import MyDrawer from './components/Drawer/drawer.jsx';
 import RootStackScreens from './components/RootStackScreens/RootStackScreens.jsx'
 import { ActivityIndicator, View } from 'react-native';
 import { AuthContext } from './components/Context';
+import { Provider } from "react-redux";
+import store from './redux/store/store.js';
 
 
 const App = () => {
 
-  const [isLoading, setIsLoading] = useState (true);
-  const [userToken, setUserToken ] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userToken, setUserToken] = useState(null);
 
   /* if(isLoading){
     return (
@@ -44,10 +46,12 @@ const App = () => {
   }, [])
  */
   return (
-    < NavigationContainer>
-      {/* <RootStackScreens /> */}
-      <MyDrawer/>
-    </NavigationContainer >
+    <Provider store={ store }>
+      < NavigationContainer>
+        <RootStackScreens />
+        {/* <MyDrawer/> */}
+      </NavigationContainer >
+    </Provider>
   );
 };
 

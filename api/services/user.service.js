@@ -60,11 +60,11 @@ module.exports = {
 			})
 			console.log(existe)
 	//SE VERIFICA SI EL USUARIO SE ENCUENTRA EN USO
-		if(existe && existe.username && existe.username !== data.username) {
+		if(existe && existe.username && existe.username == data.username) {
 				throw new MoleculerError("Usuario en uso !", 422,"")}
 				
 	//SE VERIFICA SI EL EMAIL SE ENCUENTRA EN USO
-		if(existe && existe.email && existe.email !== data.email){
+		if(existe && existe.email && existe.email == data.email){
 				throw new MoleculerError("Email en uso !", 422,"")}
 				
 	//ENCRIPTAR CONTRASEÑA
@@ -89,9 +89,9 @@ module.exports = {
 	userById: {
 		rest: {
 			method: "GET",
-			path: "/users"
+			path: "/user/:id"
 		},
-		async handler() {
+		async handler(ctx) {
 		const {id} = ctx.params
 		const data = await User.findByPk(id)
 
