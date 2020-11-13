@@ -1,11 +1,13 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Button, Text, View } from 'native-base';
+import { StyleSheet, Image} from 'react-native';
+import { Button, Text, View, Container } from 'native-base';
+
 
 const FirstStart = ({navigation}) => {
     return (
+        <Container style={styles.default}>
         <View style={styles.container}>
-            <Text style={styles.icon}>HB</Text>
+            {/* <Image source={require('../Uploads/')}/> */}
             <Button 
                 block 
                 dark 
@@ -14,10 +16,16 @@ const FirstStart = ({navigation}) => {
                 >
                 <Text>Ingresar</Text>
             </Button>
-            <Button block dark style={styles.button}>
+            <Button 
+             block
+             dark 
+             style={styles.button}
+             onPress={() => navigation.navigate('Registrarse')}
+            >
                 <Text>Registrarme</Text>
             </Button>
         </View>
+    </Container>
     );
 };
 
@@ -26,7 +34,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 360,
         height: 512,
-        backgroundColor: 'yellow'
+        alignSelf: 'center'
     },
     button: {
         margin: 10,
@@ -35,7 +43,11 @@ const styles = StyleSheet.create({
         fontSize: 100,
         textAlign: 'center',
 
+    },
+    default: {
+        backgroundColor: 'yellow'
     }
+
 });
 
 export default FirstStart;
