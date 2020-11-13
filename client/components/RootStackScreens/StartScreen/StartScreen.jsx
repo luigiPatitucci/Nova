@@ -1,27 +1,34 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Button, Text, View } from 'native-base';
+import { StyleSheet, Image } from 'react-native';
+import { Button, Text, View, Container } from 'native-base';
 
-const StartScreen = ({navigation}) => {
+
+const StartScreen = ({ navigation }) => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.icon}>HB</Text>
-            <Button 
-                block 
-                dark 
-                style={styles.button}
-                onPress={() => navigation.navigate('Ingresar')}
+        <Container style={styles.default}>
+            <View>
+                <Image source={{ uri: 'https://i.imgur.com/SGFslqf.png' }}
+                    style={styles.imagen} />
+            </View>
+            <View style={styles.container}>
+                <Button
+                    block
+                    dark
+                    style={styles.button}
+                    onPress={() => navigation.navigate('Ingresar')}
                 >
-                <Text>Ingresar</Text>
-            </Button>
-            <Button block dark style={styles.button}>
-                <Text>Registrarme</Text>
-            </Button>
-            
-            <Button block dark style={styles.button}  onPress={() => navigation.navigate('Client')}>
-                <Text>homeclient</Text>
-            </Button>
-        </View>
+                    <Text>Ingresar</Text>
+                </Button>
+                <Button
+                    block
+                    dark
+                    style={styles.button}
+                    onPress={() => navigation.navigate('Registrarse')}
+                >
+                    <Text>Registrarme</Text>
+                </Button>
+            </View>
+        </Container>
     );
 };
 
@@ -30,7 +37,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 360,
         height: 512,
-        backgroundColor: 'yellow'
+        alignSelf: 'center'
     },
     button: {
         margin: 10,
@@ -39,7 +46,18 @@ const styles = StyleSheet.create({
         fontSize: 100,
         textAlign: 'center',
 
+    },
+    default: {
+        backgroundColor: 'yellow'
+    },
+    imagen: {
+        width: 100,
+        height: 70,
+        alignSelf: 'center',
+        bottom:-120,
+        left:15
     }
+
 });
 
 export default StartScreen;

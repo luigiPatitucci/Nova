@@ -25,7 +25,7 @@ module.exports = {
 
 		routes: [
 			{
-				path: "/api",
+				path: "/",
 
 				whitelist: [
 					"**"
@@ -38,7 +38,7 @@ module.exports = {
 				mergeParams: true,
 
 				// Enable authentication. Implement the logic into `authenticate` method. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Authentication
-				authentication: false,
+				authentication: true,
 
 				// Enable authorization. Implement the logic into `authorize` method. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Authorization
 				authorization: false,
@@ -129,7 +129,7 @@ module.exports = {
 		 * @param {IncomingRequest} req
 		 * @returns {Promise}
 		 */
-		async authenticate(ctx, route, req) {
+		/* async authenticate(ctx, route, req) {
 			// Read the token from header
 			const auth = req.headers["authorization"];
 
@@ -151,7 +151,7 @@ module.exports = {
 				// throw new E.UnAuthorizedError(E.ERR_NO_TOKEN);
 				return null;
 			}
-		},
+		}, */
 
 		/**
 		 * Authorize the request. Check that the authenticated user has right to access the resource.
@@ -163,7 +163,7 @@ module.exports = {
 		 * @param {IncomingRequest} req
 		 * @returns {Promise}
 		 */
-		async authorize(ctx, route, req) {
+		/* async authorize(ctx, route, req) {
 			// Get the authenticated user.
 			const user = ctx.meta.user;
 
@@ -171,7 +171,7 @@ module.exports = {
 			if (req.$action.auth == "required" && !user) {
 				throw new ApiGateway.Errors.UnAuthorizedError("NO_RIGHTS");
 			}
-		}
+		} */
 
 	}
 };

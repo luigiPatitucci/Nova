@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button } from 'native-base';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../../redux/actions/userActions.js'
 
-const Login = () => {
+const Login = ({navigation}) => {
+
+    const dispatch = useDispatch();
 
     const [input, setInput] = useState({
         email: '',
@@ -11,7 +15,8 @@ const Login = () => {
 
     const handleSubmit = () => {
         console.log(input)
-        //Autenticacion con el back//
+        dispatch(login(input));
+        navigation.navigate('Home')
     };
 
     const recoverPassword = () => {
@@ -52,8 +57,7 @@ const Login = () => {
 
 const styles = StyleSheet.create({
     container: {
-        width: 360,
-        height: 512,
+
         backgroundColor: 'yellow'
     },
     button: {

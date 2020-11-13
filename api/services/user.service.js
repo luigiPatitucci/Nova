@@ -1,123 +1,203 @@
 "use strict";
 const SequelizeAdapter = require('moleculer-db-adapter-sequelize');
-const dbConfig = require ('../dbConfig');
-const model = require ('../models/User')
+const {User} = require ('../models/User')
+const {Account} = require ('../models/Account')
+const {Token} = require ('../models/token')
 const { MoleculerError } = require("moleculer").Errors;
+const dbConfig = require ('../dbConfig');
+const bcrypt = require('bcrypt');
+const nodemailer = require( 'nodemailer' );
+
 /**
  * @typedef {import('moleculer').Context} Context Moleculer's Context
  */
 module.exports = {
 	name: "user",
 	adapter: new SequelizeAdapter(dbConfig.db),
-	model:  model.user.sync(),
-	
-	/**
-	 * Settings
-	 */
 	settings: {
-
 	},
 
-	/**
-	 * Dependencies
-	 */
 	dependencies: [],
 
-	/**
-	 * Actions
-	 */
 	actions: {
 
-		/**
-		 * Say a 'Hello' action.
-		 *
-		 */
+
 		list: {
 			rest: {
 				method: "GET",
 				path: "/users"
 			},
 			async handler() {
-				const data = await model.user.findAll()
+				const data = await User.findAll()
+				return data;
+			}
+		},
+		listToken: {
+			rest: {
+				method: "GET",
+				path: "/token"
+			},
+			async handler() {
+				const data = await Token.findAll()
 				return data;
 			}
 		},
 
-		/**
-		 *
-		 * 
-		 */
+	//REGISTRO DE USUARIO		
 		newUser: {
-			rest: {
+ 			rest: {
                 method: "POST",
                 path: "/",
             },
-			params: {
-				email: "string",
-				password:"string",
-				name: "string",
-				surname:"string",
-/* 				birthday:"string",
-				identityType:"string",
-				identityNumber:"string",
-				phone_number:"string",
-				address_street:"string",
-				adress_number:"number|integer|positive",
-				locality:"string",
-				province:"string,
-				country:"string"
-				avatar:"string", */	
-			},
+
+		async handler(ctx) {
+			let data = ctx.params
+			console.log(data)
+			const existe = await User.findOne({
+				$or: [
+					{ username: data.username },
+					{ email: data.email },
+				],
+			})
+			console.log(existe)
+	//SE VERIFICA SI EL USUARIO SE ENCUENTRA EN USO
+		if(existe && existe.username && existe.username == data.username) {
+				throw new MoleculerError("Usuario en uso !", 422,"")}
+				
+	//SE VERIFICA SI EL EMAIL SE ENCUENTRA EN USO
+		if(existe && existe.email && existe.email == data.email){
+				throw new MoleculerError("Email en uso !", 422,"")}
+				
+	//ENCRIPTAR CONTRASEÑA
+		data.password = bcrypt.hashSync("12345", 11);
 			
-			handler(ctx) {
-				let data = ctx.params
-				const newUser = model.user.create({
-					email:data.email,
-					password:data.password,
-					name:data.name,
-					surname:data.surname,
-					birthday:data.birthday,
-					identityType:data.identityType,
-					identityNumber:data.identityNumber,
-					phone_number:data.phone_number,
-					address_street:data.address_street,
-					adress_number:data.adress_number,
-					locality:data.locality,
-					province:data.province,
-					country:data.country,
-					avatar:data.avatar
-				})
-				return "usuario registrado" 
+	//CREO EL USUARIO Y LO RETORNO (el usuario todavia no esta dado de alta)	
+		const newUser = await User.create(data)
+
+	//GENERAR PIN PARA DAR ALTA DE CLIENTE 
+		const newToken = await Token.create({
+			pin:Math.floor((Math.random() * 1000000)),
+			userId:newUser.id
+			})
+			
+			/* 	ACA SE DEBERIA ENVIAR EL EMAIL CON EL TOKEN AL USUARIO 
+			*/			
+	
+	const transporter = nodemailer.createTransport( {
+				service: 'gmail',
+				auth: {
+					user: `sixgamesft05@gmail.com`,
+					pass: `SixGamesSixGames`
+				}
+			} );
+	
+			const mailOptions = {
+				from: `Henry B <sixgamesft05@gmail.com>`,
+				to: data.email,
+				subject: '[Henry B] Verificación de correo electronico',
+				text: `Hola ${data.username}, para terminar el registro de tu cuenta necesitamos que ingreses el siguiente codigo en la App: ${newToken.pin}`
 			}
+	
+			transporter.sendMail( mailOptions, ( mailError, mailResponse ) => {
+				mailError ?
+					response.status( 409 ).send( 'Token email could not be sent' ) :
+					response.status( 200 ).send( 'Token email was sent successfully' );
+			} );
+			
+			return newUser	
+		}  
+	},
+	//BUSCAR USUARIO POR ID USUARIO
+	userById: {
+		rest: {
+			method: "GET",
+			path: "/:id"
+		},
+		async handler(ctx) {
+		const {id} = ctx.params
+		const data = await User.findByPk(id)
+
+			return data;
+			}
+		},
+	
+	//ACTUALIZAR USUARIO	
+	userUpdate: {
+		rest: {
+			method:"PUT",
+			path:"/update"
+		},   
+		async handler(ctx) {
+			const data = ctx.params;
+
+			const existe = await User.findOne({
+				$or: [
+					{ identityNumber: data.username },
+				],
+			})
+
+			if(existe && existe.identityNumber && existe.identityNumber == data.identityNumber) {
+				throw new MoleculerError("DNI duplicado !", 422,"")}
+			
+			data.password = bcrypt.hashSync("12345", 11);
+			//GENERAMOS CODIGO DE CUENTA DE 10 DIGITOS
+			function randomString(length, chars) {
+				var result = '';
+				for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+				return result;
+			}
+			var codigoCuenta = randomString(10, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+			//CREAMOS LA CUENTA VINCULADA AL USUARIO
+
+			const cuenta = Account.create({
+				code:codigoCuenta,
+				userId:data.id
+			}) 
+		
+		await User.update(
+			data,
+			{
+			where:{
+				id:data.id
+				}
+			}
+		);
+		const user = await User.findByPk(data.id)
+		return user
+
+		},
+	},
+	validarToken:{
+		rest: {
+			method:"POST",
+			path:"/validartoken"
+		},  
+		async handler(ctx) {
+			const {pin} = ctx.params 
+			const existe = await Token.findOne({
+				$or: [
+					{ pin: pin},
+				],
+			})
+
+			if(existe && existe.pin && existe.pin == data.pin) {
+				throw new MoleculerError("PIN incorrecto !", 422,"")}
+
+				return "email validado";
 		}
-	},
-
-	/**
-	 * Events
-	 */
+	}
+},
 	events: {
-
 	},
-
-	/**
-	 * Events
-	 */
-	events: {
-
-	},
-
-	/**
-	 * Methods
-	 */
 	methods: {
-
 	},
 
 	/**
 	 * Service created lifecycle event handler
 	 */
 	created() {
-	
+		User.hasOne(Token);
+		User.hasOne(Account)
 	},
 
 	/**

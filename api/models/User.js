@@ -1,29 +1,32 @@
 const { DataTypes } = require('sequelize');
+const {Token} = require("./Token");
 const db = require('../dbConfig');
 
-module.exports = {
-    user :  db.conexion.define('user',{
 
+   const User =  db.conexion.define('user',{
         email:{
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             unique:true,
             validated:{
-              isEmail: true,
+              isEmail: false,
             }
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false,
-            
+            allowNull: true,
+        },
+        username:{
+            type:DataTypes.STRING,
+            allowNull: true,
         },
         name:{
             type:DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         surname:{
             type:DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         birthday: {
             type: DataTypes.STRING,
@@ -68,6 +71,13 @@ module.exports = {
         role:{
             type: DataTypes.ENUM('user','admin'),
             defaultValue: 'user'
-        }
+        },
+        verified: {
+			type: DataTypes.BOOLEAN,
+			default: false,
+		},
     })
+module.exports={
+    User,
+    Token
 }
