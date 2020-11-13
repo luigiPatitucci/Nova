@@ -10,21 +10,15 @@ import { AuthContext } from './components/Context';
 import { Provider } from "react-redux";
 import store from './redux/store/store.js';
 
-
-const App = () => {
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
   const [isLoading, setIsLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
 
-  /* if(isLoading){
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator size='large'/>
-      </View>
-    );
-  };
+const App = () => {
 
-  const authContext = useMemo(() => ({
+  /* const authContext = useMemo(() => ({
     register: () =>{
       setUserToken('algo');
       setIsLoading(false);
@@ -43,16 +37,18 @@ const App = () => {
     setTimeout(() =>{
       setIsLoading(false);
     }, 1000)
-  }, [])
- */
+  }, []) */
+
   return (
     <Provider store={ store }>
       < NavigationContainer>
-        <RootStackScreens />
-        {/* <MyDrawer/> */}
+        {/* <RootStackScreens /> */}
+        <MyDrawer/>
       </NavigationContainer >
     </Provider>
   );
 };
 
 export default App;
+
+

@@ -69,8 +69,7 @@ const Login = () => {
 
 const styles = StyleSheet.create({
     container: {
-        width: 360,
-        height: 512,
+
         backgroundColor: 'yellow'
     },
     button: {
