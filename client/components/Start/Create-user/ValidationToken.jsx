@@ -2,13 +2,21 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button, Picker } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { createUser } from '../../../redux/actions/userActions.js'
 
 const CreateUser = ({navigation}) => {
+
+    const dispatch = useDispatch();
+
     const [data, setData] = useState({
-        userName: '',
-        email: ''
+        pin: '',
     });
+
+    const handleSubmit = () => {
+        dispatch(createUser(data));
+        navigation.navigate('Crear Usuario')
+    };
 
     return (
         <Container style={styles.container}>
@@ -16,14 +24,14 @@ const CreateUser = ({navigation}) => {
                 <Form>
                     <Item floatingLabel>
                         <Label>Validacion de Usuario</Label>
-                        <Input onChangeText={userName => setData({ ...data, userName })}></Input>
+                        <Input onChangeText={pin => setData({ ...data, pin })}></Input>
                     </Item>
                 </Form>
                 <Button
                     block
                     dark
                     style={styles.button}
-                    onPress={() => navigation.navigate('Registrarse')}
+                    onPress={() => handleSubmit()}
                 >
                     <Text>Enviar</Text>
                 </Button>

@@ -6,7 +6,7 @@ const db = require('../dbConfig');
    const User =  db.conexion.define('user',{
         email:{
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             unique:true,
             validated:{
               isEmail: false,
@@ -14,11 +14,11 @@ const db = require('../dbConfig');
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         username:{
             type:DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         name:{
             type:DataTypes.STRING,

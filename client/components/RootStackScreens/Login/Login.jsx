@@ -2,33 +2,21 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button } from 'native-base';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUser } from '../../../redux/actions/userActions.js'
-import axios from 'axios';
+import { login } from '../../../redux/actions/userActions.js'
 
-const Login = () => {
+const Login = ({navigation}) => {
 
     const dispatch = useDispatch();
 
     const [input, setInput] = useState({
         email: '',
-        username: ''
+        password: ''
     });
 
     const handleSubmit = () => {
         console.log(input)
-        /* dispatch(createUser(input)) */
-        axios.post("http://192.168.1.12:3000/user/", input)
-        .then(resp=>{
-            console.log('SOY LA RESPUESTA', resp.data)
-            /* dispatch({
-                type:ADD_USER,
-                user:resp.data
-            }) */
-        })
-        .catch(err=>{
-            console.log('Soy el error', err)
-        })
-        
+        dispatch(login(input));
+        navigation.navigate('Home')
     };
 
     const recoverPassword = () => {
@@ -45,7 +33,7 @@ const Login = () => {
                 </Item>
                 <Item floatingLabel last>
                     <Label>Contraseña</Label>
-                    <Input onChangeText={username => setInput({ ...input, username })} />
+                    <Input onChangeText={password => setInput({ ...input, password })} />
                 </Item>
             </Form>
             <Button 

@@ -3,7 +3,7 @@ const SequelizeAdapter = require('moleculer-db-adapter-sequelize');
 const { MoleculerError } = require("moleculer").Errors;
 const dbConfig = require ('../dbConfig');
 const {User} = require ('../models/User')
-const {Account} = require ('../models/User')
+const {Account} = require ('../models/Account')
 
 /**
  * @typedef {import('moleculer').Context} Context Moleculer's Context
@@ -16,26 +16,37 @@ module.exports = {
 
 
 	actions: {
-        login: {
+        getAccount: {
 			rest: {
-				method: "POST",
-				path: "/account"
+				method: "GET",
+				path: "/getaccount/:id"
 			},
             async handler(ctx){
 
                 const {id} = ctx.params
             
-                const user = await User.findOne({
+                const account = await Account.findOne({
                     where:{
-                        id:id
+                    	userId:id
                     },
-                    include:Account
                 })
             
-                return user.accounts
-            }      
-        }
-    },
+                return account
+            },      
+		},
+			newAccount:{
+				rest:{
+					method:"POST",
+					path:"/"
+				},
+				async handler(ctx){
+					const data = ctx.params;
+					const newAccount = await Account.create(data)
+					return newAccount
+				}
+			}
+	},
+	
 	methods: {
         
     },

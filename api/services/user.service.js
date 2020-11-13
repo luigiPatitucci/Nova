@@ -6,6 +6,7 @@ const {Token} = require ('../models/token')
 const { MoleculerError } = require("moleculer").Errors;
 const dbConfig = require ('../dbConfig');
 const bcrypt = require('bcrypt');
+const nodemailer = require( 'nodemailer' );
 
 /**
  * @typedef {import('moleculer').Context} Context Moleculer's Context
@@ -79,9 +80,30 @@ module.exports = {
 			userId:newUser.id
 			})
 			
-	/* 	ACA SE DEBERIA ENVIAR EL EMAIL CON EL TOKEN AL USUARIO 
-		--> enviarEmail(newToken) <--	
-	*/			
+			/* 	ACA SE DEBERIA ENVIAR EL EMAIL CON EL TOKEN AL USUARIO 
+			*/			
+	
+	const transporter = nodemailer.createTransport( {
+				service: 'gmail',
+				auth: {
+					user: `sixgamesft05@gmail.com`,
+					pass: `SixGamesSixGames`
+				}
+			} );
+	
+			const mailOptions = {
+				from: `Henry B <sixgamesft05@gmail.com>`,
+				to: data.email,
+				subject: '[Henry B] Verificación de correo electronico',
+				text: `Hola ${data.username}, para terminar el registro de tu cuenta necesitamos que ingreses el siguiente codigo en la App: ${newToken.pin}`
+			}
+	
+			transporter.sendMail( mailOptions, ( mailError, mailResponse ) => {
+				mailError ?
+					response.status( 409 ).send( 'Token email could not be sent' ) :
+					response.status( 200 ).send( 'Token email was sent successfully' );
+			} );
+			
 			return newUser	
 		}  
 	},
@@ -89,7 +111,7 @@ module.exports = {
 	userById: {
 		rest: {
 			method: "GET",
-			path: "/user/:id"
+			path: "/:id"
 		},
 		async handler(ctx) {
 		const {id} = ctx.params
@@ -107,8 +129,31 @@ module.exports = {
 		},   
 		async handler(ctx) {
 			const data = ctx.params;
-			data.password = bcrypt.hashSync(data.password, 11);
 
+			const existe = await User.findOne({
+				$or: [
+					{ identityNumber: data.username },
+				],
+			})
+
+			if(existe && existe.identityNumber && existe.identityNumber == data.identityNumber) {
+				throw new MoleculerError("DNI duplicado !", 422,"")}
+			
+			data.password = bcrypt.hashSync("12345", 11);
+			//GENERAMOS CODIGO DE CUENTA DE 10 DIGITOS
+			function randomString(length, chars) {
+				var result = '';
+				for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+				return result;
+			}
+			var codigoCuenta = randomString(10, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+			//CREAMOS LA CUENTA VINCULADA AL USUARIO
+
+			const cuenta = Account.create({
+				code:codigoCuenta,
+				userId:data.id
+			}) 
+		
 		await User.update(
 			data,
 			{
@@ -121,6 +166,25 @@ module.exports = {
 		return user
 
 		},
+	},
+	validarToken:{
+		rest: {
+			method:"POST",
+			path:"/validartoken"
+		},  
+		async handler(ctx) {
+			const {pin} = ctx.params 
+			const existe = await Token.findOne({
+				$or: [
+					{ pin: pin},
+				],
+			})
+
+			if(existe && existe.pin && existe.pin == data.pin) {
+				throw new MoleculerError("PIN incorrecto !", 422,"")}
+
+				return "email validado";
+		}
 	}
 },
 	events: {

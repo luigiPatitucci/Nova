@@ -1,5 +1,6 @@
 import axios from 'axios';
 export const ADD_USER = "ADD_USER";
+export const LOGIN_USER = "LOGIN_USER";
 
 
 
@@ -7,10 +8,9 @@ export function createUser(user){
 
     return function(dispatch){
       
-        return axios.post("https://localhost:3000/user/",user,
-        /* {headers:{'accept':'application/json','content-type':'application/json'}} */)
+        return axios.post("http://192.168.1.12:3000/user/", user)
         .then(resp=>{
-            console.log('SOY LA RESPUESTA', resp)
+            console.log('SOY LA RESPUESTA', resp.data)
             dispatch({
                 type:ADD_USER,
                 user:resp.data
@@ -19,5 +19,26 @@ export function createUser(user){
         .catch(err=>{
             console.log('Soy el error', err)
         })
-    }
-}
+    };
+};
+
+
+export function login (data){
+
+    return function(dispatch){
+      
+        return axios.post("http://192.168.1.12:3000/auth/login", data)
+        .then( resp =>{
+            console.log('SOY LA RESPUESTA', resp.data)
+            dispatch({
+                type:LOGIN_USER,
+                user:resp
+            })
+        })
+        .catch(err=>{
+            console.log('Soy el error', err)
+        })
+    };
+};
+
+
