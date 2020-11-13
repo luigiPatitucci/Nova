@@ -3,7 +3,7 @@ import { StyleSheet, Image} from 'react-native';
 import { Button, Text, View, Container } from 'native-base';
 
 
-const FirstStart = ({navigation}) => {
+const StartScreen = ({navigation}) => {
     return (
         <Container style={styles.default}>
         <View style={styles.container}>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default FirstStart;
+export default StartScreen;

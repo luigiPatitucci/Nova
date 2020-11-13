@@ -25,7 +25,7 @@ module.exports = {
 
 		routes: [
 			{
-				path: "/api",
+				path: "/",
 
 				whitelist: [
 					"**"
