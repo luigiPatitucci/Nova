@@ -10,7 +10,7 @@ const CreateUser = () => {
             tipoDoc:""
         },
         onSubmit: values => {
-
+            
         },
     })
     const [data, setData] = useState({
