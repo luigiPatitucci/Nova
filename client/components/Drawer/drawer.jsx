@@ -1,40 +1,45 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { View, TouchableOpacity, Image, Text } from 'react-native';
-import PrincipalScreen from '../PrincipalScreen/principal_screen.jsx'
-import s from './style.js'
+import PrincipalScreen from '../PrincipalScreen/principal_screen.jsx';
+import s from './style.js';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useSelector } from 'react-redux';
 
 const Drawer = createDrawerNavigator();
 
-const OptionDrawer = ({ iconName, optionName }) => {
+const OptionDrawer = (props) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={props.navigation}>
             <View style={s.menuContainer}>
-                <Icon size={18} name={iconName}></Icon>
-                <Text style={s.tituloTxt}>{optionName}</Text>
+                <Icon size={18} name={props.iconName}></Icon>
+                <Text style={s.tituloTxt}>{props.optionName}</Text>
             </View>
         </TouchableOpacity>
     );
 };
 
-const MenuDrawer = () => {
+const MenuDrawer = (props) => {
+
+    const user = useSelector((state) => state.userReducer);
+    console.log('SOY EL USUARIO', user)
+
     return (
         <View style={s.container}>
             <View style={s.bgContainer}>
                 <TouchableOpacity >
                     <View style={s.userContainer}>
-                        <Image source={{ uri: 'https://img2.freepng.es/20180418/ujq/kisspng-metal-gear-solid-peace-walker-military-soldier-bi-5ad79833ac2a92.8090401915240786437052.jpg' }}
+                        <Image source={require('../../assets/logoUser.png')}
                             style={s.userImagen}
                         />
                     </View>
                     <View>
-                        <Text style={s.userTitulo}>Kevin Vega</Text>
-                        <Text style={s.userSubTitulo}>kevinvega2070@gmail.com</Text>
+                        <Text style={s.userTitulo}>{user.name}</Text>
+                        <Text style={s.userSubTitulo}>{user.email}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
-            <OptionDrawer iconName='home' optionName='Home' />
+            <OptionDrawer iconName='home' optionName='Home' navigation={() => props.navigation.navigate('Home')}/>
             <OptionDrawer iconName='hand-holding-usd' optionName='Transacciones' />
             <OptionDrawer iconName='store-alt' optionName='Mis productos' />
             <OptionDrawer iconName='user-alt' optionName='Mis datos' />
@@ -43,8 +48,9 @@ const MenuDrawer = () => {
 };
 
 const MyDrawer = () => {
+
     return (
-        <Drawer.Navigator drawerContent={() => <MenuDrawer />}>
+        <Drawer.Navigator drawerContent={(props) => <MenuDrawer {...props} />}>
             <Drawer.Screen name="Home" component={PrincipalScreen} />
         </Drawer.Navigator>
     );
