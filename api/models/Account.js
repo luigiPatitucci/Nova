@@ -4,7 +4,7 @@ const db = require('../dbConfig');
  const Account = db.conexion.define('account', {
     balance:{
       type: DataTypes.BIGINT,
-      allowNull: false,
+      allowNull: true,
       default: 0,
     },
     cbu:{
@@ -25,7 +25,8 @@ const db = require('../dbConfig');
     },
     verified:{
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: true,
+        defaultValue:false
     }
   
 })

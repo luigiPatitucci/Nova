@@ -20,7 +20,6 @@ module.exports = {
 
 	actions: {
 
-
 		list: {
 			rest: {
 				method: "GET",
@@ -51,47 +50,70 @@ module.exports = {
 
 		async handler(ctx) {
 			let data = ctx.params
-			console.log(data)
+
 			const existe = await User.findOne({
 				$or: [
 					{ username: data.username },
 					{ email: data.email },
 				],
 			})
-			console.log(existe)
+			console.log( " asdasdasda"+existe)
 	//SE VERIFICA SI EL USUARIO SE ENCUENTRA EN USO
-		if(existe && existe.username && existe.username !== data.username) {
+		if(existe && existe.username && existe.username === data.username) {
 				throw new MoleculerError("Usuario en uso !", 422,"")}
 				
 	//SE VERIFICA SI EL EMAIL SE ENCUENTRA EN USO
-		if(existe && existe.email && existe.email !== data.email){
+		if(existe && existe.email && existe.email === data.email){
 				throw new MoleculerError("Email en uso !", 422,"")}
 				
 	//ENCRIPTAR CONTRASEÑA
 		data.password = bcrypt.hashSync("12345", 11);
 			
 	//CREO EL USUARIO Y LO RETORNO (el usuario todavia no esta dado de alta)	
-		const newUser = await User.create(data)
+		const newuser = await User.create(data)
 
 	//GENERAR PIN PARA DAR ALTA DE CLIENTE 
 		const newToken = await Token.create({
 			pin:Math.floor((Math.random() * 1000000)),
-			userId:newUser.id
+			userId:newuser.id
 			})
 			
 	/* 	ACA SE DEBERIA ENVIAR EL EMAIL CON EL TOKEN AL USUARIO 
-		--> enviarEmail(newToken) <--	
-	*/			
-			return newUser	
+
+	*/
+	const nodemailer = require( 'nodemailer' );
+	
+	const transporter = nodemailer.createTransport( {
+				service: 'gmail',
+				auth: {
+					user: `sixgamesft05@gmail.com`,
+					pass: `SixGamesSixGames`
+				}
+			} );
+	
+			const mailOptions = {
+				from: `Henry B <sixgamesft05@gmail.com>`,
+				to: data.email,
+				subject: '[Henry B] Verificación de correo electronico',
+				text: `Hola ${data.username}, para terminar el registro de tu cuenta necesitamos que ingreses el siguiente codigo en la App: ${newToken.pin}`
+			}
+	
+			transporter.sendMail( mailOptions, ( mailError, mailResponse ) => {
+				mailError ?
+					response.status( 409 ).send( 'Token email could not be sent' ) :
+					response.status( 200 ).send( 'Token email was sent successfully' );
+			} );
+			
+			return newuser	
 		}  
 	},
 	//BUSCAR USUARIO POR ID USUARIO
 	userById: {
 		rest: {
 			method: "GET",
-			path: "/users"
+			path: "/user/:id"
 		},
-		async handler() {
+		async handler(ctx) {
 		const {id} = ctx.params
 		const data = await User.findByPk(id)
 
@@ -104,7 +126,8 @@ module.exports = {
 		rest: {
 			method:"PUT",
 			path:"/update"
-		},   
+		},
+		
 		async handler(ctx) {
 			const data = ctx.params;
 			data.password = bcrypt.hashSync(data.password, 11);

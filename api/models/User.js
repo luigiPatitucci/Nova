@@ -7,7 +7,6 @@ const db = require('../dbConfig');
         email:{
             type: DataTypes.STRING,
             allowNull: false,
-            unique:true,
             validated:{
               isEmail: false,
             }
