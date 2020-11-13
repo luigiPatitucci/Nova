@@ -6,7 +6,7 @@ const {Token} = require ('../models/token')
 const { MoleculerError } = require("moleculer").Errors;
 const dbConfig = require ('../dbConfig');
 const bcrypt = require('bcrypt');
-const nodemailer = require( 'nodemailer' );
+const sendMail = require( '../helpers/email/sender' );
 
 /**
  * @typedef {import('moleculer').Context} Context Moleculer's Context
@@ -81,31 +81,16 @@ module.exports = {
 			})
 			
 			/* 	ACA SE DEBERIA ENVIAR EL EMAIL CON EL TOKEN AL USUARIO 
-			*/			
-	
-	const transporter = nodemailer.createTransport( {
-				service: 'gmail',
-				auth: {
-					user: `sixgamesft05@gmail.com`,
-					pass: `SixGamesSixGames`
-				}
-			} );
-	
-			const mailOptions = {
-				from: `Henry B <sixgamesft05@gmail.com>`,
-				to: data.email,
-				subject: '[Henry B] Verificación de correo electronico',
-				text: `Hola ${data.username}, para terminar el registro de tu cuenta necesitamos que ingreses el siguiente codigo en la App: ${newToken.pin}`
-			}
-	
-			transporter.sendMail( mailOptions, ( mailError, mailResponse ) => {
-				mailError ?
-					response.status( 409 ).send( 'Token email could not be sent' ) :
-					response.status( 200 ).send( 'Token email was sent successfully' );
-			} );
+			*/
 			
-			return newUser	
-		}  
+		await sendMail( {
+			to: data.email,
+			subject: "[Henry Bank] Código de confirmación",
+			template: "confirmation",
+			input: {
+				code: newToken.pin
+			}
+		} );
 	},
 	//BUSCAR USUARIO POR ID USUARIO
 	userById: {
