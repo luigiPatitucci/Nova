@@ -6,6 +6,10 @@ import s from './style.js';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useSelector } from 'react-redux';
 
+import Transacciones from '../Transacciones/Transacciones.jsx'
+import DetalleTransaccion from '../Transacciones/DetalleTransaccion.jsx'
+import Estadisticas from '../Estadisticas/Estadisticas.jsx'
+
 const Drawer = createDrawerNavigator();
 
 const OptionDrawer = (props) => {
