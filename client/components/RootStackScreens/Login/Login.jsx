@@ -15,7 +15,7 @@ const Login = ({navigation}) => {
 
     const handleSubmit = () => {
         console.log(input)
-        dispatch(login(input));
+        /* dispatch(login(input)); */
         navigation.navigate('Home')
     };
 

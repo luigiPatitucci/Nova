@@ -6,6 +6,10 @@ import s from './style.js';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useSelector } from 'react-redux';
 
+import Transacciones from '../Transacciones/Transacciones.jsx'
+import DetalleTransaccion from '../Transacciones/DetalleTransaccion.jsx'
+import Estadisticas from '../Estadisticas/Estadisticas.jsx'
+
 const Drawer = createDrawerNavigator();
 
 const OptionDrawer = (props) => {
@@ -40,9 +44,9 @@ const MenuDrawer = (props) => {
                 </TouchableOpacity>
             </View>
             <OptionDrawer iconName='home' optionName='Home' navigation={() => props.navigation.navigate('Home')}/>
-            <OptionDrawer iconName='hand-holding-usd' optionName='Transacciones' />
-            <OptionDrawer iconName='store-alt' optionName='Mis productos' />
-            <OptionDrawer iconName='user-alt' optionName='Mis datos' />
+            <OptionDrawer iconName='hand-holding-usd' optionName='Transacciones' navigation={() => props.navigation.navigate('Transacciones')}/>
+            <OptionDrawer iconName='store-alt' optionName='Mis productos'/>
+            <OptionDrawer iconName='user-alt' optionName='Mis datos'/>
         </View>
     );
 };
