@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import s from './style.js';
 
 
-const PrincipalScreen = () => {
+const PrincipalScreen = ({navigation}) => {
     return (
 
         <Container style={s.container}>
@@ -47,15 +47,15 @@ const PrincipalScreen = () => {
                     </Button>
                 </View>
                 <View style={s.buttonsContainer}>
-                    <Button style={s.button}>
+                    <Button style={s.button} onPress={() => navigation.navigate('Transacciones')}>
                         <Icon size={30} name='history' />
                         <Text style={s.textOption}>Transacciones</Text>
                     </Button>
-                    <Button style={s.button}>
+                    <Button style={s.button} onPress={() => navigation.navigate('Estadisticas')}>
                         <Icon size={30} name='chart-bar' />
                         <Text style={s.textOption}>Estadisticas</Text>
                     </Button>
-                    <Button style={s.button}>
+                    <Button style={s.button} >
                         <Icon size={30} name='user-circle' />
                         <Text style={s.textOption}>Mis datos</Text>
                     </Button>
