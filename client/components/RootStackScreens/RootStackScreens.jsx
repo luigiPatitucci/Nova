@@ -7,6 +7,7 @@ import Login from './Login/Login.jsx'
 import CreateUser from '.././Start/Create-user/Create-user.jsx';
 import FirstRegister from '.././Start/Create-user/First-register';
 import Validation from '.././Start/Create-user/ValidationToken';
+import DirectionRegister from '.././Start/Create-user/Direction-register';
 import MyDrawer from '../Drawer/drawer.jsx'
 
 
@@ -20,6 +21,7 @@ const RootStackScreens = ({ navigation }) => {
             <RootStack.Screen name='Registrarse' component ={FirstRegister}/>
             <RootStack.Screen name='Verificacion' component={Validation} /> 
             <RootStack.Screen name='Crear Usuario' component={CreateUser} />
+            <RootStack.Screen name='DirectionRegister' component={DirectionRegister} />
             <RootStack.Screen name='Home' component={MyDrawer} options={{headerShown: false}}/>   
         </RootStack.Navigator>
     );
