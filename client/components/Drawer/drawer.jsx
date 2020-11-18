@@ -45,7 +45,7 @@ const MenuDrawer = (props) => {
             </View>
             <OptionDrawer iconName='home' optionName='Inicio' navigation={() => props.navigation.navigate('Inicio')}/>
             <OptionDrawer iconName='history' optionName='Transacciones' navigation={() => props.navigation.navigate('Transacciones')}/>
-            <OptionDrawer iconName='store-alt' optionName='Mis productos'/>
+            <OptionDrawer iconName='tags' optionName='Mis productos'/>
             <OptionDrawer iconName='user-circle' optionName='Mis datos'/>
         </View>
     );
