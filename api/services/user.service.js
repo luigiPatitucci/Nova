@@ -1,4 +1,5 @@
 "use strict";
+const relation = require ('../relations.js')
 const SequelizeAdapter = require('moleculer-db-adapter-sequelize');
 const {User} = require ('../models/User')
 const {Account} = require ('../models/Account')
@@ -68,20 +69,24 @@ module.exports = {
 				throw new MoleculerError("Email en uso !", 422,"")}
 				
 	//ENCRIPTAR CONTRASEÑA
-		data.password = bcrypt.hashSync("12345", 11);
+		data.password = bcrypt.hashSync(data.password, 11);
 			
 	//CREO EL USUARIO Y LO RETORNO (el usuario todavia no esta dado de alta)	
 		const newuser = await User.create(data)
-
+	
+	//CREO LA CUENTA 
+	let codigo = Math.floor(Math.random() * 100000000)
+	const cuenta = Account.create({
+		code:codigo,
+		userId:newuser.id
+	})
 	//GENERAR PIN PARA DAR ALTA DE CLIENTE 
 		const newToken = await Token.create({
 			pin:Math.floor((Math.random() * 1000000)),
 			userId:newuser.id
 			})
-			
-			/* 	ACA SE DEBERIA ENVIAR EL EMAIL CON EL TOKEN AL USUARIO 
-			*/
-			
+	//SE ENVIA EMAIL CON EL CODIGO DE VERIFICACION
+
 		await sendMail( {
 			to: data.email,
 			subject: "[Henry Bank] Código de confirmación",
@@ -89,8 +94,10 @@ module.exports = {
 			input: {
 				code: newToken.pin
 			}
-		} );
+		} )
+		return newuser;
 	},
+},
 	//BUSCAR USUARIO POR ID USUARIO
 	userById: {
 		rest: {
@@ -98,18 +105,18 @@ module.exports = {
 			path: "/user/:id"
 		},
 		async handler(ctx) {
-		const {id} = ctx.params
+		const id = ctx.params
 		const data = await User.findByPk(id)
 
 			return data;
 			}
 		},
 	
-	//ACTUALIZAR USUARIO	
-	userUpdate: {
+	//ALTA DE USUARIO	
+	userConfirm: {
 		rest: {
 			method:"PUT",
-			path:"/update"
+			path:"/confirm"
 		},
 		
 		async handler(ctx) {
@@ -117,37 +124,56 @@ module.exports = {
 
 			const existe = await User.findOne({
 				$or: [
-					{ identityNumber: data.username },
+					{ identityNumber: data.identityNumber},
 				],
 			})
 
 			if(existe && existe.identityNumber && existe.identityNumber == data.identityNumber) {
 				throw new MoleculerError("DNI duplicado !", 422,"")}
-			
-			data.password = bcrypt.hashSync("12345", 11);
-			//GENERAMOS CODIGO DE CUENTA DE 10 DIGITOS
-			function randomString(length, chars) {
-				var result = '';
-				for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
-				return result;
-			}
-			var codigoCuenta = randomString(10, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-			//CREAMOS LA CUENTA VINCULADA AL USUARIO
+		//SE COMPRUEBA QUE SEA MAYOR DE 16 AÑOS
+		let fechaNac = new Date(data.birthday);
+		let fechaAct = new Date()
+		let edad = fechaAct.getTime() - fechaNac.getTime()
 
-			const cuenta = Account.create({
-				code:codigoCuenta,
-				userId:data.id
-			}) 
-		
+			if(Math.floor(edad/(1000*60*60*24)/365)<16) {
+				throw new MoleculerError("Debe ser mayor de 16 años", 422,"")}
+
 		await User.update(
-			data,
+			{	email:data.email,
+				name:data.name,
+				surname:data.surname,
+				birthday:data.birthday,
+				identityType:data.identityType,
+				identityNumber:data.identityNumber,
+				phone_number:data.phone_number,
+				adress:data.adress,
+				verified:true
+			},
+
 			{
 			where:{
 				id:data.id
 				}
 			}
 		);
-		const user = await User.findByPk(data.id)
+		await Account.update(
+			{
+				verified:true,
+			},
+			{
+				where:{
+					userId:data.id
+					}
+			}
+		)
+
+		const user = await User.findOne({
+			where:{id:data.id},
+			include:[{
+				model:Account,
+				where:{userId:data.id}
+			}]	
+		})
 		return user
 
 		},
@@ -171,7 +197,7 @@ module.exports = {
 				return "email validado";
 		}
 	}
-	}
+
 },
 	events: {
 	},
@@ -182,8 +208,7 @@ module.exports = {
 	 * Service created lifecycle event handler
 	 */
 	created() {
-		User.hasOne(Token);
-		User.hasOne(Account)
+		relation()
 	},
 
 	/**
