@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { createStackNavigator, TransitionPresets, CardStyleInterpolators } from '@react-navigation/stack';
-
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import StartScreen from './StartScreen/StartScreen.jsx'
 import Login from './Login/Login.jsx'
 import CreateUser from '.././Start/Create-user/Create-user.jsx';

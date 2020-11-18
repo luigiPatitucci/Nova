@@ -69,7 +69,7 @@ export default {
     },
 
     tituloTxt: {
-        fontSize: 13,
+        fontSize: 15,
         marginLeft: 15
         
     },

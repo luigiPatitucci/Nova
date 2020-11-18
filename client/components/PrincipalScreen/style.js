@@ -1,12 +1,18 @@
 export default {
     container: {
-        /* backgroundColor: 'yellow', */
+        /* backgroundColor: '#171717', */
     },
     headerAmount: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
         minHeight: 100,
+    },
+    headerContainer: {
+        backgroundColor: '#4A1491',
+        paddingBottom: '2%',
+        borderBottomLeftRadius: 13,
+        borderBottomRightRadius: 13
     },
     balanceContainer: {
         justifyContent: 'space-around',
@@ -34,7 +40,7 @@ export default {
     },
     generalContainer: {
         backgroundColor: 'white',
-        borderRadius: 5,
+        borderRadius: 15,
         margin: 5,
         padding: 10,
         shadowColor: "#000",
@@ -78,7 +84,7 @@ export default {
         marginTop: -15,
         marginBottom: -20,
         width: 81,
-        backgroundColor: 'white'
+        backgroundColor: '#4A1491'
     },
     secondaryButton: {
         flexDirection: 'column',
@@ -87,10 +93,14 @@ export default {
         margin: 4,
         marginTop: -15,
         width: 170,
-        backgroundColor: 'white'
+        backgroundColor: '#4A1491'
     },
     textOption: {
-        fontSize: 11
+        fontSize: 11,
+        color: 'white'
+    },
+    icon: {
+        color: 'white'
     }
 
 }

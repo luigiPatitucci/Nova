@@ -1,5 +1,5 @@
 import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, CardStyleInterpolators } from '@react-navigation/drawer';
 import { View, TouchableOpacity, Image, Text } from 'react-native';
 import PrincipalScreen from '../PrincipalScreen/principal_screen.jsx';
 import s from './style.js';
@@ -16,7 +16,7 @@ const OptionDrawer = (props) => {
     return (
         <TouchableOpacity onPress={props.navigation}>
             <View style={s.menuContainer}>
-                <Icon size={18} name={props.iconName}></Icon>
+                <Icon size={20} name={props.iconName}></Icon>
                 <Text style={s.tituloTxt}>{props.optionName}</Text>
             </View>
         </TouchableOpacity>
@@ -43,7 +43,7 @@ const MenuDrawer = (props) => {
                     </View>
                 </TouchableOpacity>
             </View>
-            <OptionDrawer iconName='home' optionName='Home' navigation={() => props.navigation.navigate('Home')}/>
+            <OptionDrawer iconName='home' optionName='Inicio' navigation={() => props.navigation.navigate('Inicio')}/>
             <OptionDrawer iconName='hand-holding-usd' optionName='Transacciones' navigation={() => props.navigation.navigate('Transacciones')}/>
             <OptionDrawer iconName='store-alt' optionName='Mis productos'/>
             <OptionDrawer iconName='user-alt' optionName='Mis datos'/>
@@ -53,9 +53,22 @@ const MenuDrawer = (props) => {
 
 const MyDrawer = () => {
 
+    const options = {
+        headerStyle: {
+            backgroundColor: '#4A1491',
+            borderBottomColor: '#ffffff',
+            borderBottomWidth: 0,
+            elevation: 0
+        },
+        /* gestureEnabled: true,
+        gestureDirection: 'horizontal',
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS, */
+        headerTintColor: 'white' 
+    }
+
     return (
-        <Drawer.Navigator drawerContent={(props) => <MenuDrawer {...props} />}>
-            <Drawer.Screen name="Home" component={PrincipalScreen} />
+        <Drawer.Navigator  screenOptions={options} drawerContent={(props) => <MenuDrawer {...props} />}>
+            <Drawer.Screen name="Inicio" component={PrincipalScreen} />
             <Drawer.Screen name="Transacciones" component={Transacciones} />
             <Drawer.Screen name="Estadisticas" component={Estadisticas} />
             <Drawer.Screen name="DetalleTransaccion" component={DetalleTransaccion} />
