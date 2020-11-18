@@ -7,6 +7,7 @@ const { MoleculerError } = require("moleculer").Errors;
 const dbConfig = require ('../dbConfig');
 const {User} = require ('../models/User')
 const bcrypt = require('bcrypt');
+const {Account} = require('../models/Account.js');
 
 const {CLAVE_TOKEN} = process.env;
 
@@ -37,7 +38,10 @@ module.exports = {
             async handler(ctx) {
 				const { email, password } = ctx.params;
                 //CHECKEO EL EMAIL
-                const logUser = await User.findOne({where: {email: email}});
+                const logUser = await User.findOne({
+					where: {email: email},
+					include:Account
+				});
 				//CHECKEO CONTRASEÑA
 				const checkPass = await bcrypt.compare(password , logUser?logUser.password:" ");
 
@@ -47,7 +51,7 @@ module.exports = {
 
                 const res = { 
 				token:  jwt.sign({id: logUser.id},CLAVE_TOKEN,{expiresIn: "1d"}),
-				id:logUser
+				logUser
 				};
 				
 				

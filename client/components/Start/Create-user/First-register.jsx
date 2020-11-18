@@ -5,7 +5,7 @@ import { Container, Form, Item, Input, Label, Text, Button, Picker } from 'nativ
 import { ScrollView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../../redux/actions/userActions.js'
-import axios from 'axios'
+
 
 
 const CreateUser = ({navigation}) => {
