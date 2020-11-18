@@ -105,8 +105,11 @@ module.exports = {
 			path: "/user/:id"
 		},
 		async handler(ctx) {
-		const id = ctx.params
-		const data = await User.findByPk(id)
+		const {id} = ctx.params
+		const data = await User.findOne({
+			where:{id:id},
+			include:Account
+		})
 
 			return data;
 			}

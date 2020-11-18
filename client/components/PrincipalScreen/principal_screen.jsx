@@ -1,11 +1,20 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Image, View, Text, ImageBackground } from 'react-native';
 import { Button, Container } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useDispatch, useSelector } from 'react-redux';
 import s from './style.js';
+import {refresh} from '../../redux/actions/userActions';
 
 
-const PrincipalScreen = ({ navigation }) => {
+const PrincipalScreen = ({navigation}) => {
+    const user = useSelector((state) => state.userReducer);
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        console.log("USER ID !!",user.id)
+        dispatch(refresh(user.id))
+    },[])
     return (
 
         <Container style={s.container}>
@@ -15,7 +24,7 @@ const PrincipalScreen = ({ navigation }) => {
                         style={s.userImage}
                     />
                     <View style={s.balanceContainer}>
-                        <Text style={s.amount}>5000 ARS</Text>
+                        <Text style={s.amount}>{user.balanceArs} ARS</Text>
                         <Text style={s.amountDescription}>Balance total de la cuenta</Text>
                     </View>
                 </View>
