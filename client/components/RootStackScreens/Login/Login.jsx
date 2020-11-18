@@ -17,7 +17,7 @@ const Login = ({ navigation }) => {
 
     const handleSubmit = () => {
         console.log(input)
-        /* dispatch(login(input)); */
+         dispatch(login(input)); 
         navigation.navigate('Home')
     };
 
@@ -40,7 +40,7 @@ const Login = ({ navigation }) => {
                     <Item floatingLabel>
                         <Label style={s.labelForm}>Contraseña</Label>
                         <Input  style={s.inputForm} 
-                                onChangeText={email => setInput({ ...input, email })}
+                                onChangeText={password => setInput({ ...input, password })}
                                 secureTextEntry={true} 
                         />
                     </Item>
