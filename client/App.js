@@ -1,12 +1,11 @@
 import * as Font from 'expo-font';
-import React, { useEffect, useMemo, useState } from 'react';
-import MyDrawer from './components/Drawer/drawer.jsx';
+import React, { useEffect, useState } from 'react';
 import RootStackScreens from './components/RootStackScreens/RootStackScreens.jsx'
 import Loader from './components/Loader/Loader.jsx';
 import { Provider } from "react-redux";
-import { View, Text } from 'react-native'
 import store from './redux/store/store.js';
 import { Ionicons } from "@expo/vector-icons";
+import { StatusBar } from 'react-native'
 
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -31,8 +30,11 @@ const App = () => {
     (
       <Provider store={store}>
         < NavigationContainer>
+          <StatusBar 
+            barStyle='light-content'
+            backgroundColor='#171717'
+          />
           <RootStackScreens />
-          {/* <MyDrawer/> */}
         </NavigationContainer >
       </Provider>
     );
