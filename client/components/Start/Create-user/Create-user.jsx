@@ -20,11 +20,7 @@ const CreateUser = ({navigation}) => {
         apellido: '',
         fechaNac: '',
         cel: '',
-        fijo: '',
-        calle: '',
-        nro: '',
-        localidad: '',
-        provincia: ''
+        fijo: ''
     });
 
     return (
@@ -35,10 +31,6 @@ const CreateUser = ({navigation}) => {
                     <Item >
                     <Label>Tipo de documento: *</Label>
                     <Picker onValueChange={value => setFieldValue('tipoDoc', value)} selectedValue={values.tipoDoc}
-                        // onValueChange={(value) => {
-                        //     if (value !== 0) setFieldValue('tipoDoc', value);
-                        // }}
-                        //  selectedValue={values.tipoDoc}
                         >
                             <Picker.Item label= 'Selecciona el tipo de documento' value= ''/>
                             <Picker.Item label='DNI' value= "DNI"/>
@@ -69,31 +61,14 @@ const CreateUser = ({navigation}) => {
                         <Label>Telefono fijo:</Label>
                         <Input onChangeText={fijo => setData({ ...data, fijo })}></Input>
                     </Item>
-                    <Label style={styles.titulos}>Residencia</Label>
-                    <Item floatingLabel>
-                        <Label>Calle: *</Label>
-                        <Input></Input>
-                    </Item>
-                    <Item floatingLabel>
-                        <Label>Nro: *</Label>
-                        <Input></Input>
-                    </Item>
-                    <Item floatingLabel>
-                        <Label>Localidad: *</Label>
-                        <Input></Input>
-                    </Item>
-                    <Item floatingLabel>
-                        <Label>Provincia: *</Label>
-                        <Input></Input>
-                    </Item>
                 </Form>
                 <Button
                     block
                     dark
                     style={styles.button}
-                    onPress={() => navigation.navigate('Home')}
+                    onPress={() => navigation.navigate('DirectionRegister')}
                 >
-                    <Text>Registrarme</Text>
+                    <Text>Siguiente</Text>
                 </Button>
             </ScrollView>
         </Container>

@@ -5,6 +5,7 @@ import { Container, Form, Item, Input, Label, Text, Button, Picker } from 'nativ
 import { ScrollView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../../redux/actions/userActions.js'
+import axios from 'axios'
 
 
 const CreateUser = ({navigation}) => {
@@ -13,7 +14,8 @@ const CreateUser = ({navigation}) => {
   
     const [data, setData] = useState({
         username: '',
-        email: ''
+        email: '',
+        contraseña: ''
     });
 
     const createUser =  () => {
@@ -45,6 +47,11 @@ const CreateUser = ({navigation}) => {
                         <Label>Email *</Label>
                         <Input onChangeText={email => setData({ ...data, email })}></Input>
                     </Item>
+
+                    <Item floatingLabel>
+                        <Label>Contraseña *</Label>
+                        <Input onChangeText={contraseña => setData({ ...data, contraseña })}></Input>
+                    </Item>
                 </Form>
                 <Button
                     block
@@ -52,7 +59,7 @@ const CreateUser = ({navigation}) => {
                     style={styles.button}
                     onPress={() => handleSubmit()}
                 >
-                    <Text>Enviar</Text>
+                    <Text>Siguiente</Text>
                 </Button>
             </ScrollView>
         </Container>
