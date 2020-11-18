@@ -1,5 +1,5 @@
 import React from 'react';
-import { createDrawerNavigator, CardStyleInterpolators } from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { View, TouchableOpacity, Image, Text } from 'react-native';
 import PrincipalScreen from '../PrincipalScreen/principal_screen.jsx';
 import s from './style.js';
@@ -16,7 +16,7 @@ const OptionDrawer = (props) => {
     return (
         <TouchableOpacity onPress={props.navigation}>
             <View style={s.menuContainer}>
-                <Icon size={20} name={props.iconName}></Icon>
+                <Icon size={22} name={props.iconName}></Icon>
                 <Text style={s.tituloTxt}>{props.optionName}</Text>
             </View>
         </TouchableOpacity>
@@ -44,9 +44,9 @@ const MenuDrawer = (props) => {
                 </TouchableOpacity>
             </View>
             <OptionDrawer iconName='home' optionName='Inicio' navigation={() => props.navigation.navigate('Inicio')}/>
-            <OptionDrawer iconName='hand-holding-usd' optionName='Transacciones' navigation={() => props.navigation.navigate('Transacciones')}/>
+            <OptionDrawer iconName='history' optionName='Transacciones' navigation={() => props.navigation.navigate('Transacciones')}/>
             <OptionDrawer iconName='store-alt' optionName='Mis productos'/>
-            <OptionDrawer iconName='user-alt' optionName='Mis datos'/>
+            <OptionDrawer iconName='user-circle' optionName='Mis datos'/>
         </View>
     );
 };

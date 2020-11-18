@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react';
-import { Image, View, Text, ImageBackground } from 'react-native';
+import { Image, View, Text } from 'react-native';
 import { Button, Container } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useDispatch, useSelector } from 'react-redux';
