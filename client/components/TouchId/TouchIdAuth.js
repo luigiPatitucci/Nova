@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import {View, Text, StylesSheet, TouchableHighlight} from 'react-native';
+import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 import * as LocalAuthentication from 'expo-local-authentication';
 export default function Touch(){
     const [suportted, setSuportted] = useState(null);
@@ -39,7 +39,7 @@ export default function Touch(){
        </View>
     )
 }
-const styles = StylesSheet.create({
+const styles = StyleSheet.create({
     container:{
         flex:1,
         justifyContent: 'center',
