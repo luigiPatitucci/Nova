@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 import { StyleSheet } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button, Picker } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -18,7 +19,7 @@ const CreateUser = ({navigation}) => {
     });
 
     const createUser =  () => {
-        return axios.post("http://192.168.1.12:3000/user/", data)
+        return axios.post("http://192.168.0.209:3000/user/", data)
         .then(resp=>{
             console.log('SOY LA RESPUESTA', resp.data)
         })

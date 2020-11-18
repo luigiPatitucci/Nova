@@ -1,4 +1,5 @@
 "use strict";
+const relation = require ('../relations.js')
 const SequelizeAdapter = require('moleculer-db-adapter-sequelize');
 const model = require ('../models/User')
 const jwt = require('jsonwebtoken');
@@ -38,7 +39,7 @@ module.exports = {
                 //CHECKEO EL EMAIL
                 const logUser = await User.findOne({where: {email: email}});
 				//CHECKEO CONTRASEÑA
-				const checkPass = await bcrypt.compare(password , logUser.password);
+				const checkPass = await bcrypt.compare(password , logUser?logUser.password:" ");
 
                 if(!logUser || !checkPass){
                     throw new MoleculerError('Email o contraseña invalido', 422)
@@ -68,7 +69,7 @@ module.exports = {
 	 * Service created lifecycle event handler
 	 */
 	created() {
-	
+		relation()
 	},
 
 	/**

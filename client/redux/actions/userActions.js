@@ -8,7 +8,7 @@ export function createUser(user){
 
     return function(dispatch){
       
-        return axios.post("http://192.168.1.12:3000/user/", user)
+        return axios.post("http://192.168.0.209:3000/user/", user)
         .then(resp=>{
             console.log('SOY LA RESPUESTA', resp.data)
             dispatch({
@@ -27,7 +27,7 @@ export function login (data){
 
     return function(dispatch){
       
-        return axios.post("http://192.168.1.12:3000/auth/login", data)
+        return axios.post("http://192.168.0.209:3000/auth/login", data)
         .then( resp =>{
             console.log('SOY LA RESPUESTA', resp.data)
             dispatch({
