@@ -7,9 +7,8 @@ import { Provider } from "react-redux";
 import { View, Text } from 'react-native'
 import store from './redux/store/store.js';
 import { Ionicons } from "@expo/vector-icons";
-
 import { NavigationContainer } from '@react-navigation/native';
-
+import Touch from './components/TouchId/TouchIdAuth.js'
 
 const App = () => {
 
@@ -32,6 +31,7 @@ const App = () => {
       <Provider store={store}>
         < NavigationContainer>
           <RootStackScreens />
+          <Touch />
           {/* <MyDrawer/> */}
         </NavigationContainer >
       </Provider>
