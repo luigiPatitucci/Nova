@@ -1,4 +1,5 @@
 "use strict";
+const relation = require ('../relations.js')
 const SequelizeAdapter = require('moleculer-db-adapter-sequelize');
 const { MoleculerError } = require("moleculer").Errors;
 const dbConfig = require ('../dbConfig');
@@ -16,6 +17,17 @@ module.exports = {
 
 
 	actions: {
+		allAcoounts:{
+			rest:{
+				method:"GET",
+				path: "/accounts"
+			},
+			async handler(ctx){
+				const accounts = await Account.findAll()
+				return accounts;
+			}
+		},
+
         getAccount: {
 			rest: {
 				method: "GET",
@@ -55,7 +67,7 @@ module.exports = {
 	 * Service created lifecycle event handler
 	 */
 	created() {
-	
+		relation()
 	},
 
 	/**

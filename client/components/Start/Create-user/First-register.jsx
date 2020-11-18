@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 import { StyleSheet } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button, Picker } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../../redux/actions/userActions.js'
+
 
 
 const CreateUser = ({navigation}) => {
@@ -12,11 +14,12 @@ const CreateUser = ({navigation}) => {
   
     const [data, setData] = useState({
         username: '',
-        email: ''
+        email: '',
+        contraseña: ''
     });
 
     const createUser =  () => {
-        return axios.post("http://192.168.1.12:3000/user/", data)
+        return axios.post("http://192.168.0.209:3000/user/", data)
         .then(resp=>{
             console.log('SOY LA RESPUESTA', resp.data)
         })
@@ -44,6 +47,11 @@ const CreateUser = ({navigation}) => {
                         <Label>Email *</Label>
                         <Input onChangeText={email => setData({ ...data, email })}></Input>
                     </Item>
+
+                    <Item floatingLabel>
+                        <Label>Contraseña *</Label>
+                        <Input onChangeText={contraseña => setData({ ...data, contraseña })}></Input>
+                    </Item>
                 </Form>
                 <Button
                     block
@@ -51,7 +59,7 @@ const CreateUser = ({navigation}) => {
                     style={styles.button}
                     onPress={() => handleSubmit()}
                 >
-                    <Text>Enviar</Text>
+                    <Text>Siguiente</Text>
                 </Button>
             </ScrollView>
         </Container>

@@ -1,63 +1,39 @@
 import React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { Image } from 'react-native';
 import { Button, Text, View, Container } from 'native-base';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import s from './styles.js'
 
 
 const StartScreen = ({ navigation }) => {
     return (
-        <Container style={styles.default}>
+        <Container style={s.default}>
             <View>
-                <Image source={{ uri: 'https://i.imgur.com/SGFslqf.png' }}
-                    style={styles.imagen} />
+                <Image source={require('../../../assets/logohb.png')}
+                    style={s.image} />
             </View>
-            <View style={styles.container}>
+            <View style={s.container}>
                 <Button
                     block
                     dark
-                    style={styles.button}
+                    style={s.button}
                     onPress={() => navigation.navigate('Ingresar')}
                 >
+                    <Icon size={30} name='login' style={s.icon}/>
                     <Text>Ingresar</Text>
                 </Button>
                 <Button
                     block
                     dark
-                    style={styles.button}
+                    style={s.button}
                     onPress={() => navigation.navigate('Registrarse')}
                 >
+                    <Icon size={30} name='user-follow' style={s.icon}/>
                     <Text>Registrarme</Text>
                 </Button>
             </View>
         </Container>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'center',
-        width: 360,
-        height: 512,
-        alignSelf: 'center'
-    },
-    button: {
-        margin: 10,
-    },
-    icon: {
-        fontSize: 100,
-        textAlign: 'center',
-
-    },
-    default: {
-        backgroundColor: 'yellow'
-    },
-    imagen: {
-        width: 100,
-        height: 70,
-        alignSelf: 'center',
-        bottom:-120,
-        left:15
-    }
-
-});
 
 export default StartScreen;
