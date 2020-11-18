@@ -1,13 +1,12 @@
 
 import React, { useEffect, useState } from 'react';
 import {View, Text, StylesSheet, TouchableHighlight} from 'react-native';
-import TouchID from 'react-native-touch-id';
-
+import * as LocalAuthentication from 'expo-local-authentication';
 export default function Touch(){
     const [suportted, setSuportted] = useState(null);
     const [nombre, setNombre] = useState('Usuario')
     useEffect(()=>{
-        TouchID.isSupported()
+        LocalAuthentication.supportedAuthenticationTypesAsync()
         .then(success =>{
             setSuportted(true);
         })
@@ -18,11 +17,11 @@ export default function Touch(){
     }, []);
     function handleLogin(){
         const config = {
-            title: "Autenticacion Touch ID",
+            promptMessage: "Autenticacion Touch ID",
             color: "#FF0000",
-            sensorErrorDescription: 'Touch ID invalido'
+            fallbackLabel: 'Touch ID invalido'
         };
-        TouchID.authenticate("Ingresar a HenryBank", config)
+        LocalAuthentication.authenticateAsync(config)
         .then(success =>{
             setNombre("Penelope")
         })
