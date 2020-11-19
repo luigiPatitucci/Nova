@@ -30,7 +30,7 @@ const RootStackScreens = ({ navigation }) => {
 
     return (
         <RootStack.Navigator screenOptions={options} headerMode='float'>
-            <RootStack.Screen name='Inicio' component={StartScreen} options={{headerShown: false}}/>
+            <RootStack.Screen name='Comienzo' component={StartScreen} options={{headerShown: false}}/>
             <RootStack.Screen name='Ingresar' component={Login} />
             <RootStack.Screen name='Registrarse' component ={FirstRegister}/>
             <RootStack.Screen name='Verificacion' component={Validation} /> 
