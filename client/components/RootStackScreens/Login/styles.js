@@ -24,6 +24,7 @@ export default {
         color: 'white',
     },
     optionsContainer: {
+        top: -60,
         width: '85%',
         alignSelf: 'center'
     },
@@ -31,12 +32,23 @@ export default {
         alignSelf: 'center',
     },
     textReset: {
-        color: 'white'
+        color: 'white',
     },
     inputForm: {
         color: 'white',
     },
     labelForm: {
         color: 'white',
+    },
+    buttonBiometric: {
+        backgroundColor: 'transparent',
+        borderBottomWidth: 0,
+        elevation: 0,
+        alignSelf: 'center'
+    },
+    fingerPrint: {
+        height: 100,
+        alignSelf: 'center',
+        top: -5
     }
 }

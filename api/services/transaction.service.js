@@ -95,7 +95,8 @@ module.exports = {
 				path: "/recharge"
 			},
             async handler(ctx) {
-                const {id} = ctx.params
+				const data = ctx.params
+				console.log(data)
 				const amount = Math.floor(Math.random()  * 1000 + 50)
 
                const transaction= await Transaction.create({
@@ -103,12 +104,12 @@ module.exports = {
                     currency:"ARS",
                     transactionType:"recharge",
                     description:"recarga en efectivo",
-					accountId:id,
-					refernece:numReference()
+					accountId:data.id,
+					refernece: await numReference()
                 })
 
                 const account = await Account.findOne({
-                    where: { id: id },
+                    where: { id: data.id },
                 });
             
                 account.balanceArs = account.balanceArs + amount;

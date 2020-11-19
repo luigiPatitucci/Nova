@@ -6,10 +6,11 @@ import s from './style.js';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useSelector } from 'react-redux';
 
+
 import Transacciones from '../Transacciones/Transacciones.jsx'
 import DetalleTransaccion from '../Transacciones/DetalleTransaccion.jsx'
 import Estadisticas from '../Estadisticas/Estadisticas.jsx'
-
+import RechargeBalance from "../RechargeBalance/RechargeBalance.jsx"
 const Drawer = createDrawerNavigator();
 
 const OptionDrawer = (props) => {
@@ -59,6 +60,7 @@ const MyDrawer = () => {
             <Drawer.Screen name="Transacciones" component={Transacciones} />
             <Drawer.Screen name="Estadisticas" component={Estadisticas} />
             <Drawer.Screen name="DetalleTransaccion" component={DetalleTransaccion} />
+            <Drawer.Screen name="Recargar Dinero" component={RechargeBalance} />
         </Drawer.Navigator>
     );
 };
