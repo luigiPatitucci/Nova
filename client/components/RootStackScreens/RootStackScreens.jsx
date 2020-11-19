@@ -10,7 +10,6 @@ import FirstRegister from '.././Start/Create-user/First-register';
 import Validation from '.././Start/Create-user/ValidationToken';
 import DirectionRegister from '.././Start/Create-user/Direction-register';
 import MyDrawer from '../Drawer/drawer.jsx';
-import Touch from '../TouchId/Huella.js';
 
 
 
