@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 50,
     fontWeight: 'bold',
-    fontFamily: "Times New Roman"
+    /* fontFamily: "Times New Roman" */
   },
   item: {
     backgroundColor: 'white',

@@ -7,8 +7,8 @@ import CreateUser from '.././Start/Create-user/Create-user.jsx';
 import FirstRegister from '.././Start/Create-user/First-register';
 import Validation from '.././Start/Create-user/ValidationToken';
 import DirectionRegister from '.././Start/Create-user/Direction-register';
-import MyDrawer from '../Drawer/drawer.jsx'
-import { Easing } from 'react-native';
+import MyDrawer from '../Drawer/drawer.jsx';
+
 
 
 const RootStack = createStackNavigator();
