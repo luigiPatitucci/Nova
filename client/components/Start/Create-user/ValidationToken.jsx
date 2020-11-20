@@ -24,7 +24,7 @@ const CreateUser = ({navigation}) => {
                 <Form>
                     <Item floatingLabel>
                         <Label>Validacion de Usuario</Label>
-                        <Input onChangeText={pin => setData({ ...data, pin })}></Input>
+                        <Input style={{color: 'white'}} onChangeText={pin => setData({ ...data, pin })}></Input>
                     </Item>
                 </Form>
                 <Button
@@ -43,15 +43,15 @@ const CreateUser = ({navigation}) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'yellow'
+        backgroundColor: '#171717',
     },
     button: {
-        marginBottom:100,
-        bottom: -50,
-        width: 350,
+        width: '90%',
         alignSelf: 'center',
-        marginTop: 15,
-        justifyContent: 'center'
+        marginTop: 50,
+        justifyContent: 'center',
+        backgroundColor: '#4A1491',
+        borderRadius: 10,
     },
     titulos: {
         marginTop: 50,

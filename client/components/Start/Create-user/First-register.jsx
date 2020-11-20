@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../../redux/actions/userActions.js'
 
 
-
 const CreateUser = ({navigation}) => {
 
     const dispatch = useDispatch();
@@ -15,11 +14,11 @@ const CreateUser = ({navigation}) => {
     const [data, setData] = useState({
         username: '',
         email: '',
-        contraseña: ''
+        password: '',
     });
 
     const createUser =  () => {
-        return axios.post("http://192.168.0.209:3000/user/", data)
+        return axios.post("http://192.168.0.211:3000/user/", data)
         .then(resp=>{
             console.log('SOY LA RESPUESTA', resp.data)
         })
@@ -38,19 +37,19 @@ const CreateUser = ({navigation}) => {
             <ScrollView>
                 <Form>
                    
-                    <Item floatingLabel>
+                    <Item floatingLabel >
                         <Label>Nombre de Usuario *</Label>
-                        <Input onChangeText={username => setData({ ...data, username })}></Input>
+                        <Input style={{color: 'white'}} onChangeText={username => setData({ ...data, username })}></Input>
                     </Item>
 
                     <Item floatingLabel>
                         <Label>Email *</Label>
-                        <Input onChangeText={email => setData({ ...data, email })}></Input>
+                        <Input style={{color: 'white'}}  onChangeText={email => setData({ ...data, email })}></Input>
                     </Item>
 
                     <Item floatingLabel>
                         <Label>Contraseña *</Label>
-                        <Input onChangeText={contraseña => setData({ ...data, contraseña })}></Input>
+                        <Input style={{color: 'white'}}  secureTextEntry={true} onChangeText={password => setData({ ...data, password })}></Input>
                     </Item>
                 </Form>
                 <Button
@@ -69,15 +68,15 @@ const CreateUser = ({navigation}) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'yellow'
+        backgroundColor: '#171717',
     },
     button: {
-        marginBottom:100,
-        bottom: -50,
-        width: 350,
+        width: '90%',
         alignSelf: 'center',
-        marginTop: 15,
-        justifyContent: 'center'
+        marginTop: 50,
+        justifyContent: 'center',
+        backgroundColor: '#4A1491',
+        borderRadius: 10,
     },
     titulos: {
         marginTop: 50,
