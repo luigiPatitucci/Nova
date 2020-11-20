@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import { Button, Container } from 'native-base';
 import { useDispatch, useSelector } from 'react-redux';
 import { recharge } from '../../redux/actions/transactions.js';
@@ -34,7 +34,7 @@ const RechargeBalance = ({ navigation }) => {
                 <Button style={s.button}onPress={() => handleSubmit()}>
                     <Text style={s.buttonText}>Confirmar Recarga</Text>
                 </Button>
-                <Button style={s.button} onPress={() => navigation.navigate('Home')}> 
+                <Button style={s.button} onPress={() => navigation.navigate('Inicio')}> 
                     <Text style={s.buttonText}>Volver al inicio</Text>
                 </Button>
             </View>

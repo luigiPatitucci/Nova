@@ -26,7 +26,7 @@ const StartScreen = ({ navigation }) => {
                     block
                     dark
                     style={s.button}
-                    onPress={() => navigation.navigate('Reconocimiento dactilar')}
+                    onPress={() => navigation.navigate('Registrarse')}
                 >
                     <Icon size={30} name='user-follow' style={s.icon}/>
                     <Text>Registrarme</Text>

@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { createStackNavigator, TransitionPresets, CardStyleInterpolators } from '@react-navigation/stack';
-import { Easing } from 'react-native';
-
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import StartScreen from './StartScreen/StartScreen.jsx'
 import Login from './Login/Login.jsx'
 import CreateUser from '.././Start/Create-user/Create-user.jsx';
@@ -32,7 +30,7 @@ const RootStackScreens = ({ navigation }) => {
 
     return (
         <RootStack.Navigator screenOptions={options} headerMode='float'>
-            <RootStack.Screen name='Inicio' component={StartScreen} options={{headerShown: false}}/>
+            <RootStack.Screen name='Comienzo' component={StartScreen} options={{headerShown: false}}/>
             <RootStack.Screen name='Ingresar' component={Login} />
             <RootStack.Screen name='Registrarse' component ={FirstRegister}/>
             <RootStack.Screen name='Verificacion' component={Validation} /> 
