@@ -1,4 +1,4 @@
-import { RECHARGE} from '../actions/userActions.js';
+import {RECHARGE} from '../actions/transactions.js';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const initialState = {  
@@ -17,7 +17,6 @@ export default (state = initialState, action) => {
         case RECHARGE:
             return {
                 ...state,
-                title: action.transaction.title,
                 description: action.transaction.description,
                 transactionType: action.transaction.transactionType,
                 amount: action.transaction.amount,
