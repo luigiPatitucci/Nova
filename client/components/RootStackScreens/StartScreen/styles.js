@@ -19,7 +19,7 @@ export default {
     },
     image: {
         width: '81%',
-        height: '65%',
+        height: '63%',
         alignSelf: 'center',
     },
     icon: {

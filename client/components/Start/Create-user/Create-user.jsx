@@ -21,7 +21,7 @@ const CreateUser = ({navigation}) => {
                 return;
             }
         }
-            navigation.navigate('Direction Register', data)
+            navigation.navigate('DirectionRegister', data)
     }
 
     return (
@@ -37,7 +37,7 @@ const CreateUser = ({navigation}) => {
                                 <Label style={styles.titulos}>Datos Personales</Label>
                                 <Item >
                                 <Label>Tipo de documento: *</Label>
-                                <Picker onValueChange={tipoDoc => setData({...data, tipoDoc})} selectedValue={data.tipoDoc}
+                                <Picker style={{color: 'white'}} onValueChange={tipoDoc => setData({...data, tipoDoc})} selectedValue={data.tipoDoc}
                                     >
                                         <Picker.Item label= 'Selecciona el tipo de documento' value= ''/>
                                         <Picker.Item label='DNI' value= "DNI"/>
@@ -46,23 +46,23 @@ const CreateUser = ({navigation}) => {
                                 </Item>
                                 <Item floatingLabel>
                                     <Label>Nro de DNI: *</Label>
-                                    <Input onChangeText={nroDNI => setData({ ...data, nroDNI })} type="number"></Input>
+                                    <Input style={{color: 'white'}} onChangeText={nroDNI => setData({ ...data, nroDNI })} type="number"></Input>
                                 </Item>
                                 <Item floatingLabel>
                                     <Label>Nombre: *</Label>
-                                    <Input onChangeText={nombre => setData({ ...data, nombre })}></Input>
+                                    <Input style={{color: 'white'}} onChangeText={nombre => setData({ ...data, nombre })}></Input>
                                 </Item>
                                 <Item floatingLabel>
                                     <Label>Apellido: *</Label>
-                                    <Input onChangeText={apellido => setData({ ...data, apellido }) }></Input>
+                                    <Input style={{color: 'white'}} onChangeText={apellido => setData({ ...data, apellido }) }></Input>
                                 </Item>
                                 <Item floatingLabel>
                                     <Label>Fecha de nacimiento: *</Label>
-                                    <Input onChangeText={fechaNac => setData({ ...data, fechaNac })} type="date"></Input>
+                                    <Input style={{color: 'white'}} onChangeText={fechaNac => setData({ ...data, fechaNac })} type="date"></Input>
                                 </Item>
                                 <Item floatingLabel>
                                     <Label>Telefono celular: *</Label>
-                                    <Input onChangeText={cel => setData({ ...data, cel })}  type="number"></Input>
+                                    <Input style={{color: 'white'}} onChangeText={cel => setData({ ...data, cel })}  type="number"></Input>
                                 </Item>
                             </Form>
                             <Button
@@ -85,7 +85,7 @@ const CreateUser = ({navigation}) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'yellow',
+        backgroundColor: '#171717',
         flex: 1
     },
     keyboard: {
@@ -95,12 +95,12 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end"
     },
     button: {
-        marginBottom:100,
-        bottom: -50,
-        width: 350,
+        width: '90%',
         alignSelf: 'center',
-        marginTop: 15,
-        justifyContent: 'center'
+        marginTop: 50,
+        justifyContent: 'center',
+        backgroundColor: '#4A1491',
+        borderRadius: 10,
     },
     titulos: {
         marginTop: 50,
