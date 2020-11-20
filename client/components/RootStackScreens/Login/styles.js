@@ -13,7 +13,7 @@ export default {
     },
     image: {
         width: '81%',
-        height: '95%',
+        height: '85%',
         alignSelf: 'center',
     },
     imageContainer: {

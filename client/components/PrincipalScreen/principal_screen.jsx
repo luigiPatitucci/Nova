@@ -49,7 +49,7 @@ const PrincipalScreen = ({navigation}) => {
                     <Icon style={s.icon} size={30} name='vote-yea' />
                     <Text style={s.textOption}>Recargar dinero</Text>
                 </Button>
-                <Button style={s.secondaryButton}>
+                <Button style={s.secondaryButton} onPress={() => navigation.navigate('Envio Dinero')}>
                     <Icon style={s.icon} size={30} name='paper-plane' />
                     <Text style={s.textOption}>Enviar dinero</Text>
                 </Button>

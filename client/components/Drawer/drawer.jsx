@@ -11,6 +11,8 @@ import Transacciones from '../Transacciones/Transacciones.jsx'
 import DetalleTransaccion from '../Transacciones/DetalleTransaccion.jsx'
 import Estadisticas from '../Estadisticas/Estadisticas.jsx'
 import RechargeBalance from "../RechargeBalance/RechargeBalance.jsx"
+import SendMoney from '../SendMoney/SendMoney.jsx'
+
 const Drawer = createDrawerNavigator();
 
 const OptionDrawer = (props) => {
@@ -75,6 +77,7 @@ const MyDrawer = () => {
             <Drawer.Screen name="Estadisticas" component={Estadisticas} />
             <Drawer.Screen name="DetalleTransaccion" component={DetalleTransaccion} />
             <Drawer.Screen name="Recargar Dinero" component={RechargeBalance} />
+            <Drawer.Screen name="Envio Dinero" component={SendMoney} />
             <Drawer.Screen name="Contactos" component={ListaContactos} />
         </Drawer.Navigator>
     );

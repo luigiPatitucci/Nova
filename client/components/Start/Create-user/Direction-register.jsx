@@ -6,12 +6,6 @@ import axios from 'axios';
 const DirectionRegister = ({route, navigation}) => {
 
     const [data, setData] = useState({
-        tipoDoc: '',
-        nroDNI: '',
-        nombre: '',
-        apellido: '',
-        fechaNac: '',
-        cel: '',
         calle: '',
         nro: '',
         localidad: '',
@@ -99,7 +93,7 @@ const DirectionRegister = ({route, navigation}) => {
                         <Form>
                             <Item>
                                 <Label>Provincia: *</Label>
-                                <Picker onValueChange={value => handleProvincias(value)} selectedValue={data.provincia}> 
+                                <Picker style={{color: 'white'}}  onValueChange={value => handleProvincias(value)} selectedValue={data.provincia}> 
                                     <Picker.Item label='Seleccione su provincia' value=''/>
                                     {
                                         pickerProvincias.map( provincia => (
@@ -110,7 +104,7 @@ const DirectionRegister = ({route, navigation}) => {
                             </Item>
                             <Item>
                                 <Label>Partido/Departamento: *</Label>
-                                <Picker onValueChange={value => handleDepartamentos(value)} selectedValue={data.departamento}>
+                                <Picker style={{color: 'white'}}  onValueChange={value => handleDepartamentos(value)} selectedValue={data.departamento}>
                                     <Picker.Item label='Seleccione su Partido/Departamento' value=''/>
                                     {
                                         pickerDepartamentos.map( departamento => (
@@ -121,7 +115,7 @@ const DirectionRegister = ({route, navigation}) => {
                             </Item>
                             <Item>
                                 <Label>Localidad: *</Label>
-                                <Picker onValueChange={localidad => setData({ ...data, localidad })} selectedValue={data.localidad}>
+                                <Picker style={{color: 'white'}}  onValueChange={localidad => setData({ ...data, localidad })} selectedValue={data.localidad}>
                                     <Picker.Item label='Seleccione su Localidad' value=''/>
                                     {
                                         pickerLocalidades.map( localidad => (
@@ -132,11 +126,11 @@ const DirectionRegister = ({route, navigation}) => {
                             </Item>
                             <Item floatingLabel>
                                 <Label>Calle: *</Label>
-                                <Input onChangeText={calle => setData({ ...data, calle})}></Input>
+                                <Input style={{color: 'white'}}  onChangeText={calle => setData({ ...data, calle})}></Input>
                             </Item>
                             <Item floatingLabel>
                                 <Label>Nro: *</Label>
-                                <Input onChangeText={nro => setData({ ...data, nro})}></Input>
+                                <Input style={{color: 'white'}}  onChangeText={nro => setData({ ...data, nro})}></Input>
                             </Item>
                         </Form>
                         <Button
@@ -158,7 +152,7 @@ const DirectionRegister = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'yellow',
+        backgroundColor: '#171717',
         flex: 1
     },
     keyboard: {
@@ -168,17 +162,18 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end"
     },
     button: {
-        marginBottom:100,
-        bottom: -50,
-        width: 350,
+        width: '90%',
         alignSelf: 'center',
-        marginTop: 15,
-        justifyContent: 'center'
+        marginTop: 50,
+        justifyContent: 'center',
+        backgroundColor: '#4A1491',
+        borderRadius: 10,
     },
     titulos: {
         marginTop: 50,
         alignSelf: 'center',
-        fontWeight: "bold"
+        fontWeight: "bold",
+        color: 'white'
     }
 });
 
