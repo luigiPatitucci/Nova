@@ -2,6 +2,10 @@ export default {
     container: {
         backgroundColor: '#4A1491'
     },
+    headerContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
     infoContainer: {
         backgroundColor: 'white',
         width: '90%',
@@ -28,7 +32,12 @@ export default {
         width: '80%',
         alignSelf: 'center'
     },
-    info: {
+    infoOne: {
+        fontSize: 17,
+        marginTop: '5%',
+        marginLeft: '13%'
+    },
+    infoTwo: {
         fontSize: 17,
         marginTop: '5%'
     },
@@ -54,5 +63,44 @@ export default {
         height: 100,
         alignSelf: 'center',
         top: -5
+    },
+    infoIcon: {
+        marginRight: '1%',
+        marginTop: '7%'
+    },
+    //////////////////MODAL/////////////////
+    modalContainer: {
+        backgroundColor: 'white',
+        width: '90%',
+        height: '75%',
+        alignSelf: 'center',
+        marginTop: '5%',
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        elevation: 4,
+    },
+    modalTitleText: {
+        fontSize: 35,
+        alignSelf: 'center',
+        marginBottom: '5%',
+        color: 'grey'
+    },
+    properties: {
+        fontSize: 18,
+        marginLeft: '5%'
+    },
+    icon: {
+        textAlign: 'right',
+        marginRight: '2%',
+        marginTop: '2%'
+    },
+    animation: {
+        marginTop: '27%'
     }
 }
