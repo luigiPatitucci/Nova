@@ -5,7 +5,6 @@ import { Image, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../redux/actions/userActions.js'
 import * as LocalAuthentication from 'expo-local-authentication';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import LottieView from 'lottie-react-native';
 import s from './styles.js'
 

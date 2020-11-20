@@ -1,5 +1,5 @@
 import axios from 'axios';
-const RECHARGE = "RECHARGE";
+export const RECHARGE = "RECHARGE"; 
 
 const API_URL ="192.168.1.12:3000"
 
