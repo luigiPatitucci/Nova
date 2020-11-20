@@ -2,7 +2,7 @@ import axios from 'axios';
 export const ADD_USER = "ADD_USER";
 export const LOGIN_USER = "LOGIN_USER";
 export const USER_BY_ID ="USER_BY_ID";
-const API_URL ="192.168.1.12:3000"
+const API_URL ="192.168.0.209:3000"
 
 export function createUser(user){
 
