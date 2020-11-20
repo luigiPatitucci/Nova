@@ -42,7 +42,7 @@ export function login (data){
 export function refresh (data){
 
     return function(dispatch){
-        return axios.get(`http://${API_URL}/user/user/${1}`)
+        return axios.get(`http://${API_URL}/user/user/${data}`)
         .then( resp =>{
             dispatch({
                 type:USER_BY_ID,

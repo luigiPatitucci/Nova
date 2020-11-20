@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const  LIST_CONTACTS = "RECHARGE";
+export const  LIST_CONTACTS = "LIST_CONTACTS";
 export const DELETE_CONTACTS = "DELETE_CONTACTS"
 export const UPDATE_CONTACTS = "UPDATE_CONTACTS"
 export const ADD_CONTACTO = "ADD_CONTACTO"

@@ -25,6 +25,7 @@ module.exports = {
 			},
             async handler(ctx) {
                 const data = ctx.params
+                data.email = data.email.toLowerCase()
                 const contact = await User.findOne({
                     where:{email:data.email}
                 })

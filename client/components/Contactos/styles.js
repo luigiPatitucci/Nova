@@ -29,6 +29,7 @@ modalAdd:{
   height:250
 },
 modalDelete:{
+  padding:10,
   alignItems:"center",
   borderRadius:10,
   backgroundColor:"white",

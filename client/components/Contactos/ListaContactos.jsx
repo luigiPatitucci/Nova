@@ -22,7 +22,7 @@ const  Contactos = ()=>{
   useEffect( () => {
     dispatch(allContacts(user.id))
   },[])
-  
+  console.log("SON LOS CONTACTOS ",contactos)
   const selectContact=(id)=>{
     setCurrent(id)
     setModal(!modal)
