@@ -6,11 +6,13 @@ import s from './style.js';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useSelector } from 'react-redux';
 
-
+import ListaContactos from "../Contactos/ListaContactos"
 import Transacciones from '../Transacciones/Transacciones.jsx'
 import DetalleTransaccion from '../Transacciones/DetalleTransaccion.jsx'
 import Estadisticas from '../Estadisticas/Estadisticas.jsx'
 import RechargeBalance from "../RechargeBalance/RechargeBalance.jsx"
+import SendMoney from '../SendMoney/SendMoney.jsx'
+
 const Drawer = createDrawerNavigator();
 
 const OptionDrawer = (props) => {
@@ -48,6 +50,7 @@ const MenuDrawer = (props) => {
             <OptionDrawer iconName='history' optionName='Transacciones' navigation={() => props.navigation.navigate('Transacciones')}/>
             <OptionDrawer iconName='tags' optionName='Mis productos'/>
             <OptionDrawer iconName='user-circle' optionName='Mis datos'/>
+            <OptionDrawer iconName='address-book' optionName='Contactos' navigation={() => props.navigation.navigate('Contactos')}/>
         </View>
     );
 };
@@ -74,6 +77,8 @@ const MyDrawer = () => {
             <Drawer.Screen name="Estadisticas" component={Estadisticas} />
             <Drawer.Screen name="DetalleTransaccion" component={DetalleTransaccion} />
             <Drawer.Screen name="Recargar Dinero" component={RechargeBalance} />
+            <Drawer.Screen name="Envio Dinero" component={SendMoney} />
+            <Drawer.Screen name="Contactos" component={ListaContactos} />
         </Drawer.Navigator>
     );
 };
