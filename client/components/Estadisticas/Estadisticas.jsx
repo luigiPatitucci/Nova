@@ -12,7 +12,7 @@ function Estadisticas(){
       
            <ImageBackground source={image} style={styles.image}>
              <View style={styles.title}>
-               <Text style={styles.title}>Estadisticas</Text>
+               <Text style={styles.title}>Tus Estadisticas</Text>
              </View>
 <View style={styles.container}>
   <View style={styles.b}>
@@ -89,27 +89,28 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   title:{
+    top:20,
 color:'white',
 textAlign: 'center',
-fontSize:50,
+fontSize:30,
 fontWeight: 'bold',
 fontFamily: "Times New Roman"
 },
 b:{
 marginBottom:90,
-marginTop:110,
+marginTop:50,
   flexDirection: 'row',
   justifyContent: 'center',
 
 },
 
 text:{
-color :'black'
+color :'white'
 },
 
     button: {
     width:120,
-      backgroundColor: "white",
+      backgroundColor: "black",
      flexDirection: 'column',
       justifyContent: 'center',
       display:'flex',
