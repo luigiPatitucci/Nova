@@ -22,7 +22,6 @@ const Login = ({ navigation }) => {
     const [suportted, setSuportted] = useState(null);
     const [nombre, setNombre] = useState('Usuario');
     const user = useSelector((state) => state.userReducer);
-    console.log('GAAAAAAAAAAAAAAAAAAAAAAAA', user.id)
 
     useEffect(() => {
         LocalAuthentication.supportedAuthenticationTypesAsync()
@@ -53,14 +52,13 @@ const Login = ({ navigation }) => {
     const handleSubmit = async () => {
         console.log(input)
         await dispatch(login(input));
-        await axios.post(`http://${API_URL}/auth/login`, input)
-        .then(() =>{
-            /* console.log('TTTTTTTTTTTTTT', resp) */      
-            return navigation.navigate('Home');
-        })
-        .catch(()=>{
+        /* await axios.post(`http://${API_URL}/auth/login`, input)
+        .then(() =>{  */   
+        /* navigation.navigate('Home'); */
+        /* }) */
+        /* .catch(()=>{
             return Alert.alert('Por favor, verifique que los datos ingresados son correctos.');
-        })
+        }) */
     };
 
     const recoverPassword = () => {
@@ -91,7 +89,7 @@ const Login = ({ navigation }) => {
                     block
                     dark
                     style={s.button}
-                    onPress={() => handleSubmit()}
+                    onPress={() => navigation.navigate('Home')}
                 >
                     <Text>Ingresar</Text>
                 </Button>

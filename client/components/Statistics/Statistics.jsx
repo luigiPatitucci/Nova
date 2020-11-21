@@ -6,7 +6,7 @@ import { Dimensions,  ImageBackground } from 'react-native';
 import { Button, Text, View} from 'native-base';
 const image = { uri: "https://www.10wallpaper.com/wallpaper/1920x1080/1908/2019_Purple_Abstract_4K_HD_Design_1920x1080.jpg" };
 
-function Estadisticas(){
+function Statistics(){
     return(
         <View style={styles.container}>
       
@@ -93,7 +93,6 @@ color:'white',
 textAlign: 'center',
 fontSize:50,
 fontWeight: 'bold',
-fontFamily: "Times New Roman"
 },
 b:{
 marginBottom:90,
@@ -119,4 +118,4 @@ color :'black'
 
  
 });
-export default Estadisticas;
+export default Statistics;

@@ -4,7 +4,8 @@ import { StatusBar, StyleSheet, ScrollView ,  ImageBackground , Ima} from "react
 import { DataTable,} from 'react-native-paper';
 import moment from 'moment';
 const image = { uri: "https://www.10wallpaper.com/wallpaper/1920x1080/1908/2019_Purple_Abstract_4K_HD_Design_1920x1080.jpg" };
-function DetalleTransaccion(){
+
+function TransactionDetails(){
     return(
         <View style={styles.container}>
               <ImageBackground source={image} style={styles.image}>
@@ -96,4 +97,4 @@ text2:{
     textAlign: 'center',
 }
   });
-export default DetalleTransaccion;
+export default TransactionDetails;

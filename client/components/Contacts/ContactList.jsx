@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {allContacts , deleteContact,addContact} from '../../redux/actions/contacts'
 import Modal from 'react-native-modal'; 
 
-const  Contactos = ()=>{
+const ContactList = ()=>{
   const contactos = useSelector((state) => state.contactos);
   const user = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
@@ -116,4 +116,4 @@ const  Contactos = ()=>{
   )
 }
 
-export default Contactos;
+export default ContactList;
