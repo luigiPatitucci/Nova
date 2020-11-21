@@ -3,8 +3,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const initialState = {
     id: null,
-    name: '',
+    surname:'',
     email: '',
+    birthday:'',
+    phone_number:'',
+    adress:'',
     token: null,
 
     balanceArs: 0,
@@ -43,8 +46,11 @@ export default (state = initialState, action) => {
                 ...state,
                 id: action.user.id,
                 name: action.user.username,
+                surname:action.user.surname,
                 email: action.user.email,
-
+                birthday:action.user.birthday,
+                phone_number:action.user.phone_number,
+                adress:action.user.adress,
                 balanceArs: action.user.account.balanceArs,
                 balanceUsd: action.user.account.balanceUsd,
                 code: action.user.account.code,

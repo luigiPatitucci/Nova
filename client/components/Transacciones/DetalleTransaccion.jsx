@@ -1,17 +1,17 @@
 import React from 'react';
-import { Button, Text, View} from 'native-base';
-import { StatusBar, StyleSheet, ScrollView ,  ImageBackground , Ima} from "react-native";
+import { Button, Text, View, Icon } from 'native-base';
+import { StatusBar, StyleSheet, ScrollView ,  Ima} from "react-native";
 import { DataTable,} from 'react-native-paper';
 import moment from 'moment';
 const image = { uri: "https://www.10wallpaper.com/wallpaper/1920x1080/1908/2019_Purple_Abstract_4K_HD_Design_1920x1080.jpg" };
-function DetalleTransaccion(){
+function DetalleTransaccion({navigation}){
     return(
         <View style={styles.container}>
-              <ImageBackground source={image} style={styles.image}>
-
+              
            <Text style={styles.title}>Detalle</Text>
 
             <View style={styles.card}>
+            <Text><Icon name="arrow-back" onPress={() => navigation.navigate('Transacciones')}/></Text>
             <Text style={styles.text}>+ 600</Text>
             <Text style={styles.text2}>enviaste dinero a tal persona</Text>
         <DataTable.Row>
@@ -57,20 +57,16 @@ function DetalleTransaccion(){
             </View>
 
 
-              </ImageBackground>
            </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor:'#4A1491',
         flex: 1,
         marginTop: StatusBar.currentHeight || 0,
       },
-    image: {
-        flex: 1,
-        resizeMode: "cover",
-    },
     title:{
         marginTop:20,
         marginBottom:50,

@@ -64,7 +64,7 @@ const PrincipalScreen = ({navigation}) => {
                     <Text style={s.textOption}>Estadisticas</Text>
                 </Button>
                 <Button style={s.button} >
-                    <Icon style={s.icon} size={30} name='user-circle' />
+                    <Icon style={s.icon} size={30} name='user-circle' onPress={() => navigation.navigate('Perfil')} />
                     <Text style={s.textOption}>Mis datos</Text>
                 </Button>
                 <Button style={s.button}>
