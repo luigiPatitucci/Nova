@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Alert, TouchableOpacity } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button } from 'native-base';
 import { Image, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../redux/actions/userActions.js'
 import * as LocalAuthentication from 'expo-local-authentication';
 import LottieView from 'lottie-react-native';
-import s from './styles.js'
+import s from './styles.js';
+import axios from 'axios';
+const API_URL ="192.168.0.9:3000";
 
 const Login = ({ navigation }) => {
 
@@ -19,6 +21,8 @@ const Login = ({ navigation }) => {
     });
     const [suportted, setSuportted] = useState(null);
     const [nombre, setNombre] = useState('Usuario');
+    const user = useSelector((state) => state.userReducer);
+    console.log('GAAAAAAAAAAAAAAAAAAAAAAAA', user.id)
 
     useEffect(() => {
         LocalAuthentication.supportedAuthenticationTypesAsync()
@@ -46,18 +50,23 @@ const Login = ({ navigation }) => {
             })
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log(input)
-        dispatch(login(input));
-        navigation.navigate('Home')
+        await dispatch(login(input));
+        await axios.post(`http://${API_URL}/auth/login`, input)
+        .then(() =>{
+            /* console.log('TTTTTTTTTTTTTT', resp) */      
+            return navigation.navigate('Home');
+        })
+        .catch(()=>{
+            return Alert.alert('Por favor, verifique que los datos ingresados son correctos.');
+        })
     };
 
     const recoverPassword = () => {
-        console.log('recover');
+        console.log(user.id)
         //Recuperar contraseña del email//
     }
-
-
 
     return (
         <Container style={s.container}>
@@ -96,7 +105,7 @@ const Login = ({ navigation }) => {
                 <TouchableOpacity style={s.buttonBiometric} onPress={() => handleLogin()}>
                     <LottieView style={s.fingerPrint} source={require('../../../assets/lf30_editor_d3000vch.json')} autoPlay loop />
                 </TouchableOpacity>
-            </View>
+            </View> 
         </Container>
     );
 };

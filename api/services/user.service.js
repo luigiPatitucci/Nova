@@ -181,6 +181,41 @@ module.exports = {
 
 		},
 	},
+
+		//MODIFICAR DATOS DEL USUARIO
+		updateUser:{
+			rest: {
+				method:"PUT",
+				path:"/update/:_id"
+			},
+			async handler(ctx){
+	
+			const data = ctx.params;
+				console.log(ctx.params._id)
+				await User.update(
+					
+					{    email:data.email,
+						username:data.username,
+						surname:data.surname,
+						birthday:data.birthday,
+						phone_number:data.phone_number,
+						adress:data.adress,
+					},
+	
+					{
+					where:{
+						id:data._id
+						}
+					}
+				);
+				const user = await User.findOne({
+					where:{id:data._id},
+	
+				})
+				return user
+			}
+		},
+		
 	validarToken:{
 		rest: {
 			method:"POST",
