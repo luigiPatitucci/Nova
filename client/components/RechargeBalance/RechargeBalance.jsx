@@ -25,8 +25,7 @@ const RechargeBalance = ({ navigation }) => {
 
     const transaction = useSelector((state) => state.transactions);
     let dateFormat = transaction.createdAt.substring(0, 10).split('-').reverse().join('/');
-    console.log('SOY LA INFO DE LA TRANSACCION', transaction)
-
+    
     return (
         <Container style={s.container}>
             <View style={s.infoContainer}>

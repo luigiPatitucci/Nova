@@ -45,6 +45,7 @@ async function native_base() {
   await Font.loadAsync({
     Roboto: require("native-base/Fonts/Roboto.ttf"),
     Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+    RedHatText_Regular: require('./assets/RedHatText-Regular.ttf'),
     ...Ionicons.font,
   });
 };
