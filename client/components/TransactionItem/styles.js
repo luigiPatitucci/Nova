@@ -82,7 +82,6 @@ export default {
     icon: {
         textAlign: 'right',
         marginRight: '2%',
-        marginTop: '2%'
     },
     animation: {
         marginTop: '27%'

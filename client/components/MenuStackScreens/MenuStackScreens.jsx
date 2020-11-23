@@ -1,7 +1,6 @@
 import React from 'react';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
-import TransactionDetails from '../Transactions/TransactionDetails';
 import RechargeBalance from "../RechargeBalance/RechargeBalance";
 import SendMoney from '../SendMoney/SendMoney'
 
@@ -27,7 +26,6 @@ const MenuStackScreens = () => {
     return (
         <MenuStack.Navigator screenOptions={options} headerMode='float'>
             <MenuStack.Screen name='TabNavigator' component={TabNavigator} options={{headerShown: false}}/>
-            <MenuStack.Screen name='TransactionDetails' component={TransactionDetails} /> 
             <MenuStack.Screen name='RechargeBalance' component={RechargeBalance} />
             <MenuStack.Screen name='SendMoney' component={SendMoney} />
         </MenuStack.Navigator>

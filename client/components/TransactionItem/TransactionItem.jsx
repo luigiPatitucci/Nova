@@ -7,7 +7,7 @@ import LottieView from 'lottie-react-native';
 import Modal from 'react-native-modal';
 import s from './styles';
 
-const TransactionItem = ({ type, date, name, amount }) => {
+const TransactionItem = ({ type, date, name, amount, referenceCode }) => {
 
     let dateFormat = date.substring(0, 10).split('-').reverse().join('/');
     const [modalVisible, setModalVisible] = useState(false);
@@ -91,6 +91,7 @@ const TransactionItem = ({ type, date, name, amount }) => {
                         }
 
                         <Text style={s.properties}>Monto: {amount} ARS</Text>
+                        <Text style={s.properties}>Código de referencia: {referenceCode}</Text>
                         <LottieView style={s.animation} source={require('../../assets/lf30_editor_0qoqgqll.json')} autoPlay loop={false} />
                     </View>
                 </Modal>

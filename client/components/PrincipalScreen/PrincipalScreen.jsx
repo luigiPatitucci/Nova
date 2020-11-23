@@ -43,6 +43,7 @@ const PrincipalScreen = ({ navigation }) => {
                             amount={transaction.amount}
                             date={transaction.createdAt}
                             type={transaction.transactionType}
+                            referenceCode={transaction.refernece}
                             key={i}
                         />
                     ))
