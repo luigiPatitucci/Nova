@@ -181,7 +181,27 @@ module.exports = {
 
 		},
 	},
+	updateAvatar:{
+		rest: {
+			method:"PUT",
+			path:"/avatar/:_id"
+		},
+		async handler(ctx){
 
+			const data=ctx.params;
+			console.log(data)
+			await User.update({
+				avatar:data.avatar
+			},
+			{
+				where:{
+					id:data._id
+				}
+			}
+			)
+			return data.avatar;
+		}
+	},
 		//MODIFICAR DATOS DEL USUARIO
 		updateUser:{
 			rest: {
@@ -192,9 +212,11 @@ module.exports = {
 	
 			const data = ctx.params;
 				console.log(ctx.params._id)
+				console.log(ctx.params.avatar)
 				await User.update(
 					
-					{    email:data.email,
+					{  
+						email:data.email,
 						username:data.username,
 						surname:data.surname,
 						birthday:data.birthday,
