@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { useSelector, useDispatch} from 'react-redux'
 
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions, ScrollView } from 'react-native';
 import { Text, View, Button } from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import s from './styles';
 
 const Statistics = () => {
+
+  const transactionHistory = useSelector((state) => state.transactions.transactionHistory);
+
+  console.log('ESTOY EN LAS ESTADISTICAS ', transactionHistory)
 
   const [initialDate, setInitialDate] = useState(new Date(1598051730000));
   const [limitDate, setLimitDate] = useState(new Date(1598051730000));
@@ -34,27 +40,46 @@ const Statistics = () => {
     setShowLimit(true);
   };
 
-  const data = {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [
-      {
-        data: [20, 45, 28, 80, 99, 43],
-        color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, 
-        strokeWidth: 2 
-      }
-    ],
-    legend: ["hola"] 
-  };
+  const StatisticsPerDay = () => {
+    let dates = [];
+    let amounts = [];
+    transactionHistory.map(transaction => {
+      dates.push(transaction.createdAt.substring(5, 10).split('-').reverse().join('/'));
+      amounts.push(transaction.amount)
+    });
+
+   let dataPerDay = {
+
+      labels: dates,
+      datasets: [
+        {
+          data: amounts,
+          color: (opacity = 1) => `rgba(75, 129, 231, ${opacity})`, 
+          strokeWidth: 2 ,
+        }
+      ],
+    };
+
+    return dataPerDay;
+  }
 
   const chartConfig = {
-    backgroundColor: 'yellow',
     backgroundGradientFromOpacity: 0,
-    backgroundGradientTo: "#08130D",
-    backgroundGradientToOpacity: .3,
-    color: (opacity = 1) => `rgba(75, 129, 231, ${opacity})`,
+    backgroundGradientToOpacity: 0,
+    color: (opacity = 1) => `rgba(72, 129, 231, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(72, 129, 231 , ${opacity})`,
     strokeWidth: 2,
     barPercentage: 0.5,
-    useShadowColorFromDataset: false 
+    useShadowColorFromDataset: false,
+    propsForDots: {
+      r: "5",
+      strokeWidth: "2",
+      stroke: "#4b81e7"
+    },
+    style: {
+      borderRadius: 16,
+      fontFamily: 'RedHatText_Regular',
+    },
   };
 
   return (
@@ -63,24 +88,19 @@ const Statistics = () => {
       <View>
         <ScrollView horizontal={true}>
           < LineChart
-            data={data}
-            width={1000}
-            height={300}
-            verticalLabelRotation={30}
+            data={StatisticsPerDay()}
+            width={3600}
+            height={350}
             chartConfig={chartConfig}
-            bezier
           />
         </ScrollView>
       </View>
       <View style={s.optionsContainer}>
-        <Button onPress={() => showModeOne()}>
-          <Text>Hola</Text>
+        <Button style={s.button} onPress={() => showModeOne()}>
+          <Text style={s.textButton}>Fecha inicial</Text>
         </Button>
-        <Button onPress={() => showModeTwo()}>
-          <Text>Hola2</Text>
-        </Button>
-        <Button onPress={() => console.log('SOY EL INICIO', initialDate, 'SOY EL FIN', limitDate)}>
-          <Text>Chau</Text> 
+        <Button style={s.button}onPress={() => showModeTwo()}>
+          <Text style={s.textButton}>Fecha limite</Text>
         </Button>
       </View>
       {/* INITIAL DATE */}
