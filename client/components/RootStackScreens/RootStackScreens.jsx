@@ -29,7 +29,7 @@ const RootStackScreens = () => {
     return (
         <RootStack.Navigator screenOptions={options} headerMode='float'>
             <RootStack.Screen name='Comienzo' component={StartScreen} options={{headerShown: false}}/>
-            <RootStack.Screen name='Ingresar' component={Login} />
+            <RootStack.Screen name='Ingresar' component={Login} options={{headerShown: false}}/>
             <RootStack.Screen name='Registrarse' component ={FirstRegister}/>
             <RootStack.Screen name='Verificacion' component={Validation} /> 
             <RootStack.Screen name='Crear Usuario' component={CreateUser} />

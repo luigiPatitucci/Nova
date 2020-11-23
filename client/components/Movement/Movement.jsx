@@ -1,9 +1,12 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { View } from 'react-native';
+import SendMoney from '../SendMoney/SendMoneyStyle';
 
 const Movement = () => {
     return (
-        <Text>hOLA</Text>
+        <View>
+            <SendMoney />
+        </View>
     )
 }
 

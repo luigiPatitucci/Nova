@@ -1,16 +1,13 @@
 import React from 'react';
 
-import s from './style.js';
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useSelector } from 'react-redux';
-import { View, TouchableOpacity, Image, Text } from 'react-native';
 
 import PrincipalScreen from '../PrincipalScreen/PrincipalScreen';
-import Transactions from '../Transactions/Transactions';
 import Statistics from '../Statistics/Statistics';
 import ContactList from '../Contacts/ContactList';
-import Movement from '../Movement/Movement';
+/* import Movement from '../Movement/Movement'; */
+import SendMoney from '../SendMoney/SendMoney';
+import UserProfile from '../UserProfile/UserProfile';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -51,8 +48,8 @@ const TabNavigator = () => {
 
         >
             <Tab.Screen name="Inicio" component={PrincipalScreen}/>
-            <Tab.Screen name="Transacciones" component={Transactions} />
-            <Tab.Screen name="Movimiento" component={Movement} />
+            <Tab.Screen name="Transacciones" component={UserProfile} />
+            <Tab.Screen name="Movimiento" component={SendMoney} />
             <Tab.Screen name="Estadisticas" component={Statistics} />
             <Tab.Screen name="Contactos" component={ContactList} />
         </Tab.Navigator>

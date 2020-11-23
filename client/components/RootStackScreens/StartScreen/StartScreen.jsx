@@ -8,10 +8,10 @@ import s from './styles.js'
 const StartScreen = ({ navigation }) => {
     return (
         <Container style={s.default}>
-            <View>
+            {/* <View>
                 <Image source={require('../../../assets/logohb.png')}
                     style={s.image} />
-            </View>
+            </View> */}
             <View style={s.container}>
                 <Button
                     block
