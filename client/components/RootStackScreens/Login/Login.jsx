@@ -50,15 +50,14 @@ const Login = ({ navigation }) => {
     }
 
     const handleSubmit = async () => {
-        console.log(input)
         await dispatch(login(input));
-        /* await axios.post(`http://${API_URL}/auth/login`, input)
-        .then(() =>{  */   
-        /* navigation.navigate('Home'); */
-        /* }) */
-        /* .catch(()=>{
+        await axios.post(`http://${API_URL}/auth/login`, input)
+        .then(() =>{  
+        navigation.navigate('Home');
+        })
+        .catch(()=>{
             return Alert.alert('Por favor, verifique que los datos ingresados son correctos.');
-        }) */
+        })
     };
 
     const recoverPassword = () => {
@@ -89,7 +88,7 @@ const Login = ({ navigation }) => {
                     block
                     dark
                     style={s.button}
-                    onPress={() => navigation.navigate('Home')}
+                    onPress={() => handleSubmit()}
                 >
                     <Text>Ingresar</Text>
                 </Button>

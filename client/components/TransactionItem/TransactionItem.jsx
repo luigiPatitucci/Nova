@@ -9,7 +9,7 @@ import s from './styles';
 
 const TransactionItem = ({ type, date, name, amount }) => {
 
-    /* let dateFormat = transaction.createdAt.substring(0, 10).split('-').reverse().join('/'); */
+    let dateFormat = date.substring(0, 10).split('-').reverse().join('/');
     const [modalVisible, setModalVisible] = useState(false);
 
     return (
@@ -25,7 +25,7 @@ const TransactionItem = ({ type, date, name, amount }) => {
                     }
                     <View style={s.subInfoContainer}>
                         <Text style={s.title}>{name}</Text>
-                        <Text style={s.date}>{date}</Text>
+                        <Text style={s.date}>{dateFormat}</Text>
                     </View>
                 </View>
                 {
@@ -83,11 +83,11 @@ const TransactionItem = ({ type, date, name, amount }) => {
                         {
                             type === 'recharge' ?
 
-                                <Text style={s.properties}>Fecha de recarga: {date}</Text>
+                                <Text style={s.properties}>Fecha de recarga: {dateFormat}</Text>
 
                                 :
 
-                                <Text style={s.properties}>Fecha de transferencia: {date}</Text>
+                                <Text style={s.properties}>Fecha de transferencia: {dateFormat}</Text>
                         }
 
                         <Text style={s.properties}>Monto: {amount} ARS</Text>

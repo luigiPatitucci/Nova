@@ -28,7 +28,7 @@ const TabNavigator = () => {
                     iconName = 'home-variant-outline'
                 }
                 else if(route.name =='Transacciones') {
-                    iconName = 'circle-slice-3'
+                    iconName = 'account-circle'
                 }
                 else if(route.name =='Estadisticas') {
                     iconName = 'chart-areaspline'
