@@ -1,8 +1,12 @@
-import { ADD_USER, LOGIN_USER,USER_BY_ID } from '../actions/userActions.js';
+import { ADD_USER, LOGIN_USER,USER_BY_ID,UPDATE_AVATAR } from '../actions/userActions.js';
 import AsyncStorage from '@react-native-community/async-storage';
+import { act } from 'react-test-renderer';
 
 const initialState = {
     id: null,
+    avatar:"",
+    name:'',
+    username:'',
     surname:'',
     email: '',
     birthday:'',
@@ -28,14 +32,14 @@ export default (state = initialState, action) => {
                 email: action.user.email
             }
         case LOGIN_USER:
-            console.log('SOY LA RESPUESTA asdasd', action.user)
+            console.log('SOY LA RESPUESTA', action.user)
             return {
                 ...state,
-                id: action.user.logUser.id,
-                name: action.user.logUser.username,
+                id: action.user.logUser.id, 
+                name: action.user.logUser.name,
+                username: action.user.logUser.username,
                 token: action.user.token,
                 email: action.user.logUser.email,
-
                 balanceArs: action.user.logUser.account.balanceArs,
                 balanceUsd: action.user.logUser.account.balanceUsd,
                 code: action.user.logUser.account.code,
@@ -45,7 +49,9 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 id: action.user.id,
-                name: action.user.username,
+                name: action.user.name,
+                avatar:action.user.avatar,
+                username: action.user.username,
                 surname:action.user.surname,
                 email: action.user.email,
                 birthday:action.user.birthday,
@@ -56,7 +62,12 @@ export default (state = initialState, action) => {
                 code: action.user.account.code,
                 idAccount: action.user.account.id,
             }
-
+        case UPDATE_AVATAR:
+            console.log("SOY LA RESPUESTA AVATAR ",action.avatar)
+            return {
+                ...state,
+                avatar:action.avatar
+            }
         default:
             return state;
     }

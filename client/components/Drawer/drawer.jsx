@@ -12,7 +12,7 @@ import DetalleTransaccion from '../Transacciones/DetalleTransaccion.jsx'
 import Estadisticas from '../Estadisticas/Estadisticas.jsx'
 import RechargeBalance from "../RechargeBalance/RechargeBalance.jsx"
 import SendMoney from '../SendMoney/SendMoney.jsx'
-import Profile from './../Misdatos/Profile'
+import Profile from '../Misdatos/Profile.jsx'
 
 const Drawer = createDrawerNavigator();
 
