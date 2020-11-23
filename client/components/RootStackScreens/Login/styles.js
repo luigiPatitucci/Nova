@@ -27,7 +27,7 @@ export default {
         color: 'white',
     },
     optionsContainer: {
-        paddingTop: '3%',
+        marginTop: '3%',
         width: '85%',
         alignSelf: 'center',
     },
