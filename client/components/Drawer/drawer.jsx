@@ -12,6 +12,7 @@ import DetalleTransaccion from '../Transacciones/DetalleTransaccion.jsx'
 import Estadisticas from '../Estadisticas/Estadisticas.jsx'
 import RechargeBalance from "../RechargeBalance/RechargeBalance.jsx"
 import SendMoney from '../SendMoney/SendMoney.jsx'
+import Profile from '../Misdatos/Profile.jsx'
 
 const Drawer = createDrawerNavigator();
 
@@ -48,8 +49,9 @@ const MenuDrawer = (props) => {
             </View>
             <OptionDrawer iconName='home' optionName='Inicio' navigation={() => props.navigation.navigate('Inicio')}/>
             <OptionDrawer iconName='history' optionName='Transacciones' navigation={() => props.navigation.navigate('Transacciones')}/>
+            
             <OptionDrawer iconName='tags' optionName='Mis productos'/>
-            <OptionDrawer iconName='user-circle' optionName='Mis datos'/>
+            <OptionDrawer iconName='user-circle' optionName='Mis datos'  navigation={() => props.navigation.navigate('Perfil')}/>
             <OptionDrawer iconName='address-book' optionName='Contactos' navigation={() => props.navigation.navigate('Contactos')}/>
         </View>
     );
@@ -75,10 +77,11 @@ const MyDrawer = () => {
             <Drawer.Screen name="Inicio" component={PrincipalScreen} />
             <Drawer.Screen name="Transacciones" component={Transacciones} />
             <Drawer.Screen name="Estadisticas" component={Estadisticas} />
-            <Drawer.Screen name="DetalleTransaccion" component={DetalleTransaccion} />
+            <Drawer.Screen name="Detalle Transaccion" component={DetalleTransaccion} />
             <Drawer.Screen name="Recargar Dinero" component={RechargeBalance} />
             <Drawer.Screen name="Envio Dinero" component={SendMoney} />
             <Drawer.Screen name="Contactos" component={ListaContactos} />
+            <Drawer.Screen name="Perfil" component={Profile} />
         </Drawer.Navigator>
     );
 };

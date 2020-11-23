@@ -2,7 +2,8 @@ import axios from 'axios';
 export const ADD_USER = "ADD_USER";
 export const LOGIN_USER = "LOGIN_USER";
 export const USER_BY_ID ="USER_BY_ID";
-const API_URL ="192.168.1.12:3000"
+export const UPDATE_AVATAR= "UPDATE_AVATAR"
+const API_URL ="192.168.0.209:3000"
 
 export function createUser(user){
 
@@ -35,6 +36,35 @@ export function login (data){
         })
         .catch(err=>{
             console.log('Soy el error', err)
+        })
+    };
+};
+
+export function updateAvatar(data,id){
+    return function (dispatch){
+    return axios.put(`http://${API_URL}/user/avatar/${id}`,JSON.stringify(data),{
+        headers: {"Content-Type": "application/json"},
+      })
+       .then(resp=>{
+        dispatch({
+            type:UPDATE_AVATAR,
+            avatar:resp.data
+        })
+           console.log("imagen subida")
+       }) 
+       .catch(err=>{console.log(err)})
+   }
+}
+export function update(data, id){
+
+    return function(dispatch){
+        return axios.put(`http://${API_URL}/user/update/${id}`, data,
+        {headers:{'accept':'application/json','content-type':'application/json'}})
+        .then( resp =>{
+            console.log(resp, 'soy el update de actions')
+        })
+        .catch(err=>{
+            console.log('Soy el error del put', err)
         })
     };
 };
