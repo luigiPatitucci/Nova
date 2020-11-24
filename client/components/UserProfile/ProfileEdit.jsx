@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Modal, Portal, Button, Provider } from 'react-native-paper';
-import { Form, Item, Input, Label, View } from 'native-base';
+import { Form, Item, Input, Label, View, Text } from 'native-base';
 import { useSelector, useDispatch } from 'react-redux';
+import { TouchableOpacity } from 'react-native';
 import { update, refresh } from '../../redux/actions/userActions'
-import { StyleSheet } from "react-native";
+import s from './stylesEdit';
 
-const ModalEdit = ({ showModal, visible }) => {
+const ProfileEdit = ({ showModal }) => {
 
   const user = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
@@ -24,45 +24,36 @@ const ModalEdit = ({ showModal, visible }) => {
   };
 
   return (
-
-    <Modal visible={visible}>
-      <View style={{backgroundColor: 'white'}}>
-        <Form>
-          <Item floatingLabel>
-            <Label>Nombre de usuario:</Label>
-            <Input value={updateInfo.username} onChangeText={username => setUpdateInfo({ ...updateInfo, username })}></Input>
-          </Item>
-          <Item floatingLabel>
-            <Label>Email: </Label>
-            <Input value={updateInfo.email} onChangeText={email => setUpdateInfo({ ...updateInfo, email })}></Input>
-          </Item>
-          <Item floatingLabel>
-            <Label>Teléfono:</Label>
-            <Input value={updateInfo.phone_number} onChangeText={phone_number => setUpdateInfo({ ...updateInfo, phone_number })}></Input>
-          </Item>
-          <Item floatingLabel>
-            <Label>Dirección:</Label>
-            <Input value={updateInfo.adress} onChangeText={adress => setUpdateInfo({ ...updateInfo, adress })}></Input>
-          </Item>
-        </Form>
-        <View style={styles.buttons}>
-          <Button onPress={() => Handleup()} style={styles.buttondatos} >Editar Datos</Button>
-          <Button onPress={() => showModal()} >Cancelar</Button>
+        <View style={s.container}>
+          <Text style={s.title}>Editar mis datos</Text>
+          <Form style={s.form}>
+            <Item floatingLabel>
+              <Label style={s.label} >Nombre de usuario:</Label>
+              <Input style={s.userData} value={updateInfo.username} onChangeText={username => setUpdateInfo({ ...updateInfo, username })}></Input>
+            </Item>
+            <Item floatingLabel>
+              <Label style={s.label} >Email: </Label>
+              <Input style={s.userData} value={updateInfo.email} onChangeText={email => setUpdateInfo({ ...updateInfo, email })}></Input>
+            </Item>
+            <Item floatingLabel>
+              <Label style={s.label} >Teléfono:</Label>
+              <Input style={s.userData} value={updateInfo.phone_number} onChangeText={phone_number => setUpdateInfo({ ...updateInfo, phone_number })}></Input>
+            </Item>
+            <Item floatingLabel>
+              <Label style={s.label} >Dirección:</Label>
+              <Input style={s.userData} value={updateInfo.adress} onChangeText={adress => setUpdateInfo({ ...updateInfo, adress })}></Input>
+            </Item>
+          </Form>
+          <View style={s.buttonsContainer}>
+            <TouchableOpacity onPress={() => Handleup()}>
+              <Text style={s.button}>Actualizar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => showModal()}>
+              <Text style={s.button}>Cancelar</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </Modal>
   );
 };
-const styles = StyleSheet.create({
-  buttons: {
-    flexDirection: 'row',
 
-  },
-  buttondatos: {
-    marginLeft: 50,
-  }
-
-
-})
-
-export default ModalEdit;
+export default ProfileEdit;

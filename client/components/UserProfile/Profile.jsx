@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Button, View, Container, Card, CardItem, Text, Body } from 'native-base';
+import { View, Container, Text } from 'native-base';
 import { Image, TouchableOpacity } from "react-native";
-import ModalEdit from './ProfileEdit'
+import ProfileEdit from './ProfileEdit';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './styles';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker';
+import Modal from 'react-native-modal';
 
 import { updateAvatar } from '../../redux/actions/userActions'
 
@@ -62,22 +63,22 @@ function Profile() {
 
     <Container style={s.container}>
 
-        <View style={s.imgContainer}>
-          <TouchableOpacity onPress={() => showModal()} style={s.pencilContainer}>
-            <Icon name='pencil' size={28} style={s.pencilIcon} />
-          </TouchableOpacity>
+      <View style={s.imgContainer}>
+        <TouchableOpacity onPress={() => showModal()} style={s.pencilContainer}>
+          <Icon name='pencil' size={28} style={s.pencilIcon} />
+        </TouchableOpacity>
 
-          <TouchableOpacity onPress={openGallery} style={s.shareCvuIconContainer}>
-            <Icon name='share-variant' size={28} style={s.shareCvuIcon} />
-          </TouchableOpacity>
+        <TouchableOpacity onPress={openGallery} style={s.shareCvuIconContainer}>
+          <Icon name='share-variant' size={28} style={s.shareCvuIcon} />
+        </TouchableOpacity>
 
-          <Image style={s.avatar} source={user.avatar ? { uri: `${user.avatar}` } : imgUser} />
-          <TouchableOpacity onPress={openGallery} style={s.cameraContainer}>
-            <Icon name='camera' size={25} style={s.cameraIcon} />
-          </TouchableOpacity>
+        <Image style={s.avatar} source={user.avatar ? { uri: `${user.avatar}` } : imgUser} />
+        <TouchableOpacity onPress={openGallery} style={s.cameraContainer}>
+          <Icon name='camera' size={25} style={s.cameraIcon} />
+        </TouchableOpacity>
 
-          <Text style={s.nickName}>{user.username}</Text>
-        </View>
+        <Text style={s.nickName}>{user.username}</Text>
+      </View>
 
       <View style={s.infoContainer}>
         <Text style={s.infoCategory}>Nombre y Apellido:</Text>
@@ -92,10 +93,20 @@ function Profile() {
         <Text style={s.infoUser}>{user.adress}</Text>
       </View>
 
-      <ModalEdit
-        visible={visible}
-        showModal={showModal}
-      />
+      <Modal
+        isVisible={visible}
+        animationIn='zoomIn'
+        animationInTiming={800}
+        animationOut='fadeOut'
+        animationOutTiming={800}
+        onBackdropPress={() => showModal()}
+        style={{height: 2000}}
+        deviceHeight={520}
+      >
+        <ProfileEdit 
+          showModal={showModal}
+        />
+      </Modal>
     </Container>
 
 
