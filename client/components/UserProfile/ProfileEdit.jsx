@@ -4,69 +4,53 @@ import { Form, Item, Input, Label, View } from 'native-base';
 import { useSelector, useDispatch } from 'react-redux';
 import { update, refresh } from '../../redux/actions/userActions'
 import { StyleSheet } from "react-native";
-function ModalEdit(props) {
 
-  const [edit, setEdit] = useState({ username: '', name: '', email: '', birthday: '', phone_number: '', })
-  const containerStyle = { backgroundColor: 'white', padding: 20 };
-  const dispatch = useDispatch();
-
-
-
-  async function Handleup() {
-
-    await dispatch(update(edit, user.id))
-    await dispatch(refresh(user.id))
-    props.hideModal();
-  }
-
+const ModalEdit = ({ showModal, visible }) => {
 
   const user = useSelector((state) => state.userReducer);
-  console.log('SOY EL USUARIO', user)
+  const dispatch = useDispatch();
 
+  const [updateInfo, setUpdateInfo] = useState({
+    username: user.username,
+    email: user.email,
+    phone_number: user.phone_number,
+    adress: user.adress,
+  });
+
+  async function Handleup() {
+    await dispatch(update(updateInfo, user.id))
+    await dispatch(refresh(user.id))
+    showModal();
+  };
 
   return (
-    <Provider>
-      <Portal>
-        <Modal visible={props.visible} contentContainerStyle={containerStyle}>
 
-          <Form>
-
-            <Item floatingLabel>
-              <Label>Nombre de usuario:</Label>
-              <Input onChangeText={username => setEdit({ ...edit, username })}></Input>
-            </Item>
-            <Item floatingLabel>
-              <Label>Nombre: </Label>
-              <Input onChangeText={name => setEdit({ ...edit, name })}></Input>
-            </Item>
-            <Item floatingLabel>
-              <Label> Email: </Label>
-              <Input onChangeText={email => setEdit({ ...edit, email })}></Input>
-            </Item>
-            <Item floatingLabel>
-              <Label>Cumpleaños:</Label>
-              <Input onChangeText={birthday => setEdit({ ...edit, birthday })}></Input>
-            </Item>
-            <Item floatingLabel>
-              <Label>Telefono/celular:</Label>
-              <Input onChangeText={phone_number => setEdit({ ...edit, phone_number })}></Input>
-            </Item>
-
-
-
-          </Form>
-          <View style={styles.buttons}>
-
-            <Button onPress={Handleup} style={styles.buttondatos} >Editar Datos</Button>
-            <Button onPress={props.hideModal} >Cancelar</Button>
-          </View>
-
-
-
-        </Modal>
-      </Portal>
-
-    </Provider>
+    <Modal visible={visible}>
+      <View style={{backgroundColor: 'white'}}>
+        <Form>
+          <Item floatingLabel>
+            <Label>Nombre de usuario:</Label>
+            <Input value={updateInfo.username} onChangeText={username => setUpdateInfo({ ...updateInfo, username })}></Input>
+          </Item>
+          <Item floatingLabel>
+            <Label>Email: </Label>
+            <Input value={updateInfo.email} onChangeText={email => setUpdateInfo({ ...updateInfo, email })}></Input>
+          </Item>
+          <Item floatingLabel>
+            <Label>Teléfono:</Label>
+            <Input value={updateInfo.phone_number} onChangeText={phone_number => setUpdateInfo({ ...updateInfo, phone_number })}></Input>
+          </Item>
+          <Item floatingLabel>
+            <Label>Dirección:</Label>
+            <Input value={updateInfo.adress} onChangeText={adress => setUpdateInfo({ ...updateInfo, adress })}></Input>
+          </Item>
+        </Form>
+        <View style={styles.buttons}>
+          <Button onPress={() => Handleup()} style={styles.buttondatos} >Editar Datos</Button>
+          <Button onPress={() => showModal()} >Cancelar</Button>
+        </View>
+      </View>
+    </Modal>
   );
 };
 const styles = StyleSheet.create({

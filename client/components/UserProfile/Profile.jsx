@@ -12,16 +12,14 @@ import * as ImagePicker from 'expo-image-picker';
 import { updateAvatar } from '../../redux/actions/userActions'
 
 function Profile() {
-  const imgUser = require('../../assets/logoUser.png')
+  const imgUser = require('../../assets/logoUser.png');
+  const dispatch = useDispatch();
+
   const [visible, setVisible] = useState(false);
-  const dispatch = useDispatch()
 
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
-
+  const showModal = () => setVisible(!visible);
 
   const user = useSelector((state) => state.userReducer);
-  console.log('SOY EL USUARIO', user)
 
   //CARGAR IMGANE
 
@@ -65,7 +63,7 @@ function Profile() {
     <Container style={s.container}>
 
         <View style={s.imgContainer}>
-          <TouchableOpacity onPress={openGallery} style={s.pencilContainer}>
+          <TouchableOpacity onPress={() => showModal()} style={s.pencilContainer}>
             <Icon name='pencil' size={28} style={s.pencilIcon} />
           </TouchableOpacity>
 
@@ -83,20 +81,20 @@ function Profile() {
 
       <View style={s.infoContainer}>
         <Text style={s.infoCategory}>Nombre y Apellido:</Text>
-        <Text style={s.infoUser}>Kevin Vega</Text>
+        <Text style={s.infoUser}>{user.name}</Text>
         <Text style={s.infoCategory}>Email:</Text>
-        <Text style={s.infoUser}>kevinvega2070@gmail.com</Text>
+        <Text style={s.infoUser}>{user.email}</Text>
         <Text style={s.infoCategory}>DNI:</Text>
-        <Text style={s.infoUser}>111111111</Text>
+        <Text style={s.infoUser}>{user.identityNumber}</Text>
         <Text style={s.infoCategory}>Teléfono:</Text>
-        <Text style={s.infoUser}>3476 560372</Text>
+        <Text style={s.infoUser}>{user.phone_number}</Text>
         <Text style={s.infoCategory}>Dirección:</Text>
-        <Text style={s.infoUser}>Narnia 7842</Text>
+        <Text style={s.infoUser}>{user.adress}</Text>
       </View>
 
       <ModalEdit
-        visible={visible} setVisible={setVisible}
-        showModal={showModal} hideModal={hideModal}
+        visible={visible}
+        showModal={showModal}
       />
     </Container>
 
