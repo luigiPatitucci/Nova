@@ -4,7 +4,7 @@ export const RECHARGE = 'RECHARGE';
 export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
 export const TRANSFER = "TRANSFER";
 
-const API_URL ="192.168.0.209:3000"
+const API_URL ="192.168.1.12:3000"
 
 export function recharge(transaction){
 
@@ -30,7 +30,6 @@ export function getTransactions(userId){
       
         return axios.get(`http://${API_URL}/transaction/getTransaction/${userId}`)
         .then(resp=>{
-            console.log('SOY LAS TRANSACCIONES', resp.data)
              dispatch({
                 type: GET_TRANSACTIONS,
                 transactions: resp.data
@@ -54,7 +53,7 @@ export function tranfer(transaction){
             }) 
         })
         .catch(err=>{
-            console.log('Soy el error', err)
+            console.log('ERROR AL TRASFERIR', err)
         })
     };
 };
