@@ -38,12 +38,12 @@ const TabNavigator = () => {
                 }
                 return <Icon name={iconName} size={33} color={color}/>
             }
+            
         })}
         tabBarOptions={{
             activeTintColor: '#4b81e7',
             inactiveTintColor: 'gray',
             showLabel: false,
-
         }}
 
         >

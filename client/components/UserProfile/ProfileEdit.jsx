@@ -25,7 +25,6 @@ const ProfileEdit = ({ showModal }) => {
 
   return (
     <KeyboardAvoidingView>
-      {/* <ScrollView> */}
         <View style={s.container}>
           <Text style={s.title}>Editar mis datos</Text>
           <Form style={s.form}>
@@ -55,7 +54,6 @@ const ProfileEdit = ({ showModal }) => {
             </TouchableOpacity>
           </View>
         </View>
-      {/* </ScrollView> */}
     </KeyboardAvoidingView>
   );
 };

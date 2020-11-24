@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Container, Text } from 'native-base';
-import { Image, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity, KeyboardAvoidingView, Keyboard } from "react-native";
 import ProfileEdit from './ProfileEdit';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './styles';
@@ -18,7 +18,10 @@ function Profile() {
 
   const [visible, setVisible] = useState(false);
 
-  const showModal = () => setVisible(!visible);
+  const showModal = () => {
+    visible ? null : Keyboard.dismiss();
+    setVisible(!visible);
+  };
 
   const user = useSelector((state) => state.userReducer);
 
@@ -64,23 +67,26 @@ function Profile() {
   return (
 
     <Container style={s.container}>
+      <KeyboardAvoidingView 
+          behavior='position'
+        >
+        <View style={s.imgContainer}>
+          <TouchableOpacity onPress={() => showModal()} style={s.pencilContainer}>
+            <Icon name='pencil' size={28} style={s.pencilIcon} />
+          </TouchableOpacity>
+          
+          <TouchableOpacity onPress={openGallery} style={s.shareCvuIconContainer}>
+            <Icon name='share-variant' size={28} style={s.shareCvuIcon} />
+          </TouchableOpacity>
 
-      <View style={s.imgContainer}>
-        <TouchableOpacity onPress={() => showModal()} style={s.pencilContainer}>
-          <Icon name='pencil' size={28} style={s.pencilIcon} />
-        </TouchableOpacity>
+          <Image style={s.avatar} source={user.avatar ? { uri: `${user.avatar}` } : imgUser} />
+          <TouchableOpacity onPress={openGallery} style={s.cameraContainer}>
+            <Icon name='camera' size={25} style={s.cameraIcon} />
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={openGallery} style={s.shareCvuIconContainer}>
-          <Icon name='share-variant' size={28} style={s.shareCvuIcon} />
-        </TouchableOpacity>
-
-        <Image style={s.avatar} source={user.avatar ? { uri: `${user.avatar}` } : imgUser} />
-        <TouchableOpacity onPress={openGallery} style={s.cameraContainer}>
-          <Icon name='camera' size={25} style={s.cameraIcon} />
-        </TouchableOpacity>
-
-        <Text style={s.nickName}>{user.username}</Text>
-      </View>
+          <Text style={s.nickName}>{user.username}</Text>
+        </View>
+      </KeyboardAvoidingView>
 
       <View style={s.infoContainer}>
         <Text style={s.infoCategory}>Nombre y Apellido:</Text>
@@ -102,15 +108,14 @@ function Profile() {
         animationOut='zoomOut'
         animationOutTiming={800}
         onBackdropPress={() => showModal()}
-        style={{height: 2000}}
+        style={{ height: 2000 }}
         deviceHeight={520}
       >
-        <ProfileEdit 
+        <ProfileEdit
           showModal={showModal}
         />
       </Modal>
     </Container>
-
 
   )
 }
