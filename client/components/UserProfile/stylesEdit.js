@@ -2,6 +2,7 @@ export default {
     container: {
         backgroundColor: 'white',
         width: '90%',
+        /* height: '85%', */
         alignSelf: 'center',
         borderRadius: 10,
         justifyContent: 'center',
@@ -23,7 +24,7 @@ export default {
     },
     label: {
         fontFamily: 'RedHatText_Regular',
-        fontSize: 15
+        fontSize: 15,
     },
     userData: {
         fontFamily: 'RedHatText_Regular',

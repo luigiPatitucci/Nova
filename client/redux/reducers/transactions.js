@@ -27,7 +27,6 @@ export default (state = initialState, action) => {
                 income: state.income + action.transaction.amount
             }
         case GET_TRANSACTIONS: 
-            console.log('EN EL REDUCER', action.transactions)
             return {
                 ...state,
                 transactionHistory: action.transactions
