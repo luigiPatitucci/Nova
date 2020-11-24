@@ -1,4 +1,4 @@
-import {RECHARGE , TRANSFER} from '../actions/transactions.js';
+import {RECHARGE , TRANSFER, GET_TRANSACTIONS } from '../actions/transactions.js';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const initialState = {  
@@ -9,7 +9,8 @@ const initialState = {
     refernece: "",
     currency: "",
     createdAt: "",
-    income:0
+    income: 0,
+    transactionHistory: []
 };
 
 export default (state = initialState, action) => {
@@ -24,6 +25,12 @@ export default (state = initialState, action) => {
                 currency: action.transaction.currency,
                 createdAt: action.transaction.createdAt,
                 income: state.income + action.transaction.amount
+            }
+        case GET_TRANSACTIONS: 
+            console.log('EN EL REDUCER', action.transactions)
+            return {
+                ...state,
+                transactionHistory: action.transactions
             }
         case TRANSFER:
                 return {

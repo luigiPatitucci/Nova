@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, TouchableOpacity } from 'react-native';
+import { Alert, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button } from 'native-base';
 import { Image, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import * as LocalAuthentication from 'expo-local-authentication';
 import LottieView from 'lottie-react-native';
 import s from './styles.js';
 import axios from 'axios';
-const API_URL ="192.168.0.209:3000"
+const API_URL = "192.168.1.12:3000";
 
 const Login = ({ navigation }) => {
 
@@ -22,7 +22,6 @@ const Login = ({ navigation }) => {
     const [suportted, setSuportted] = useState(null);
     const [nombre, setNombre] = useState('Usuario');
     const user = useSelector((state) => state.userReducer);
-    console.log('GAAAAAAAAAAAAAAAAAAAAAAAA', user.id)
 
     useEffect(() => {
         LocalAuthentication.supportedAuthenticationTypesAsync()
@@ -51,16 +50,14 @@ const Login = ({ navigation }) => {
     }
 
     const handleSubmit = async () => {
-        console.log(input)
         await dispatch(login(input));
         await axios.post(`http://${API_URL}/auth/login`, input)
-        .then(() =>{
-            /* console.log('TTTTTTTTTTTTTT', resp) */      
-            return navigation.navigate('Home');
-        })
-        .catch(()=>{
-            return Alert.alert('Por favor, verifique que los datos ingresados son correctos.');
-        })
+            .then(() => {
+                navigation.navigate('Home');
+            })
+            .catch(() => {
+                return Alert.alert('Por favor, verifique que los datos ingresados son correctos.');
+            })
     };
 
     const recoverPassword = () => {
@@ -70,42 +67,46 @@ const Login = ({ navigation }) => {
 
     return (
         <Container style={s.container}>
-            <View style={s.imageContainer}>
-                <Image source={require('../../../assets/logohb.png')} style={s.image} />
-            </View>
-            <View style={s.optionsContainer}>
-                <Form style={s.form}>
-                    <Item floatingLabel>
-                        <Label style={s.labelForm}>Email</Label>
-                        <Input style={s.inputForm} onChangeText={email => setInput({ ...input, email })} />
-                    </Item>
-                    <Item floatingLabel>
-                        <Label style={s.labelForm}>Contraseña</Label>
-                        <Input style={s.inputForm}
-                            onChangeText={password => setInput({ ...input, password })}
-                            secureTextEntry={true}
-                        />
-                    </Item>
-                </Form>
-                <Button
-                    block
-                    dark
-                    style={s.button}
-                    onPress={() => handleSubmit()}
-                >
-                    <Text>Ingresar</Text>
-                </Button>
-                <Button
-                    style={s.reset}
-                    transparent
-                    onPress={() => recoverPassword()}
-                >
-                    <Text style={s.textReset}>¿Olvidaste tu contraseña?</Text>
-                </Button>
-                <TouchableOpacity style={s.buttonBiometric} onPress={() => handleLogin()}>
-                    <LottieView style={s.fingerPrint} source={require('../../../assets/lf30_editor_d3000vch.json')} autoPlay loop />
-                </TouchableOpacity>
-            </View> 
+            <KeyboardAvoidingView 
+                behavior='position'>
+                <View style={s.imageContainer}>
+                    <Image source={require('../../../assets/nova.png')} style={s.image} />
+                </View>
+                <View style={s.optionsContainer}>
+                    <Form style={s.form}>
+                        <Item floatingLabel>
+                            <Label style={s.labelForm}>Email</Label>
+                            <Input style={s.inputForm} onChangeText={email => setInput({ ...input, email })} />
+                        </Item>
+                        <Item floatingLabel>
+                            <Label style={s.labelForm}>Contraseña</Label>
+                            <Input style={s.inputForm}
+                                onChangeText={password => setInput({ ...input, password })}
+                                secureTextEntry={true}
+                            />
+                        </Item>
+                    </Form>
+                    <Button
+                        block
+                        dark
+                        style={s.button}
+                        onPress={() => handleSubmit()}
+                    >
+                        <Text style={s.textButton}>Ingresar</Text>
+                    </Button>
+                    <Button
+                        style={s.reset}
+                        transparent
+                        onPress={() => recoverPassword()}
+                    >
+                        <Text style={s.textReset}>¿Olvidaste tu contraseña?</Text>
+                    </Button>
+
+                    <TouchableOpacity style={s.buttonBiometric} onPress={() => handleLogin()}>
+                        <LottieView style={s.fingerPrint} source={require('../../../assets/lf30_editor_ftmbz2nl.json')} autoPlay loop />
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAvoidingView>
         </Container>
     );
 };

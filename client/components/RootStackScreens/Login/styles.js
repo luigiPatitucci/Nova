@@ -1,6 +1,6 @@
 export default {
     container: {
-        backgroundColor: '#171717',
+        backgroundColor: 'white',
         alingItems: 'flex-start'
     },
     button: {
@@ -8,37 +8,43 @@ export default {
         alignSelf: 'center',
         marginTop: 15,
         justifyContent: 'center',
-        backgroundColor: '#4A1491',
+        backgroundColor: '#4b81e7',
         borderRadius: 10,
     },
+    textButton: {
+        fontFamily: 'RedHatText_Regular',
+    },
     image: {
-        width: '81%',
+        width: '100%',
         height: '85%',
         alignSelf: 'center',
     },
     imageContainer: {
-        height: '46%'
+        height: '40%'
     },
     form: {
         width: '95%',
         color: 'white',
     },
     optionsContainer: {
-        top: -60,
+        marginTop: '3%',
         width: '85%',
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
     reset: {
         alignSelf: 'center',
     },
     textReset: {
-        color: 'white',
+        color: '#242835',
+        fontFamily: 'RedHatText_Regular',
     },
     inputForm: {
-        color: 'white',
+        color: '#242835',
+        fontFamily: 'RedHatText_Regular',
     },
     labelForm: {
-        color: 'white',
+        color: '#242835',
+        fontFamily: 'RedHatText_Regular',
     },
     buttonBiometric: {
         backgroundColor: 'transparent',
