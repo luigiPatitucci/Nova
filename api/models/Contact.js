@@ -14,6 +14,10 @@ module.exports = {
 			avatar:{
 				type:DataTypes.TEXT,
 				allowNull:true
+			},
+			phone:{
+				type:DataTypes.TEXT,
+				allowNull:true
 			}
 		}),
 }

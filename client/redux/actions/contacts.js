@@ -3,7 +3,7 @@ export const  LIST_CONTACTS = "LIST_CONTACTS";
 export const DELETE_CONTACTS = "DELETE_CONTACTS"
 export const UPDATE_CONTACTS = "UPDATE_CONTACTS"
 export const ADD_CONTACTO = "ADD_CONTACTO"
-const API_URL ="192.168.1.12:3000"
+const API_URL ="192.168.0.209:3000"
 
 export function allContacts(id){
 
@@ -54,21 +54,22 @@ export function addContact(contacto){
             }) 
         })
         .catch(err=>{
+            alert("El Usuario no existe")
             console.log('Soy el error', err)
         })
     };
 };
 
-export function updateContact(id){
+export function updateContact(id,data){
 
     return function(dispatch){
         
-        return axios.put(`http://${API_URL}/contact/${id}`)
+        return axios.put(`http://${API_URL}/contact/${id}`,data)
         .then(resp=>{
             console.log(resp.data)
              dispatch({
                 type:UPDATE_CONTACTS,
-                contacto:resp.data
+                contactos:resp.data
             }) 
         })
         .catch(err=>{
