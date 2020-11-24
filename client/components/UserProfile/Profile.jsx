@@ -37,7 +37,8 @@ function Profile() {
         let data = {
           avatar: resp.data.data.link
         };
-        dispatch(updateAvatar(data, user.id))
+        dispatch(updateAvatar(data, user.id));
+
       })
   }
 
@@ -55,6 +56,7 @@ function Profile() {
 
         //console.log(JSON.stringify(resolve))
         uploadImage(imageSelected.base64)
+        console.log('entre aca')
       }
 
     }
@@ -97,7 +99,7 @@ function Profile() {
         isVisible={visible}
         animationIn='zoomIn'
         animationInTiming={800}
-        animationOut='fadeOut'
+        animationOut='zoomOut'
         animationOutTiming={800}
         onBackdropPress={() => showModal()}
         style={{height: 2000}}

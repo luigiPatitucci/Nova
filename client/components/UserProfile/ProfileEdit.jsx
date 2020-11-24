@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Item, Input, Label, View, Text } from 'native-base';
 import { useSelector, useDispatch } from 'react-redux';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { update, refresh } from '../../redux/actions/userActions'
 import s from './stylesEdit';
 
@@ -24,6 +24,8 @@ const ProfileEdit = ({ showModal }) => {
   };
 
   return (
+    <KeyboardAvoidingView>
+      {/* <ScrollView> */}
         <View style={s.container}>
           <Text style={s.title}>Editar mis datos</Text>
           <Form style={s.form}>
@@ -53,6 +55,8 @@ const ProfileEdit = ({ showModal }) => {
             </TouchableOpacity>
           </View>
         </View>
+      {/* </ScrollView> */}
+    </KeyboardAvoidingView>
   );
 };
 
