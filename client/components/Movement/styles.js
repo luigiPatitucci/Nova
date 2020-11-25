@@ -1,5 +1,7 @@
 export default {
+    container: {
 
+    },
     header: {
         backgroundColor: '#242835',
         alignSelf: 'center',
@@ -10,24 +12,31 @@ export default {
         textAlign: 'center',
         borderRadius: 10,
         width: '90%',
-        height: '10%',
+        height: '10.3%',
         textAlignVertical: 'center',
         fontFamily: 'RedHatText_Regular',
     },
-    optionsContainer: {
-        marginTop: '5%',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        width: '90%',
-        alignSelf: 'center'
+    buttonsContainer: {
+        justifyContent: 'center'
     },
     button: {
         backgroundColor: '#4b81e7',
+        width: '90%',
         borderRadius: 10,
-        width: '45%',
-        justifyContent: 'center'
+        alignSelf: 'center',
+        justifyContent: 'center',
+        marginBottom: '3%',
+        flexDirection: 'column',
+        height: '17%',
+        paddingTop: '4%',
+        
     },
     textButton: {
+        color: 'white',
         fontFamily: 'RedHatText_Regular',
+        fontSize: 15,
+        paddingBottom: '2%'
+    },
+    icon: {
     }
 }
