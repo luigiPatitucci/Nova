@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions, ScrollView } from 'react-native';
@@ -48,14 +48,14 @@ const Statistics = () => {
       amounts.push(transaction.amount)
     });
 
-   let dataPerDay = {
+    let dataPerDay = {
 
       labels: dates,
       datasets: [
         {
           data: amounts,
-          color: (opacity = 1) => `rgba(75, 129, 231, ${opacity})`, 
-          strokeWidth: 2 ,
+          color: (opacity = 1) => `rgba(75, 129, 231, ${opacity})`,
+          strokeWidth: 2,
         }
       ],
     };
@@ -90,18 +90,37 @@ const Statistics = () => {
           < LineChart
             data={StatisticsPerDay()}
             width={3600}
-            height={350}
+            height={310}
             chartConfig={chartConfig}
           />
         </ScrollView>
       </View>
       <View style={s.optionsContainer}>
-        <Button style={s.button} onPress={() => showModeOne()}>
+        {/* <Button style={s.button} onPress={() => showModeOne()}>
           <Text style={s.textButton}>Fecha inicial</Text>
         </Button>
         <Button style={s.button}onPress={() => showModeTwo()}>
           <Text style={s.textButton}>Fecha limite</Text>
-        </Button>
+        </Button> */}
+        <View style={s.optionTypeContainer}>
+          <Button style={s.button} onPress={() => showModeOne()}>
+            <Text style={s.textButton}>Ingresos</Text>
+          </Button>
+          <Button style={s.button} onPress={() => showModeTwo()}>
+            <Text style={s.textButton}>Gastos</Text>
+          </Button>
+        </View>
+        <View style={s.optionTimeContainer}>
+          <Button style={s.timeButton} onPress={() => showModeOne()}>
+            <Text style={s.textButton}>Semana</Text>
+          </Button>
+          <Button style={s.timeButton} onPress={() => showModeTwo()}>
+            <Text style={s.textButton}>3 Meses</Text>
+          </Button>
+          <Button style={s.timeButton} onPress={() => showModeOne()}>
+            <Text style={s.textButton}>6 Meses</Text>
+          </Button>
+        </View>
       </View>
       {/* INITIAL DATE */}
       <View>

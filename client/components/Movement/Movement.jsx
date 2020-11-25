@@ -6,14 +6,10 @@ import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import LottieView from 'lottie-react-native';
 import s from './styles';
 
-
 const Movement = () => {
     return (
         <View style={s.container}>
             <Text style={s.header}>Actividad</Text>
-            <View>
-               {/*  <LottieView style={s.icon} source={require('../../assets/lf20_mLpK4w.json')} autoPlay loop /> */}
-            </View>
             <View style={s.buttonsContainer}>
                 <Button style={s.button}>   
                     <Icon2 name='money-bill' size={40} color='white'/> 

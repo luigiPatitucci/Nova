@@ -15,17 +15,31 @@ export default {
         fontFamily: 'RedHatText_Regular',
     },
     optionsContainer: {
-        marginTop: '5%',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
+        marginTop: '3%',
         width: '90%',
         alignSelf: 'center'
+    },
+    optionTypeContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginBottom: '2%'
+
+    },
+    optionTimeContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
     },
     button: {
         backgroundColor: '#4b81e7',
         borderRadius: 10,
-        width: '45%',
-        justifyContent: 'center'
+        width: '48%',
+        justifyContent: 'center',
+    },
+    timeButton: {
+        width: '31.5%',
+        borderRadius: 10,
+        backgroundColor: '#4b81e7',
+        justifyContent: 'center',
     },
     textButton: {
         fontFamily: 'RedHatText_Regular',

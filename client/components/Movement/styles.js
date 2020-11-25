@@ -38,5 +38,8 @@ export default {
         paddingBottom: '2%'
     },
     icon: {
+        height: 400,
+        width: 400,
+        alignSelf: 'center'
     }
 }

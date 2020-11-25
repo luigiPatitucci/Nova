@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { Alert, KeyboardAvoidingView, TouchableOpacity, Keyboard } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button } from 'native-base';
 import { Image, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -53,6 +53,7 @@ const Login = ({ navigation }) => {
         await dispatch(login(input));
         await axios.post(`http://${API_URL}/auth/login`, input)
             .then(() => {
+                Keyboard.dismiss();
                 navigation.navigate('Home');
             })
             .catch(() => {
