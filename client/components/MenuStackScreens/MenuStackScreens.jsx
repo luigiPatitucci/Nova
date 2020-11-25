@@ -5,6 +5,8 @@ import RechargeBalance from "../RechargeBalance/RechargeBalance";
 import SendMoney from '../SendMoney/SendMoney'
 
 import TabNavigator from '../TabNavigator/TabNavigator';
+import Card from '../paymentCard/Card';
+import Buydollar from '../buydollar/BuyDollar';
 
 const MenuStack = createStackNavigator();
 
@@ -28,6 +30,8 @@ const MenuStackScreens = () => {
             <MenuStack.Screen name='TabNavigator' component={TabNavigator} options={{headerShown: false}}/>
             <MenuStack.Screen name='RechargeBalance' component={RechargeBalance} />
             <MenuStack.Screen name='SendMoney' component={SendMoney} />
+            <MenuStack.Screen name='Card' component={Card} options={{headerShown: false}}/>
+            <MenuStack.Screen name='Buydollar' component={Buydollar} options={{headerShown: false}}/>
         </MenuStack.Navigator>
     );
 };
