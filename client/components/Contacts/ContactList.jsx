@@ -1,6 +1,6 @@
 import React,{useEffect,useState}  from 'react';
-import s from './styles'
-import {Image , TouchableOpacity } from 'react-native';
+import s from './stylesContacts'
+import {Image , TouchableOpacity, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { Container, View, Text, Button,Form,Item,Input,Label} from 'native-base';
@@ -8,6 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ListItem} from 'react-native-elements';
 import {allContacts , deleteContact,addContact,updateContact} from '../../redux/actions/contacts';
 import Modal from 'react-native-modal'; 
+import * as Contacts from 'expo-contacts';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+
  
 const  Contactos = ()=>{
   const contactos = useSelector((state) => state.contactos);
@@ -27,6 +31,30 @@ const  Contactos = ()=>{
   },[LengthCont])
   console.log("SON LOS CONTACTOS ",contactos)
   
+  const Tab = createMaterialTopTabNavigator();
+
+  const setImportContacts = () => {
+    (async () => {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === 'granted') {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.PhoneNumbers],
+        });
+      
+        if (data.length > 0) {
+          let text = data.find((v) => v.name === "Manu")
+          if (text[0] !== '+') {
+            Linking.openURL(`whatsapp://send?text=¿Todavía no estas usando Nova? Proba la billetera virtual aca: https://play.google.com/store/apps &phone=+54 9 ${text.phoneNumbers[0].number}`).catch( (err) => console.log(err) );
+          }
+          else {
+            Linking.openURL(`whatsapp://send?text=¿Todavía no estas usando Nova? Proba la billetera virtual aca: https://play.google.com/store/apps &phone=${text.phoneNumbers[0].number}`).catch( (err) => console.log(err) );
+          }
+          console.log(text);
+
+        }
+      }
+    })()
+  }
 
   const selectContactDelete=(id)=>{
     setCurrent(id)

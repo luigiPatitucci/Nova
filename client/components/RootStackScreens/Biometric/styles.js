@@ -14,7 +14,7 @@ export default {
         marginTop:'30%'
     },
     optionsContainer: {
-        marginTop: '3%',
+        marginTop: '6%',
         width: '85%',
         alignSelf: 'center',
     },

@@ -39,20 +39,7 @@ const Login = ({ navigation }) => {
         await AsyncStorage.setItem("userData", JSON.stringify(user))
         
     }, 8000);
-    function handleLogin() {
-        const config = {
-            promptMessage: "Autenticacion Touch ID",
-            color: "#FF0000",
-            fallbackLabel: 'Touch ID invalido'
-        };
-        LocalAuthentication.authenticateAsync(config)
-            .then(success => {
-                setNombre("Penelope")
-            })
-            .catch(error => {
-                console.log('La auntenticacion fallo: ' + error)
-            })
-    }
+   
    
     const handleSubmit = async () => {
         dispatch(login(input));
@@ -85,12 +72,14 @@ const Login = ({ navigation }) => {
                 <View style={s.optionsContainer}>
                     <Form style={s.form}>
                         <Item floatingLabel>
-                            <Label style={s.labelForm}>Email</Label>
-                            <Input style={s.inputForm} onChangeText={email => setInput({ ...input, email })} autoCapitalize= "none"/>
+                            <Label style={s.labelForm1}>Email</Label>
+                            <Input style={s.inputForm1} onChangeText={email => setInput({ ...input, email })} autoCapitalize= "none"/>
                         </Item>
-                        <Item floatingLabel>
-                            <Label style={s.labelForm}>Contraseña</Label>
-                            <Input style={s.inputForm}
+                    </Form>
+                    <Form style={s.form2}>
+                    <Item floatingLabel>
+                            <Label style={s.labelForm2}>Contraseña</Label>
+                            <Input style={s.inputForm2}
                                 onChangeText={password => setInput({ ...input, password })}
                                 secureTextEntry={true}
                             />
@@ -104,17 +93,15 @@ const Login = ({ navigation }) => {
                     >
                         <Text style={s.textButton}>Ingresar</Text>
                     </Button>
-                    <Button
+                    {/* <Button
                         style={s.reset}
                         transparent
                         onPress={() => recoverPassword()}
                     >
                         <Text style={s.textReset}>¿Olvidaste tu contraseña?</Text>
-                    </Button>
+                    </Button> */}
 
-                    <TouchableOpacity style={s.buttonBiometric} onPress={() => handleLogin()}>
-                        <LottieView style={s.fingerPrint} source={require('../../../assets/lf30_editor_ftmbz2nl.json')} autoPlay loop />
-                    </TouchableOpacity>
+                  
                 </View>
             </KeyboardAvoidingView>
         </Container>
