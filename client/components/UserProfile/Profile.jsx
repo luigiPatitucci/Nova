@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, Container, Text } from 'native-base';
+import { View, Container, Text, Button } from 'native-base';
 import { Image, TouchableOpacity, KeyboardAvoidingView, Keyboard, ActivityIndicator } from "react-native";
 import ProfileEdit from './ProfileEdit';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './styles';
 import axios from 'axios';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-community/async-storage';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker';
 import Modal from 'react-native-modal';
@@ -14,7 +15,7 @@ import Cvu from './Cvu';
 
 import { updateAvatar } from '../../redux/actions/userActions'
 
-function Profile() {
+const Profile = ({navigation}) => {
   const imgUser = require('../../assets/logoUser.png');
   const dispatch = useDispatch();
 
@@ -71,6 +72,10 @@ function Profile() {
 
     }
   }
+  const handleLogOut = async() => {
+    await AsyncStorage.clear();
+    navigation.navigate('Ingresar');
+  }
   return (
 
     <Container style={s.container}>
@@ -79,7 +84,7 @@ function Profile() {
         >
         <View style={s.imgContainer}>
           <TouchableOpacity onPress={() => showModal()} style={s.pencilContainer}>
-            <Icon name='pencil' size={28} style={s.pencilIcon} />
+            <Icon2 name='pencil' size={30} style={s.pencilIcon} />
           </TouchableOpacity>
           
           <TouchableOpacity onPress={() => setCvuModal(!CvuModal)} style={s.shareCvuIconContainer}>
@@ -88,9 +93,9 @@ function Profile() {
 
           <Image style={s.avatar} source={user.avatar ? { uri: `${user.avatar}` } : imgUser} />
           <TouchableOpacity onPress={openGallery} style={s.cameraContainer}>
-            <Icon name='camera' size={25} style={s.cameraIcon} />
+            <Icon2 name='camera' size={25} style={s.cameraIcon} />
           </TouchableOpacity>
-
+          
           <Text style={s.nickName}>{user.username}</Text>
         </View>
         <Spinner
@@ -113,6 +118,9 @@ function Profile() {
       </KeyboardAvoidingView>
 
       <View style={s.infoContainer}>
+      <TouchableOpacity onPress={handleLogOut} style={s.arrowContainer}>
+            <Icon2 name='arrow-collapse-left' size={30} style={s.arrowIcon} />
+          </TouchableOpacity>
         <Text style={s.infoCategory}>Nombre y Apellido:</Text>
         <Text style={s.infoUser}>{user.name}</Text>
         <Text style={s.infoCategory}>Email:</Text>
