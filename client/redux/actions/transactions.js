@@ -5,7 +5,7 @@ export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
 export const TRANSFER = "TRANSFER";
 export const GET_SUMATORIA = "GET_SUMATORIA"
 
-const API_URL ="192.168.1.12:3000"
+const API_URL ="192.168.0.6:3000"
 
 export function recharge(transaction){
 
@@ -38,6 +38,22 @@ export function sumarPeriodo(data){
       })
     }
 }
+export function rechargeCard(transaction){
+
+    return function(dispatch){
+      
+        return axios.post(`http://${API_URL}/transaction/recharge_card`, transaction)
+        .then(resp=>{
+             dispatch({
+                type:RECHARGE_CARD,
+                transaction:resp.data
+            }) 
+        })
+        .catch(err=>{
+            console.log('ERROR AL RECARGAR', err)
+        })
+    };
+};
 
 export function getTransactions(userId){
 

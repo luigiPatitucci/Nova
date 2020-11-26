@@ -50,6 +50,41 @@ module.exports = {
                 return newContact
             }
         },
+        addContactWithPhone: {
+			rest: {
+				method: "POST",
+				path: "/addWithPhone"
+			},
+            async handler(ctx) {
+                const data = ctx.params
+
+                const contact = await User.findOne({
+                    where:{phone_number:data.phone}
+                })
+
+                if(!contact) {
+                    throw new MoleculerError("No se encotro el usuario !", 404)}
+
+                const existe = await Contact.findOne({
+                    where:{user_id:data.id,phone:data.phone}
+                })
+
+                if(existe){
+                    throw new MoleculerError("Ya pertenece a tus contactos !", 409)
+                }
+                
+                const newContact = Contact.create(
+                {
+                    email:contact.email, 
+                    contact_id: contact.id, 
+                    nickname : data.nickname,
+                    user_id: data.id,
+                    avatar:contact.avatar,
+                    phone:contact.phone_number
+                })
+                return newContact
+            }
+        },
         getAll:{
             rest: {
 				method: "GET",
