@@ -255,7 +255,7 @@ module.exports = {
 		getByDate:{
 			rest:{
 				method:"POST",
-				path:"/getbydate"
+				path:"/getbydate/"
 			},
 
 			async handler(ctx){
@@ -290,49 +290,43 @@ module.exports = {
 					let tiempo=86400000*per; 
 					let diaAct = Date.now()
 					let tiempo2 = dias*86400000
+					let val = dias == 31 ? 31:13
 					let diasfecha=[]
-					for(let i=0;i< dias==30 ? 30 : 13 && tiempo2>0 ;i++){
+					for(let i=0;i<val ;i++){
 						periodo.amounts.push(0)
-						periodo.dates.push((new Date((Date.now()-tiempo2)+86400000).toString())
-						/* .split(" ")
+						diasfecha.push((new Date((Date.now()-tiempo2)).toString())
+						.split(" ")
 						.slice(1,3)
-						.join()) */)
-						
+						.join())
 						tiempo2 = tiempo2 - tiempo
-						
 					}
-					for(let j=0;j<periodo.dates.length;j++){
-						for(z=0;z<transacciones.length;z++){
-							if(Date.parse(transacciones[z].createdAt)>Date.parse(periodo.dates[j+1])&&
-								Date.parse(transacciones[z].createdAt)<Date.parser(periodo.dates[j])){
-									if(!data.type){
-										periodo.amounts[j] = transacciones[j].transactionType == "recharge" || "received" || "conversionArs"
-										?
-										periodo.amounts[j] + transacciones.account[z]
-										:
-										periodo.amounts[j] - transacciones.account[z]
-									}
-								}	  
+					for(let j=0;j<transacciones.length;j++){
+						let diasR = Date.parse(transacciones[j].createdAt)
+						let pos = Math.floor(periodo.amounts.length - ((diaAct - diasR)/tiempo))
+						if(!data.type){
+							periodo.dates[pos] = diasfecha[pos]
+							if(transacciones[j].transactionType == "recharge" ||transacciones[j].transactionType == "received" || transacciones[j].transactionType =="conversionArs"){
+								periodo.amounts[pos] = periodo.amounts[pos] + transacciones[j].amount
+							}else{
+								periodo.amounts[pos] + transacciones[j].amount
+							} 
+							if(data.type){
+							periodo.dates[pos] = diasfecha[pos]
+							periodo.amounts[pos] = periodo.amounts[pos] + transacciones[j].amount
 							}
 						}
-						//periodo.dates[pos] = diasfecha[pos]
-
-						
-			
 					}
-/* 					periodo.dates = periodo.dates.filter(fechas=> fechas !== null)
-					periodo.amounts = periodo.amounts.filter(fechas=> fechas !== 0) */ 
+			 		 periodo.dates = periodo.dates.filter(fechas=> fechas !== null)
+					periodo.amounts = periodo.amounts.filter(fechas=> fechas !== 0)  
 					return {periodo}
 					
-		
-		      if(data.dias == 90) return sumarPeriodo(90,7)
+				}  
+		      	if(data.dias == 90) return sumarPeriodo(90,7)
 				if(data.dias == 182) return sumarPeriodo(182,30)
 				if(data.dias == 30) return sumarPeriodo(30,1)
-				
 			}
 		}
     },
-
 	methods: {
         
     },

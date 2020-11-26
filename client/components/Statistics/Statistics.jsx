@@ -121,7 +121,7 @@ const Statistics = () => {
           segments={4}
           fromZero={true}
             data={dataConstructor}
-            width={200}
+            width={480}
             height={310}
             chartConfig={chartConfig}
           />
