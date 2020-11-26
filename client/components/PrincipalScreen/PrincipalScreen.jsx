@@ -1,37 +1,54 @@
 import React, { useEffect } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Container, Button } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useDispatch, useSelector } from 'react-redux';
 import { refresh } from '../../redux/actions/userActions';
 import { getTransactions } from '../../redux/actions/transactions';
-
+import DateTimePicker from '@react-native-community/datetimepicker';
 import s from './style.js';
-import DatePicker from 'react-native-date-ranges';
 import TransactionItem from '../TransactionItem/TransactionItem';
+import { useState } from 'react';
 
 const PrincipalScreen = ({ navigation }) => {
     const user = useSelector((state) => state.userReducer);
     const transactionHistory = useSelector((state) => state.transactions.transactionHistory);
     const dispatch = useDispatch();
+    const options = { day: 'numeric', month: 'long', year: 'numeric'};
+
+    const [initialDate, setInitialDate] = useState(new Date());
+    const [limitDate, setLimitDate] = useState(new Date());
+    const [showInitial, setShowInitial] = useState(false);
+    const [showLimit, setShowLimit] = useState(false);
 
     const getResources = async () => {
         await dispatch(refresh(user.id));
         await dispatch(getTransactions(user.id));
     };
 
+    const onChangeOne = (event, selectedDate) => {
+        let currentDate = selectedDate.toLocaleDateString('en-GB') || initialDate.toLocaleDateString('en-GB');
+        setShowInitial(Platform.OS === 'ios');
+        setInitialDate(currentDate);
+    };
+
+    const onChangeTwo = (event, selectedDate) => {
+        let currentDate = selectedDate.toLocaleDateString('en-GB') || limitDate.toLocaleDateString('en-GB');
+        setShowLimit(Platform.OS === 'ios');
+        setLimitDate(currentDate);
+    };
+
+    const showModeOne = () => {
+        setShowInitial(true);
+    };
+
+    const showModeTwo = () => {
+        setShowLimit(true);
+    };
+
     useEffect(() => {
         getResources();
-    }, [])
-
-    const customButton = (onConfirm) => (
-        <Button
-            onPress={onConfirm}
-            style={{ container: { width: '80%', marginHorizontal: '3%' }, text: { fontSize: 20 } }}
-            primary
-            text={'送出'}
-        />
-    )
+    }, []);
 
     return (
         <Container>
@@ -41,88 +58,68 @@ const PrincipalScreen = ({ navigation }) => {
                     <Text style={s.ARS}>  ARS</Text>
                 </View>
                 <Text style={s.headerTitle}>Balance total de la cuenta</Text>
-                <Text style={s.balance}>{user.balanceArs} ARS</Text>
+                <Text style={s.balance}>{user.balanceArs.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} ARS</Text>
             </View>
 
-            <DatePicker
-                style={{
-                    width: '90%',
-                    height: '8%',
-                    backgroundColor: '#242835',
-                    alignSelf: 'center',
-                    borderRadius: 10
-                }}
-                customStyles={{
-                    placeholderText: {  fontSize: 20,
-                                        fontFamily: 'RedHatText_Regular',
-                                        color: 'white',
-                                        borderWidth: 0,
-                                        borderColor: "red",
-                                        backgroundColor: 'blue'
-                                    
-                                    },
-                    headerStyle: {
-                        backgroundColor: '#4b81e7'
-                    },
-                    headerMarkTitle: {
-                        color: 'white',
-                        fontFamily: 'RedHatText_Regular',
-                        fontSize: 18,
-                        fontWeight: 'normal',
-                        textAlign: 'center'
-                    },
-                    headerDateTitle: {
-                        fontFamily: 'RedHatText_Regular',
-                        fontWeight: 'normal',
-                    },
-                    contentInput: {
-                        fontFamily: 'RedHatText_Regular',
-                        fontWeight: 'normal',
-                        fontSize: 1,
-                        color: 'red'
-                    },
-                    contentText: {
-                        backgroundColor: 'transparent',
-                        color: 'white',
-                        borderRadius: 10,
-                        fontFamily: 'RedHatText_Regular',
-                        fontSize: 17,
-                        /* height: '100%',
-                        width: '100%', */
-                        alignSelf: 'center'
-                    },
-                }}
-                onConfirm={hola => console.log(hola)}
-                centerAlign // optional text will align center or not
-                allowFontScaling={false} // optional
-                placeholder={'Filtrar por fecha'}
-                mode={'range'}
-                markText={'Seleccione el intervalo que desea filtrar'}
-                buttonText={"JAJAJAJ"}
-                selectedBgColor={'#4b81e7'}
-                dateSplitter={'||'}
-                ButtonStyle={{
-                    backgroundColor: '#4b81e7',
-                    alignSelf: 'center',
-                    borderRadius: 10,
-                    height: '120%',
-                    width: '90%'
+            <View style={s.dateContainer}>
+                <TouchableOpacity  style={s.optionDate} onPress={() => showModeOne()}>
+                    {
+                        typeof initialDate !== "object" ?
+                        <Text style={s.textDate}>{initialDate}</Text>
+                        :
+                        <Text style={s.textDate}>Fecha inicial</Text>
 
-                }}
-                ButtonTextStyle={{
-                    textAlign: 'center',
-                    color: 'white',
-                    fontFamily: 'RedHatText_Regular',
-                    fontSize: 20
-                }}
-            />
+                    }
+                </TouchableOpacity>
+                <TouchableOpacity style={s.optionDate} onPress={() => showModeTwo()}>
+                    {
+                        typeof limitDate !== "object" ?
+                        <Text style={s.textDate}>{limitDate}</Text>
+                        :
+                        <Text style={s.textDate}>Fecha Límite</Text>
+
+                    }
+                </TouchableOpacity>
+            </View>
+
+            {/* INITIAL DATE */}
+            <View>
+                {
+                    showInitial && (
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={initialDate}
+                            mode='date'
+                            is24Hour={true}
+                            display="default"
+                            onChange={onChangeOne}
+                        />
+                    )
+                }
+            </View>
+            {/* LIMIT DATE */}
+            <View>
+                {
+                    showLimit && (
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={limitDate}
+                            mode='date'
+                            is24Hour={true}
+                            display="default"
+                            onChange={onChangeTwo}
+                        />
+                    )
+                }
+            </View>
+
             <ScrollView>
                 {
                     transactionHistory.map((transaction, i) => (
 
                         <TransactionItem
                             name={transaction.name}
-                            amount={transaction.amount}
+                            amount={transaction.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
                             date={transaction.createdAt}
                             type={transaction.transactionType}
                             referenceCode={transaction.refernece}

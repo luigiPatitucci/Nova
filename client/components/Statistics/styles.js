@@ -30,6 +30,9 @@ export default {
         justifyContent: 'space-around'
     },
     button: {
+        btnSelected: {
+            backgroundColor: 'red'
+         },
         backgroundColor: '#4b81e7',
         borderRadius: 10,
         width: '48%',
@@ -42,6 +45,18 @@ export default {
         justifyContent: 'center',
     },
     textButton: {
+        fontFamily: 'RedHatText_Regular',
+    },
+    activeButtonType: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        width: '48%',
+        justifyContent: 'center',
+        borderWidth: 2,
+        borderColor: '#4b81e7'
+    },
+    activeText: {
+        color: '#4b81e7',
         fontFamily: 'RedHatText_Regular',
     }
 }
