@@ -5,7 +5,7 @@ export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
 export const TRANSFER = "TRANSFER";
 export const GET_SUMATORIA = "GET_SUMATORIA"
 
-const API_URL ="192.168.0.6:3000"
+import { API_URL } from '../../components/variables';
 
 export function recharge(transaction){
 
