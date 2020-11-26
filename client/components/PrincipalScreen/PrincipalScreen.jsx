@@ -69,12 +69,9 @@ const PrincipalScreen = ({ navigation }) => {
     return (
         <Container>
             <View style={s.container}>
-                <View style={s.fakeTopHeader}>
-                    <Text style={s.UDS}>UDS  </Text>
-                    <Text style={s.ARS}>  ARS</Text>
-                </View>
                 <Text style={s.headerTitle}>Balance total de la cuenta</Text>
                 <Text style={s.balance}>{user.balanceArs.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} ARS</Text>
+                <Text style={s.balance}>{user.balanceUds ? user.balanceUdstoFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : 0} USD</Text>
             </View>
 
             <View style={s.dateContainer}>

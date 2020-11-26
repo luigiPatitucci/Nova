@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Button, Container } from 'native-base';
 import { useDispatch, useSelector } from 'react-redux';
-import { recharge } from '../../redux/actions/transactions.js';
+import { recharge, getTransactions } from '../../redux/actions/transactions.js';
 import { refresh } from '../../redux/actions/userActions.js';
 import s from './styles.js';
 import Modal from 'react-native-modal';
@@ -20,6 +20,7 @@ const RechargeBalance = ({ navigation }) => {
         let obj = { id: user.idAccount }
         await dispatch(recharge(obj));
         await dispatch(refresh(user.id));
+        await dispatch(getTransactions(user.id))
         await setModalVisible(!modalVisible);
 
     };
