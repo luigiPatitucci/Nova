@@ -8,7 +8,7 @@ import * as LocalAuthentication from 'expo-local-authentication';
 import LottieView from 'lottie-react-native';
 import s from './styles.js';
 import axios from 'axios';
-const API_URL = "192.168.1.12:3000";
+const API_URL ="192.168.0.209:3000";
 
 const Login = ({ navigation }) => {
 
