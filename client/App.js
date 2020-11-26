@@ -30,7 +30,6 @@ const App = () => {
     (
       <Provider store={store}>
         < NavigationContainer>
-        <Loader/>
           <StatusBar 
             barStyle='light-content'
             backgroundColor='#242835'

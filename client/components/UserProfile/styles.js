@@ -8,16 +8,30 @@ export default {
         textAlign: 'center',
         fontSize: 25,
     },
+    arrowIcon:{
+        color: 'white', 
+        
+    },
+    arrowContainer:{
+        position:'absolute',
+        bottom:23,
+        zIndex: 3,
+        backgroundColor: '#db3a34',
+        padding: 10,
+        borderRadius: 100,
+        left: 257,
+        
+    },
     nickName: {
         color: 'white',
         fontFamily: 'RedHatText_Regular',
-        bottom: -85
+        bottom: -73
     },
     avatar: {
         width: 110,
         height: 110,
         borderRadius: 100,
-        bottom: -115,
+        bottom: -100,
         zIndex: 1,
     },
     cameraIcon: {
@@ -26,7 +40,7 @@ export default {
         alignSelf: 'center'
     },
     cameraContainer: {
-        bottom: -83,
+        bottom: -70,
         zIndex: 2,
         left: 29,
         backgroundColor: '#242835',
@@ -38,7 +52,7 @@ export default {
         color: 'white'
     },
     pencilContainer: {
-        bottom: -185,
+        bottom: -165,
         backgroundColor: '#242835',
         padding: 10,
         borderRadius: 100,
@@ -47,8 +61,9 @@ export default {
     shareCvuIcon: {
         color: 'white'
     },
+    
     shareCvuIconContainer: {
-        bottom: -135,
+        bottom: -112,
         backgroundColor: '#242835',
         padding: 10,
         borderRadius: 100,
@@ -77,7 +92,8 @@ export default {
     infoContainer: {
         top: -280,
         width: '90%',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        zIndex:0
     },
     infoUser: {
         fontSize: 20,

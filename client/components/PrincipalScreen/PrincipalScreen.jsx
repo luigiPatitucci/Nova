@@ -58,7 +58,7 @@ const PrincipalScreen = ({ navigation }) => {
                     <Text style={s.ARS}>  ARS</Text>
                 </View>
                 <Text style={s.headerTitle}>Balance total de la cuenta</Text>
-                <Text style={s.balance}>{user.balanceArs.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} ARS</Text>
+                <Text style={s.balance}>{user.balanceArs?user.balanceArs.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'):0}ARS</Text>
             </View>
 
             <View style={s.dateContainer}>
