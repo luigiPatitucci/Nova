@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios'
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button, Picker } from 'native-base';
-import { ScrollView } from 'react-native-gesture-handler';
+import { KeyboardAvoidingView, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../../redux/actions/userActions.js'
-
+import s from './Styles.js';
 
 const CreateUser = ({navigation}) => {
 
@@ -18,7 +18,7 @@ const CreateUser = ({navigation}) => {
     });
 
     const createUser =  () => {
-        return axios.post("http://192.168.0.9:3000/user/", data)
+        return axios.post("http://192.168.0.211:3000/user/", data)
         .then(resp=>{
             console.log('SOY LA RESPUESTA', resp.data)
         })
@@ -34,22 +34,25 @@ const CreateUser = ({navigation}) => {
 
     return (
         <Container style={styles.container}>
-            <ScrollView>
+                      <KeyboardAvoidingView 
+                behavior='position'>
+                <View style={s.imageContainer}>
+                    <Image source={require('../../../assets/nova.png')} style={s.image} />
+                </View>
                 <Form>
-                   
                     <Item floatingLabel >
-                        <Label>Nombre de Usuario *</Label>
-                        <Input style={{color: 'white'}} onChangeText={username => setData({ ...data, username })}></Input>
+                        <Label style={s.labelForm}>Nombre de Usuario *</Label>
+                        <Input style={s.inputForm} onChangeText={username => setData({ ...data, username })}></Input>
                     </Item>
 
                     <Item floatingLabel>
-                        <Label>Email *</Label>
-                        <Input style={{color: 'white'}}  onChangeText={email => setData({ ...data, email })}></Input>
+                        <Label style={s.labelForm}>Email *</Label>
+                        <Input style={s.inputForm} onChangeText={email => setData({ ...data, email })}></Input>
                     </Item>
 
                     <Item floatingLabel>
-                        <Label>Contraseña *</Label>
-                        <Input style={{color: 'white'}}  secureTextEntry={true} onChangeText={password => setData({ ...data, password })}></Input>
+                        <Label style={s.labelForm}>Contraseña *</Label>
+                        <Input style={s.inputForm} secureTextEntry={true} onChangeText={password => setData({ ...data, password })}></Input>
                     </Item>
                 </Form>
                 <Button
@@ -60,7 +63,7 @@ const CreateUser = ({navigation}) => {
                 >
                     <Text>Siguiente</Text>
                 </Button>
-            </ScrollView>
+                </KeyboardAvoidingView>
         </Container>
 
     )
@@ -68,14 +71,14 @@ const CreateUser = ({navigation}) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#171717',
+        backgroundColor: '#242835',
     },
     button: {
         width: '90%',
         alignSelf: 'center',
-        marginTop: 50,
+        marginTop: 35,
         justifyContent: 'center',
-        backgroundColor: '#4A1491',
+        backgroundColor: '#4b81e7',
         borderRadius: 10,
     },
     titulos: {
