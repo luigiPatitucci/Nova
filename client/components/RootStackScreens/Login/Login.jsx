@@ -9,7 +9,9 @@ import LottieView from 'lottie-react-native';
 import s from './styles.js';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
-const API_URL = "192.168.0.209:3000";
+
+import { API_URL } from '../../variables';
+
 
 const Login = ({ navigation }) => {
     const dispatch = useDispatch();

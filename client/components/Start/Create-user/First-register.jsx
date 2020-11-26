@@ -9,6 +9,8 @@ import s from './Styles.js';
 const API_URL = "192.168.0.209:3000"
 
 
+import { API_URL } from '../../variables'
+
 const CreateUser = ({navigation}) => {
 
     const dispatch = useDispatch();
