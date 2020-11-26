@@ -161,7 +161,28 @@ module.exports = {
 				return transaction;
 			}
 		}      
-    },
+	},
+	//FILTRAR TRANSACCIONES EN UN RANGO DE FECHA
+	rangoFecha:{
+		rest:{
+			method:"POST",
+			path:"/getRangoFecha"
+		},
+		async handler(ctx){
+			const data = ctx.params
+			const fechaInicio = new Date(data.fechaInicio).getTime();
+			const fechaFin 	=   new Date(data.fechaFin).getTime() 
+			const transacciones = await Transaction.findAll({
+				where:{
+					accountId:data.id,
+					createdAt: {
+						[Op.between]: [fechaInicio, fechaFin],
+					  },
+				}
+			})
+			return transacciones
+		}
+	},
 
 	methods: {
         

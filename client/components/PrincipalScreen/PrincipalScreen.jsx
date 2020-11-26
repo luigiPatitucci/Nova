@@ -9,12 +9,13 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import s from './style.js';
 import TransactionItem from '../TransactionItem/TransactionItem';
 import { useState } from 'react';
+import axios from 'axios';
+const API_URL = "192.168.1.12:3000";
 
 const PrincipalScreen = ({ navigation }) => {
     const user = useSelector((state) => state.userReducer);
     const transactionHistory = useSelector((state) => state.transactions.transactionHistory);
     const dispatch = useDispatch();
-    const options = { day: 'numeric', month: 'long', year: 'numeric'};
 
     const [initialDate, setInitialDate] = useState(new Date());
     const [limitDate, setLimitDate] = useState(new Date());
@@ -27,13 +28,13 @@ const PrincipalScreen = ({ navigation }) => {
     };
 
     const onChangeOne = (event, selectedDate) => {
-        let currentDate = selectedDate.toLocaleDateString('en-GB') || initialDate.toLocaleDateString('en-GB');
+        let currentDate = selectedDate || initialDate
         setShowInitial(Platform.OS === 'ios');
         setInitialDate(currentDate);
     };
 
     const onChangeTwo = (event, selectedDate) => {
-        let currentDate = selectedDate.toLocaleDateString('en-GB') || limitDate.toLocaleDateString('en-GB');
+        let currentDate = selectedDate|| limitDate
         setShowLimit(Platform.OS === 'ios');
         setLimitDate(currentDate);
     };
@@ -50,6 +51,21 @@ const PrincipalScreen = ({ navigation }) => {
         getResources();
     }, []);
 
+    const GetLeaks = () => {
+        console.log('Fecha inicial', initialDate.toLocaleDateString('en-US'), 'fecha final', limitDate.toLocaleDateString('en-US'));
+        console.log('ID USER:', user.id)
+        axios.post(`http://${API_URL}/transaction/getRangoFecha`, 
+            {    
+                id: user.id,
+                fechaInicio : initialDate.toLocaleDateString('en-US'),
+                fechaFin: limitDate.toLocaleDateString('en-US')
+            }
+        ).then(resp => console.log('UUUUUUUUUUU', resp))
+        .catch(() => console.log('algo se rompio'))
+    };
+
+
+
     return (
         <Container>
             <View style={s.container}>
@@ -63,24 +79,31 @@ const PrincipalScreen = ({ navigation }) => {
 
             <View style={s.dateContainer}>
                 <TouchableOpacity  style={s.optionDate} onPress={() => showModeOne()}>
-                    {
+                    {/* {
                         typeof initialDate !== "object" ?
                         <Text style={s.textDate}>{initialDate}</Text>
-                        :
+                        : */}
                         <Text style={s.textDate}>Fecha inicial</Text>
 
-                    }
+                   {/*  } */}
                 </TouchableOpacity>
                 <TouchableOpacity style={s.optionDate} onPress={() => showModeTwo()}>
-                    {
+                   {/*  {
                         typeof limitDate !== "object" ?
                         <Text style={s.textDate}>{limitDate}</Text>
-                        :
+                        : */}
                         <Text style={s.textDate}>Fecha Límite</Text>
 
-                    }
+                    {/* } */}
                 </TouchableOpacity>
             </View>
+
+            <Button onPress={() => GetLeaks()}>
+                <Text>
+                    hola
+                </Text>
+            </Button>
+
 
             {/* INITIAL DATE */}
             <View>
