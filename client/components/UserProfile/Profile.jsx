@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import s from './styles';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker';
 import Modal from 'react-native-modal';
@@ -84,7 +84,7 @@ const Profile = ({navigation}) => {
         >
         <View style={s.imgContainer}>
           <TouchableOpacity onPress={() => showModal()} style={s.pencilContainer}>
-            <Icon2 name='pencil' size={30} style={s.pencilIcon} />
+            <Icon name='pencil' size={30} style={s.pencilIcon} />
           </TouchableOpacity>
           
           <TouchableOpacity onPress={() => setCvuModal(!CvuModal)} style={s.shareCvuIconContainer}>
@@ -93,7 +93,7 @@ const Profile = ({navigation}) => {
 
           <Image style={s.avatar} source={user.avatar ? { uri: `${user.avatar}` } : imgUser} />
           <TouchableOpacity onPress={openGallery} style={s.cameraContainer}>
-            <Icon2 name='camera' size={25} style={s.cameraIcon} />
+            <Icon name='camera' size={25} style={s.cameraIcon} />
           </TouchableOpacity>
           
           <Text style={s.nickName}>{user.username}</Text>
@@ -119,7 +119,7 @@ const Profile = ({navigation}) => {
 
       <View style={s.infoContainer}>
       <TouchableOpacity onPress={handleLogOut} style={s.arrowContainer}>
-            <Icon2 name='arrow-collapse-left' size={30} style={s.arrowIcon} />
+            <Icon name='arrow-collapse-left' size={30} style={s.arrowIcon} />
           </TouchableOpacity>
         <Text style={s.infoCategory}>Nombre y Apellido:</Text>
         <Text style={s.infoUser}>{user.name}</Text>

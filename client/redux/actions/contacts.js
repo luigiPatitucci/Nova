@@ -4,7 +4,7 @@ export const DELETE_CONTACTS = "DELETE_CONTACTS"
 export const UPDATE_CONTACTS = "UPDATE_CONTACTS"
 export const ADD_CONTACTO = "ADD_CONTACTO"
 
-const API_URL ="192.168.0.42:3000";
+const API_URL = "192.168.0.209:3000";
 
 export function allContacts(id){
 
