@@ -23,6 +23,22 @@ export function recharge(transaction){
     };
 };
 
+export function rechargeCard(transaction){
+
+    return function(dispatch){
+      
+        return axios.post(`http://${API_URL}/transaction/recharge_card`, transaction)
+        .then(resp=>{
+             dispatch({
+                type:RECHARGE_CARD,
+                transaction:resp.data
+            }) 
+        })
+        .catch(err=>{
+            console.log('ERROR AL RECARGAR', err)
+        })
+    };
+};
 
 export function getTransactions(userId){
 

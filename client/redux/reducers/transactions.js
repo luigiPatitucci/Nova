@@ -1,4 +1,4 @@
-import {RECHARGE , TRANSFER, GET_TRANSACTIONS } from '../actions/transactions.js';
+import { RECHARGE, RECHARGE_CARD, TRANSFER, GET_TRANSACTIONS } from '../actions/transactions.js';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const initialState = {  
