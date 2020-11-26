@@ -18,30 +18,32 @@ const RechargeBalance = ({ navigation }) => {
 
     const handleSubmit = async () => {
         let obj = { id: user.idAccount }
-        await dispatch(recharge(obj))
-        await dispatch(refresh(user.id))
+        await dispatch(recharge(obj));
+        await dispatch(refresh(user.id));
+        await setModalVisible(!modalVisible);
 
-    }
+    };
 
     const transaction = useSelector((state) => state.transactions);
     let dateFormat = transaction.createdAt.substring(0, 10).split('-').reverse().join('/');
     
     return (
         <Container style={s.container}>
+            <Text style={s.title}>Recargar mediante efectivo</Text>
             <View style={s.infoContainer}>
                 <View style={s.headerContainer}>
                     <View style={s.infoBox}>
-                        <Text style={s.infoOne}>Usa este codigo siempre que quieras ingresar dinero a tu cuenta.</Text>
+                        <Text style={s.infoOne}>Usa este código siempre que quieras ingresar dinero a tu cuenta.</Text>
                     </View>
-                    <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                        <Icon size={30} name='info-circle' style={s.infoIcon}/>
+                    <TouchableOpacity disabled={!transaction.amount} onPress={() => setModalVisible(!modalVisible)}>
+                        <Icon size={30} name='info-circle' style={!transaction.amount ? s.infoIconDisabled : s.infoIcon} />
                     </TouchableOpacity>
                 </View>
                 <View style={s.userCodeBox}>
                     <Text style={s.userCode}>{user.code}</Text>
                 </View>
                 <View style={s.infoBox}>
-                    <Text style={s.infoTwo}>Mostrale este codigo al cajero en Rapipago o en PagoFacil.</Text>
+                    <Text style={s.infoTwo}>Mostrale este código al cajero en Rapipago o en Pago Fácil.</Text>
                 </View>
                 <Button style={s.button} onPress={() => handleSubmit()}>
                     <Text style={s.buttonText}>Confirmar Recarga</Text>
@@ -67,9 +69,9 @@ const RechargeBalance = ({ navigation }) => {
                             <Text style={s.modalTitleText}>Recibo</Text>
                         </View>
                         <Text style={s.properties}>Fecha de recarga: {dateFormat}</Text>
-                        <Text style={s.properties}>Monto: {transaction.amount} ARS</Text>
+                        <Text style={s.properties}>Monto: {transaction.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} ARS</Text>
                         <Text style={s.properties}>Codigo de referencia: {transaction.refernece}</Text>
-                        <LottieView style={s.animation} source={require('../../assets/lf30_editor_0qoqgqll.json')} autoPlay loop={false} />
+                        <LottieView style={s.animation} source={require('../../assets/lf30_editor_4tc8fsjh.json')} autoPlay loop={false} />
                     </View>
                 </Modal>
             </View>

@@ -45,7 +45,7 @@ const TransactionItem = ({ type, date, name, amount, referenceCode }) => {
                     isVisible={modalVisible}
                     animationIn='zoomIn'
                     animationInTiming={800}
-                    animationOut='fadeOut'
+                    animationOut='zoomOut'
                     animationOutTiming={800}
                     onBackdropPress={() => setModalVisible(!modalVisible)}
                 >
@@ -92,7 +92,7 @@ const TransactionItem = ({ type, date, name, amount, referenceCode }) => {
 
                         <Text style={s.properties}>Monto: {amount} ARS</Text>
                         <Text style={s.properties}>Código de referencia: {referenceCode}</Text>
-                        <LottieView style={s.animation} source={require('../../assets/lf30_editor_0qoqgqll.json')} autoPlay loop={false} />
+                        <LottieView style={s.animation} source={require('../../assets/lf30_editor_4tc8fsjh.json')} autoPlay loop={false} />
                     </View>
                 </Modal>
             </View>

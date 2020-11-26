@@ -8,16 +8,17 @@ export default {
         color: 'white',
         fontSize: 25,
         marginTop: '5%',
-        marginBottom: '5%',
+        marginBottom: '2%',
         textAlign: 'center',
         borderRadius: 10,
         width: '90%',
-        height: '10.3%',
+        height: '7%',
         textAlignVertical: 'center',
         fontFamily: 'RedHatText_Regular',
     },
     buttonsContainer: {
-        justifyContent: 'center'
+        justifyContent: 'center',
+        top: '-35%'
     },
     button: {
         backgroundColor: '#4b81e7',
@@ -27,7 +28,7 @@ export default {
         justifyContent: 'center',
         marginBottom: '3%',
         flexDirection: 'column',
-        height: '17%',
+        height: '14%',
         paddingTop: '4%',
         
     },

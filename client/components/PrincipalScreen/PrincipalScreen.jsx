@@ -58,7 +58,7 @@ const PrincipalScreen = ({ navigation }) => {
                     <Text style={s.ARS}>  ARS</Text>
                 </View>
                 <Text style={s.headerTitle}>Balance total de la cuenta</Text>
-                <Text style={s.balance}>{user.balanceArs} ARS</Text>
+                <Text style={s.balance}>{user.balanceArs.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} ARS</Text>
             </View>
 
             <View style={s.dateContainer}>
@@ -119,7 +119,7 @@ const PrincipalScreen = ({ navigation }) => {
 
                         <TransactionItem
                             name={transaction.name}
-                            amount={transaction.amount}
+                            amount={transaction.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
                             date={transaction.createdAt}
                             type={transaction.transactionType}
                             referenceCode={transaction.refernece}

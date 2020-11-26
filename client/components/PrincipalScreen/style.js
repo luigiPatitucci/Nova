@@ -29,7 +29,7 @@ export default {
         fontFamily: 'RedHatText_Regular'
     },
     balance: {
-        fontSize: 47, 
+        fontSize: 42, 
         color: 'white', 
         textAlign: 'center', 
         fontFamily: 'RedHatText_Regular',
