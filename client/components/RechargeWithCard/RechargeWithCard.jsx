@@ -12,7 +12,7 @@ import { refresh } from "../../redux/actions/userActions.js";
 
 import styles from "./styles.js";
 
-function RechargeBalance( { navigation } )
+function RechargeWithCard( { navigation } )
 {
 	const [ amount, setAmount ] = useState( "" );
 	const [ cardData, setCardData ] = useState( null );
@@ -280,4 +280,4 @@ function ParseResponse( text )
 	};
 }
 
-export default RechargeBalance;
+export default RechargeWithCard;
