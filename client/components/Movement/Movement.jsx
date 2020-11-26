@@ -23,7 +23,7 @@ const Movement = ({ navigation }) => {
                     <Text style={s.textButton}>Recargar con tarjeta</Text>
                 </Button>
                 <Button style={s.button}>
-                    <Icon2 name='paper-plane' size={30} color='white'/>
+                    <Icon2 name='paper-plane' size={30} color='white' onPress={() => navigation.navigate('SendMoney')}/>
                     <Text style={s.textButton}>Enviar dinero</Text>
                 </Button>
                 <Button style={s.button}>
