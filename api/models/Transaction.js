@@ -11,7 +11,7 @@ const db = require('../dbConfig');
         allowNull: true,
     },
     transactionType: {
-        type: DataTypes.ENUM(["recharge","transfer","sendMoney","debitCard"]),
+        type: DataTypes.ENUM(["recharge","transfer","received","debitCard","conversionArs","conversionUsd"]),
         allowNull: true,
     },
     amount: {
@@ -22,6 +22,7 @@ const db = require('../dbConfig');
         type: DataTypes.STRING,
         allowNull: true,
     },
+
     currency: {
         type: DataTypes.ENUM(["ARS", "USD"]),
         allowNull: true,

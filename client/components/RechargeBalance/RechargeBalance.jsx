@@ -26,7 +26,7 @@ const RechargeBalance = ({ navigation }) => {
         await dispatch(refresh(user.id));
         await dispatch(getTransactions(user.id))
         setLoading(false)
-        await setModalVisible(!modalVisible);
+        setModalVisible(!modalVisible);
 
     };
 

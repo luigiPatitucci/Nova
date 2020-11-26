@@ -3,6 +3,7 @@ import axios from 'axios';
 export const RECHARGE = 'RECHARGE'; 
 export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
 export const TRANSFER = "TRANSFER";
+export const GET_SUMATORIA = "GET_SUMATORIA"
 
 const API_URL ="192.168.1.12:3000"
 
@@ -23,6 +24,20 @@ export function recharge(transaction){
     };
 };
 
+export function sumarPeriodo(data){
+    return function(dispatch){
+   axios.post(`http://${API_URL}/transaction/getbydate`,data)
+    .then(resp => {
+      //console.log("ENTRE A LA CONSULTA ", resp.data )
+          dispatch({
+            type: GET_SUMATORIA,
+            obj:resp.data
+          })    
+      }).catch(err=>{
+          console.log(err)
+      })
+    }
+}
 
 export function getTransactions(userId){
 

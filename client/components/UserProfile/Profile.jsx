@@ -10,6 +10,7 @@ import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker';
 import Modal from 'react-native-modal';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Cvu from './Cvu';
 
 import { updateAvatar } from '../../redux/actions/userActions'
 
@@ -17,8 +18,11 @@ function Profile() {
   const imgUser = require('../../assets/logoUser.png');
   const dispatch = useDispatch();
 
+  const cvu = useSelector((state) => state.userReducer);
+
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [CvuModal, setCvuModal] = useState(false);
 
   const showModal = () => {
     visible ? null : Keyboard.dismiss();
@@ -78,7 +82,7 @@ function Profile() {
             <Icon name='pencil' size={28} style={s.pencilIcon} />
           </TouchableOpacity>
           
-          <TouchableOpacity onPress={openGallery} style={s.shareCvuIconContainer}>
+          <TouchableOpacity onPress={() => setCvuModal(!CvuModal)} style={s.shareCvuIconContainer}>
             <Icon name='share-variant' size={28} style={s.shareCvuIcon} />
           </TouchableOpacity>
 
@@ -134,6 +138,21 @@ function Profile() {
         <ProfileEdit
           showModal={showModal}
           setLoading={setLoading}
+        />
+      </Modal>
+
+      <Modal
+        isVisible={CvuModal}
+        animationIn='zoomIn'
+        animationInTiming={500}
+        animationOut='zoomOut'
+        animationOutTiming={500}
+        onBackdropPress={() => setCvuModal(!CvuModal)}
+      >
+        <Cvu
+          phone_number={user.phone_number}
+          cvu={cvu.cvu}
+          alias={cvu.username}
         />
       </Modal>
     </Container>

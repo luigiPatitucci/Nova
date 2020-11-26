@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
 import { Container, Button } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +11,7 @@ import TransactionItem from '../TransactionItem/TransactionItem';
 import { useState } from 'react';
 import axios from 'axios';
 import Modal from 'react-native-modal';
+import Spinner from 'react-native-loading-spinner-overlay';
 const API_URL = "192.168.1.12:3000";
 
 const PrincipalScreen = ({ navigation }) => {
@@ -23,13 +24,15 @@ const PrincipalScreen = ({ navigation }) => {
     const [showInitial, setShowInitial] = useState(false);
     const [showLimit, setShowLimit] = useState(false);
     const [visible, setVisible] = useState(false);
+    const [filtered, setFiltered] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const [dateOne, setDateOne] = useState('');
     const [dateTwo, setDateTwo] = useState('');
 
-    const getResources = async () => {
-        await dispatch(refresh(user.id));
-        await dispatch(getTransactions(user.id));
+    const getResources = () => {
+        dispatch(refresh(user.id));
+        dispatch(getTransactions(user.id));
     };
 
     const onChangeOne = (event, selectedDate) => {
@@ -67,7 +70,12 @@ const PrincipalScreen = ({ navigation }) => {
                 fechaInicio: initialDate.toLocaleDateString('en-US'),
                 fechaFin: limitDate.toLocaleDateString('en-US')
             }
-        ).then(resp => console.log('UUUUUUUUUUU', resp))
+        ).then( resp => {
+            if(resp.data.length === 0) return Alert.alert('No hay transacciones en el rango de fecha especificado.');
+            
+            setFiltered(resp.data);
+            setVisible(false);
+        })
             .catch(() => console.log('algo se rompio'))
     };
 
@@ -77,7 +85,7 @@ const PrincipalScreen = ({ navigation }) => {
         <Container>
             <View style={s.container}>
                 <Text style={s.headerTitle}>Balance total de la cuenta</Text>
-                <Text style={s.balance}>{user.balanceArs.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} ARS</Text>
+                <Text style={s.balance}>{user.balanceArs ? user.balanceArs.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : 0} ARS</Text>
                 <Text style={s.balance}>{user.balanceUds ? user.balanceUdstoFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : 0} USD</Text>
                 <TouchableOpacity style={s.button2} onPress={() => setVisible(!visible)}>
                     <Icon style={s.icon2} name='feature-search' color='white' size={25} />
@@ -114,7 +122,7 @@ const PrincipalScreen = ({ navigation }) => {
                             :
                             <Text style={s.date}>{dateTwo}</Text>
                     }
-                    
+
                     <View style={s.buttonsCC}>
                         <TouchableOpacity style={s.optionModal} onPress={() => GetLeaks()}>
                             <Text style={s.textDate1}>Aceptar</Text>
@@ -159,19 +167,49 @@ const PrincipalScreen = ({ navigation }) => {
 
             <ScrollView>
                 {
-                    transactionHistory.map((transaction, i) => (
+                    filtered.length === 0 ?
+                        transactionHistory.map((transaction, i) => (
 
-                        <TransactionItem
-                            name={transaction.name}
-                            amount={transaction.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
-                            date={transaction.createdAt}
-                            type={transaction.transactionType}
-                            referenceCode={transaction.refernece}
-                            key={i}
-                        />
-                    ))
-                }
+                            <TransactionItem
+                                name={transaction.name}
+                                amount={transaction.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                                date={transaction.createdAt}
+                                type={transaction.transactionType}
+                                referenceCode={transaction.refernece}
+                                key={i}
+                            />
+                        )) 
+                        :
+                        filtered.map((transaction, i) => (
+
+                            <TransactionItem
+                                name={transaction.name}
+                                amount={transaction.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                                date={transaction.createdAt}
+                                type={transaction.transactionType}
+                                referenceCode={transaction.refernece}
+                                key={i}
+                            />
+                        ))
+                    }
             </ScrollView>
+            <Spinner
+                visible={loading}
+                textContent={'Loading...'}
+                size={'large'}
+                overlayColor={'rgba(0, 0, 0, 0.8)'}
+                color={'#4b81e7'}
+                animation={'fade'}
+                textContent={'Un momento, por favor...'}
+                textStyle={{
+                    color: 'white',
+                    fontFamily: 'RedHatText_Regular',
+                    fontWeight: 'normal'
+                }}
+                customIndicator={
+                    <ActivityIndicator size={60} color={'#4b81e7'}/>
+                }
+            />
         </Container>
 
     );
