@@ -1,7 +1,5 @@
 export default {
-    container: {
 
-    },
     header: {
         backgroundColor: '#242835',
         alignSelf: 'center',
@@ -13,22 +11,52 @@ export default {
         borderRadius: 10,
         width: '90%',
         height: '10%',
-        textAlignVertical: 'center'
+        textAlignVertical: 'center',
+        fontFamily: 'RedHatText_Regular',
     },
     optionsContainer: {
-        marginTop: '5%',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
+        marginTop: '3%',
         width: '90%',
         alignSelf: 'center'
     },
+    optionTypeContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginBottom: '2%'
+
+    },
+    optionTimeContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
     button: {
+        btnSelected: {
+            backgroundColor: 'red'
+         },
         backgroundColor: '#4b81e7',
         borderRadius: 10,
-        width: '45%',
-        justifyContent: 'center'
+        width: '48%',
+        justifyContent: 'center',
+    },
+    timeButton: {
+        width: '31.5%',
+        borderRadius: 10,
+        backgroundColor: '#4b81e7',
+        justifyContent: 'center',
     },
     textButton: {
+        fontFamily: 'RedHatText_Regular',
+    },
+    activeButtonType: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        width: '48%',
+        justifyContent: 'center',
+        borderWidth: 2,
+        borderColor: '#4b81e7'
+    },
+    activeText: {
+        color: '#4b81e7',
         fontFamily: 'RedHatText_Regular',
     }
 }

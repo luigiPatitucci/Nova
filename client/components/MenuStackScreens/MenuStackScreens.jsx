@@ -26,7 +26,7 @@ const MenuStackScreens = () => {
     return (
         <MenuStack.Navigator screenOptions={options} headerMode='float'>
             <MenuStack.Screen name='TabNavigator' component={TabNavigator} options={{headerShown: false}}/>
-            <MenuStack.Screen name='RechargeBalance' component={RechargeBalance} />
+            <MenuStack.Screen name='RechargeBalance' component={RechargeBalance} options={{headerShown: false}}/>
             <MenuStack.Screen name='SendMoney' component={SendMoney} />
         </MenuStack.Navigator>
     );

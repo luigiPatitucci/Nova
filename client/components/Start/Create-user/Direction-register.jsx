@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, KeyboardAvoidingView, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, View, TouchableWithoutFeedback, Keyboard, Image } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button, Picker } from 'native-base';
 import axios from 'axios';
+import s from './Styles.js';
 
 const DirectionRegister = ({route, navigation}) => {
 
@@ -87,50 +88,53 @@ const DirectionRegister = ({route, navigation}) => {
             behavior={Platform.OS == "ios" ? "padding" : null}
             style={styles.keyboard}
             >
+              <View style={s.imageContainerCU}>
+                    <Image source={require('../../../assets/nova.png')} style={s.image} />
+                </View>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.inner}>
                         <Label style={styles.titulos}>Residencia</Label>
                         <Form>
                             <Item>
-                                <Label>Provincia: *</Label>
-                                <Picker style={{color: 'white'}}  onValueChange={value => handleProvincias(value)} selectedValue={data.provincia}> 
-                                    <Picker.Item label='Seleccione su provincia' value=''/>
+                                <Label style={s.labelForm}>Provincia: *</Label>
+                                <Picker style={s.inputForm}  onValueChange={value => handleProvincias(value)} selectedValue={data.provincia}> 
+                                    <Picker.Item style={s.inputForm} label='Seleccione su provincia' value=''/>
                                     {
                                         pickerProvincias.map( provincia => (
-                                            <Picker.Item label={provincia.nombre} value={provincia.nombre}/>
+                                            <Picker.Item style={s.inputForm} label={provincia.nombre} value={provincia.nombre}/>
                                         ))
                                     }
                                 </Picker>
                             </Item>
                             <Item>
-                                <Label>Partido/Departamento: *</Label>
-                                <Picker style={{color: 'white'}}  onValueChange={value => handleDepartamentos(value)} selectedValue={data.departamento}>
-                                    <Picker.Item label='Seleccione su Partido/Departamento' value=''/>
+                                <Label style={s.labelForm}>Partido/Departamento: *</Label>
+                                <Picker style={s.inputForm}  onValueChange={value => handleDepartamentos(value)} selectedValue={data.departamento}>
+                                    <Picker.Item style={s.inputForm} label='Seleccione su Partido/Departamento' value=''/>
                                     {
                                         pickerDepartamentos.map( departamento => (
-                                            <Picker.Item label={departamento.nombre} value={departamento.nombre}/>
+                                            <Picker.Item style={s.inputForm} label={departamento.nombre} value={departamento.nombre}/>
                                         ))
                                     }
                                 </Picker>
                             </Item>
                             <Item>
-                                <Label>Localidad: *</Label>
-                                <Picker style={{color: 'white'}}  onValueChange={localidad => setData({ ...data, localidad })} selectedValue={data.localidad}>
-                                    <Picker.Item label='Seleccione su Localidad' value=''/>
+                                <Label style={s.labelForm}>Localidad: *</Label>
+                                <Picker style={s.inputForm}  onValueChange={localidad => setData({ ...data, localidad })} selectedValue={data.localidad}>
+                                    <Picker.Item style={s.inputForm} label='Seleccione su Localidad' value=''/>
                                     {
                                         pickerLocalidades.map( localidad => (
-                                            <Picker.Item label={localidad.nombre} value={localidad.nombre}/>
+                                            <Picker.Item style={s.inputForm} label={localidad.nombre} value={localidad.nombre}/>
                                         ))
                                     }
                                 </Picker>
                             </Item>
                             <Item floatingLabel>
-                                <Label>Calle: *</Label>
-                                <Input style={{color: 'white'}}  onChangeText={calle => setData({ ...data, calle})}></Input>
+                                <Label style={s.labelForm}>Calle: *</Label>
+                                <Input style={s.inputForm} onChangeText={calle => setData({ ...data, calle})}></Input>
                             </Item>
                             <Item floatingLabel>
-                                <Label>Nro: *</Label>
-                                <Input style={{color: 'white'}}  onChangeText={nro => setData({ ...data, nro})}></Input>
+                                <Label style={s.labelForm}>Nro: *</Label>
+                                <Input style={s.inputForm}  onChangeText={nro => setData({ ...data, nro})}></Input>
                             </Item>
                         </Form>
                         <Button
@@ -152,7 +156,7 @@ const DirectionRegister = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#171717',
+        backgroundColor: '#242835',
         flex: 1
     },
     keyboard: {
@@ -164,13 +168,12 @@ const styles = StyleSheet.create({
     button: {
         width: '90%',
         alignSelf: 'center',
-        marginTop: 50,
+        marginTop: 35,
         justifyContent: 'center',
-        backgroundColor: '#4A1491',
+        backgroundColor: '#4b81e7',
         borderRadius: 10,
     },
     titulos: {
-        marginTop: 50,
         alignSelf: 'center',
         fontWeight: "bold",
         color: 'white'

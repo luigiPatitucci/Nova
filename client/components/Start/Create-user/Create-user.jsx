@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, KeyboardAvoidingView, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, View, TouchableWithoutFeedback, Keyboard, Image} from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button, Picker } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import s from './Styles.js';
 const CreateUser = ({navigation}) => {
 
     const [data, setData] = useState({
@@ -30,39 +30,42 @@ const CreateUser = ({navigation}) => {
             behavior={Platform.OS == "ios" ? "padding" : null}
             style={styles.keyboard}
             >
+                  <View style={s.imageContainerCU}>
+                    <Image source={require('../../../assets/nova.png')} style={s.image} />
+                </View>
                 <View style={styles.inner}>
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                         <ScrollView>
                             <Form>
                                 <Label style={styles.titulos}>Datos Personales</Label>
                                 <Item >
-                                <Label>Tipo de documento: *</Label>
-                                <Picker style={{color: 'white'}} onValueChange={tipoDoc => setData({...data, tipoDoc})} selectedValue={data.tipoDoc}
+                                <Label style={s.labelForm}>Tipo de documento: *</Label>
+                                <Picker style={s.inputForm} onValueChange={tipoDoc => setData({...data, tipoDoc})} selectedValue={data.tipoDoc}
                                     >
-                                        <Picker.Item label= 'Selecciona el tipo de documento' value= ''/>
-                                        <Picker.Item label='DNI' value= "DNI"/>
-                                        <Picker.Item label='Pasaporte' value= "Pasaporte"/>
+                                        <Picker.Item style={s.labelForm} label= 'Selecciona el tipo de documento' value= ''/>
+                                        <Picker.Item style={s.labelForm} label='DNI' value= "DNI"/>
+                                        <Picker.Item style={s.labelForm} label='Pasaporte' value= "Pasaporte"/>
                                     </Picker>
                                 </Item>
                                 <Item floatingLabel>
-                                    <Label>Nro de DNI: *</Label>
-                                    <Input style={{color: 'white'}} onChangeText={nroDNI => setData({ ...data, nroDNI })} type="number"></Input>
+                                    <Label style={s.labelForm}>Nro de DNI: *</Label>
+                                    <Input style={s.inputForm} onChangeText={nroDNI => setData({ ...data, nroDNI })} type="number"></Input>
                                 </Item>
                                 <Item floatingLabel>
-                                    <Label>Nombre: *</Label>
-                                    <Input style={{color: 'white'}} onChangeText={nombre => setData({ ...data, nombre })}></Input>
+                                    <Label style={s.labelForm}>Nombre: *</Label>
+                                    <Input style={s.inputForm} onChangeText={nombre => setData({ ...data, nombre })}></Input>
                                 </Item>
                                 <Item floatingLabel>
-                                    <Label>Apellido: *</Label>
-                                    <Input style={{color: 'white'}} onChangeText={apellido => setData({ ...data, apellido }) }></Input>
+                                    <Label style={s.labelForm}>Apellido: *</Label>
+                                    <Input style={s.inputForm} onChangeText={apellido => setData({ ...data, apellido }) }></Input>
                                 </Item>
                                 <Item floatingLabel>
-                                    <Label>Fecha de nacimiento: *</Label>
-                                    <Input style={{color: 'white'}} onChangeText={fechaNac => setData({ ...data, fechaNac })} type="date"></Input>
+                                    <Label style={s.labelForm}>Fecha de nacimiento: *</Label>
+                                    <Input style={s.inputForm} onChangeText={fechaNac => setData({ ...data, fechaNac })} type="date"></Input>
                                 </Item>
                                 <Item floatingLabel>
-                                    <Label>Telefono celular: *</Label>
-                                    <Input style={{color: 'white'}} onChangeText={cel => setData({ ...data, cel })}  type="number"></Input>
+                                    <Label style={s.labelForm}>Telefono celular: *</Label>
+                                    <Input style={s.inputForm} onChangeText={cel => setData({ ...data, cel })}  type="number"></Input>
                                 </Item>
                             </Form>
                             <Button
@@ -85,7 +88,7 @@ const CreateUser = ({navigation}) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#171717',
+        backgroundColor: '#242835',
         flex: 1
     },
     keyboard: {
@@ -97,15 +100,16 @@ const styles = StyleSheet.create({
     button: {
         width: '90%',
         alignSelf: 'center',
-        marginTop: 50,
+        marginTop: 35,
         justifyContent: 'center',
-        backgroundColor: '#4A1491',
+        backgroundColor: '#4b81e7',
         borderRadius: 10,
     },
     titulos: {
-        marginTop: 50,
         alignSelf: 'center',
-        fontWeight: "bold"
+        fontWeight: "bold",
+        color: 'white',
+        fontFamily: 'RedHatText_Regular',
     }
 });
 

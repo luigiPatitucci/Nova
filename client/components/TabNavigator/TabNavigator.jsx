@@ -5,8 +5,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import PrincipalScreen from '../PrincipalScreen/PrincipalScreen';
 import Statistics from '../Statistics/Statistics';
 import ContactsTopNavigator from '../Contacts/ContactsTopNavigator';
-/* import Movement from '../Movement/Movement'; */
-import SendMoney from '../SendMoney/SendMoney';
+import Movement from '../Movement/Movement'; 
+/* import SendMoney from '../SendMoney/SendMoney';*/
 import Profile from '../UserProfile/Profile';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -49,7 +49,7 @@ const TabNavigator = () => {
         >
             <Tab.Screen name="Inicio" component={PrincipalScreen}/>
             <Tab.Screen name="Mi cuenta" component={Profile} />
-            <Tab.Screen name="Movimiento" component={SendMoney} />
+            <Tab.Screen name="Movimiento" component={Movement} />
             <Tab.Screen name="Estadisticas" component={Statistics} />
             <Tab.Screen name="Contactos" component={ContactsTopNavigator} />
         </Tab.Navigator>
