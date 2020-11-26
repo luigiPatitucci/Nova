@@ -1,6 +1,6 @@
 export default {
     container: {
-        backgroundColor: 'white'
+        backgroundColor: '#F2F2F2'
     },
     title: {
         color: 'white',
@@ -21,21 +21,12 @@ export default {
         justifyContent: 'space-between'
     },
     infoContainer: {
-        backgroundColor: 'white',
+        backgroundColor: '#F2F2F2',
         width: '90%',
         alignSelf: 'center',
         justifyContent: 'center',
-        marginTop: '15%',
         borderRadius: 10,
         paddingBottom: '5%',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-        elevation: 4,
     },
     userCodeBox: {
         alignSelf: 'center',

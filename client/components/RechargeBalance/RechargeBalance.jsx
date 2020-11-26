@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Button, Container } from 'native-base';
 import { useDispatch, useSelector } from 'react-redux';
 import { recharge } from '../../redux/actions/transactions.js';
@@ -45,6 +45,7 @@ const RechargeBalance = ({ navigation }) => {
                 <View style={s.infoBox}>
                     <Text style={s.infoTwo}>Mostrale este código al cajero en Rapipago o en Pago Fácil.</Text>
                 </View>
+                <Image style={{width: '50%', height: '30%', alignSelf: 'center'}}source={require('../../assets/money.png')}/>
                 <Button style={s.button} onPress={() => handleSubmit()}>
                     <Text style={s.buttonText}>Confirmar Recarga</Text>
                 </Button>
@@ -57,7 +58,7 @@ const RechargeBalance = ({ navigation }) => {
                     isVisible={modalVisible}
                     animationIn='zoomIn'
                     animationInTiming={800}
-                    animationOut='fadeOut'
+                    animationOut='zoomOut'
                     animationOutTiming={800}
                     onBackdropPress={() => setModalVisible(!modalVisible)}
                 >
