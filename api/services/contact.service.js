@@ -44,7 +44,8 @@ module.exports = {
                     contact_id: contact.id, 
                     nickname : data.nickname,
                     user_id: data.id,
-                    avatar:contact.avatar 
+                    avatar:contact.avatar,
+                    phone:contact.phone
                 })
                 return newContact
             }
@@ -70,11 +71,11 @@ module.exports = {
                 path: "/:userId"
                 },
             async handler(ctx){
+                console.log( "DATOS CONTACTOS" ,ctx.params)
                 const data = ctx.params
                     const contacto = await Contact.findOne({
                     where:{
-                        user_id:data.userId,
-                        contact_id:data.contactId
+                        id:data.userId
                     }
                 })
                 contacto.nickname = data.nickname

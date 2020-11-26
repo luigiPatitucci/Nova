@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { Alert, KeyboardAvoidingView, TouchableOpacity, Keyboard } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button } from 'native-base';
 import { Image, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import s from './styles.js';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 const API_URL = "192.168.0.6:3000";
+
 
 const Login = ({ navigation }) => {
 
@@ -56,11 +57,13 @@ const Login = ({ navigation }) => {
     const handleSubmit = async () => {
         dispatch(login(input));
         await axios.post(`http://${API_URL}/auth/login`, input)
+
             .then(async() => {
             tiempo
             console.log("LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", user)
-            if(user.id !== null){navigation.navigate('Home');   }
-                   
+            if(user.id !== null){
+                navigation.navigate('Home'); 
+                Keyboard.dismiss();  }
             })
             .catch(() => {
                 return Alert.alert("Datos incorrectos");

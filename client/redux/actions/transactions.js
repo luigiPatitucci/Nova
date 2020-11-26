@@ -30,7 +30,6 @@ export function getTransactions(userId){
       
         return axios.get(`http://${API_URL}/transaction/getTransaction/${userId}`)
         .then(resp=>{
-            console.log('SOY LAS TRANSACCIONES', resp.data)
              dispatch({
                 type: GET_TRANSACTIONS,
                 transactions: resp.data
@@ -54,7 +53,7 @@ export function tranfer(transaction){
             }) 
         })
         .catch(err=>{
-            console.log('Soy el error', err)
+            console.log('ERROR AL TRASFERIR', err)
         })
     };
 };
