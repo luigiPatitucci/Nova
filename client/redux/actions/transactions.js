@@ -4,7 +4,7 @@ export const RECHARGE = 'RECHARGE';
 export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
 export const TRANSFER = "TRANSFER";
 
-const API_URL ="192.168.0.209:3000"
+const API_URL ="192.168.0.6:3000"
 
 export function recharge(transaction){
 
@@ -23,6 +23,22 @@ export function recharge(transaction){
     };
 };
 
+export function rechargeCard(transaction){
+
+    return function(dispatch){
+      
+        return axios.post(`http://${API_URL}/transaction/recharge_card`, transaction)
+        .then(resp=>{
+             dispatch({
+                type:RECHARGE_CARD,
+                transaction:resp.data
+            }) 
+        })
+        .catch(err=>{
+            console.log('ERROR AL RECARGAR', err)
+        })
+    };
+};
 
 export function getTransactions(userId){
 

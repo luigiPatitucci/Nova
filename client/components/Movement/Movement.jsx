@@ -18,7 +18,7 @@ const Movement = ({ navigation }) => {
                     <Icon2 name='money-bill' size={30} color='white'/> 
                     <Text style={s.textButton}>Recargar mediante efectivo</Text>
                 </Button>
-                <Button style={s.button}>
+                <Button style={s.button} onPress={() => navigation.navigate('RechargeWithCard')}>
                     <Icon2 name='credit-card' size={30} color='white'/>
                     <Text style={s.textButton}>Recargar con tarjeta</Text>
                 </Button>
