@@ -13,7 +13,7 @@ import * as Contacts from 'expo-contacts';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const ContactImport = () => {
-  const API_URL ="192.168.0.42:3000";
+  const API_URL = "192.168.0.209:3000"
   const user = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const [currentContact, setCurrent] = useState()

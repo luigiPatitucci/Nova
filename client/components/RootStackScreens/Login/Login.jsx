@@ -11,10 +11,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 const API_URL = "192.168.0.209:3000";
 
-
 const Login = ({ navigation }) => {
-
-
     const dispatch = useDispatch();
 
     const [input, setInput] = useState({

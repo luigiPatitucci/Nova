@@ -12,7 +12,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import Spinner from 'react-native-loading-spinner-overlay';
-const API_URL = "192.168.1.12:3000";
+const API_URL = "192.168.0.209:3000"
 
 const PrincipalScreen = ({ navigation }) => {
     const user = useSelector((state) => state.userReducer);

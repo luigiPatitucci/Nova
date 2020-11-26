@@ -6,6 +6,8 @@ import { KeyboardAvoidingView, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../../redux/actions/userActions.js'
 import s from './Styles.js';
+const API_URL = "192.168.0.209:3000"
+
 
 const CreateUser = ({navigation}) => {
 
@@ -18,7 +20,7 @@ const CreateUser = ({navigation}) => {
     });
 
     const createUser =  () => {
-        return axios.post("http://192.168.1.12:3000/user/", data)
+        return axios.post(`http://${API_URL}/user/`, data)
         .then(resp=>{
             console.log('SOY LA RESPUESTA', resp.data)
         })

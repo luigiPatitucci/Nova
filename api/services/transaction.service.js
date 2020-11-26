@@ -316,8 +316,9 @@ module.exports = {
 							}
 						}
 					}
-			 		 periodo.dates = periodo.dates.filter(fechas=> fechas !== null)
-					periodo.amounts = periodo.amounts.filter(fechas=> fechas !== 0)  
+			 		/*  periodo.dates = periodo.dates.filter(fechas=> fechas !== null)
+					periodo.amounts = periodo.amounts.filter(fechas=> fechas !== 0) */  
+					
 					return {periodo}
 					
 				}  
