@@ -8,7 +8,8 @@ import * as LocalAuthentication from 'expo-local-authentication';
 import LottieView from 'lottie-react-native';
 import s from './styles.js';
 import axios from 'axios';
-const API_URL = "192.168.1.12:3000";
+import AsyncStorage from '@react-native-community/async-storage';
+const API_URL = "192.168.0.6:3000";
 
 const Login = ({ navigation }) => {
 
@@ -33,7 +34,10 @@ const Login = ({ navigation }) => {
                 alert("Tu dispositivo no es compatible")
             })
     }, []);
-
+    const tiempo = setTimeout(async() => {
+        await AsyncStorage.setItem("userData", JSON.stringify(user))
+        
+    }, 8000);
     function handleLogin() {
         const config = {
             promptMessage: "Autenticacion Touch ID",
@@ -48,15 +52,18 @@ const Login = ({ navigation }) => {
                 console.log('La auntenticacion fallo: ' + error)
             })
     }
-
+   
     const handleSubmit = async () => {
-        await dispatch(login(input));
+        dispatch(login(input));
         await axios.post(`http://${API_URL}/auth/login`, input)
-            .then(() => {
-                navigation.navigate('Home');
+            .then(async() => {
+            tiempo
+            console.log("LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", user)
+            if(user.id !== null){navigation.navigate('Home');   }
+                   
             })
             .catch(() => {
-                return Alert.alert('Por favor, verifique que los datos ingresados son correctos.');
+                return Alert.alert("Datos incorrectos");
             })
     };
 
@@ -76,7 +83,7 @@ const Login = ({ navigation }) => {
                     <Form style={s.form}>
                         <Item floatingLabel>
                             <Label style={s.labelForm}>Email</Label>
-                            <Input style={s.inputForm} onChangeText={email => setInput({ ...input, email })} />
+                            <Input style={s.inputForm} onChangeText={email => setInput({ ...input, email })} autoCapitalize= "none"/>
                         </Item>
                         <Item floatingLabel>
                             <Label style={s.labelForm}>Contraseña</Label>

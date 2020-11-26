@@ -3,7 +3,7 @@ export const ADD_USER = "ADD_USER";
 export const LOGIN_USER = "LOGIN_USER";
 export const USER_BY_ID ="USER_BY_ID";
 export const UPDATE_AVATAR= "UPDATE_AVATAR"
-const API_URL ="192.168.0.209:3000"
+const API_URL ="192.168.0.6:3000"
 
 export function createUser(user){
 
@@ -25,9 +25,9 @@ export function createUser(user){
 
 export function login (data){
 
-    return function(dispatch){
+    return async function(dispatch){
       
-        return axios.post(`http://${API_URL}/auth/login`, data)
+        return await axios.post(`http://${API_URL}/auth/login`, data)
         .then( resp =>{
             dispatch({
                 type:LOGIN_USER,
@@ -35,7 +35,7 @@ export function login (data){
             })
         })
         .catch(err=>{
-            console.log('Soy el error', err)
+            console.log('Soy el error de Redux', err)
         })
     };
 };

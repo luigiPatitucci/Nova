@@ -18,7 +18,7 @@ const App = () => {
     native_base();
     setTimeout(() => {
       setReady(true);
-    }, 1000);
+    }, 6000);
   });
 
 
@@ -30,6 +30,7 @@ const App = () => {
     (
       <Provider store={store}>
         < NavigationContainer>
+        <Loader/>
           <StatusBar 
             barStyle='light-content'
             backgroundColor='#242835'
