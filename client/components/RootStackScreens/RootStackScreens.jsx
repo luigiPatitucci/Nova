@@ -10,6 +10,7 @@ import DirectionRegister from '.././Start/Create-user/Direction-register';
 import MenuStackScreens from '../MenuStackScreens/MenuStackScreens';
 import Touch from './Biometric/Huella'
 import Loader from '../Loader/Loader'
+import SendMoney from '../SendMoney/SendMoney'
 const RootStack = createStackNavigator();
 const RootStackScreens = () => {
 
