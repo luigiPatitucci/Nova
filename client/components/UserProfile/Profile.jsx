@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Container, Text } from 'native-base';
-import { Image, TouchableOpacity, KeyboardAvoidingView, Keyboard } from "react-native";
+import { Image, TouchableOpacity, KeyboardAvoidingView, Keyboard, ActivityIndicator } from "react-native";
 import ProfileEdit from './ProfileEdit';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './styles';
@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker';
 import Modal from 'react-native-modal';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import { updateAvatar } from '../../redux/actions/userActions'
 
@@ -17,11 +18,13 @@ function Profile() {
   const dispatch = useDispatch();
 
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const showModal = () => {
     visible ? null : Keyboard.dismiss();
     setVisible(!visible);
   };
+
 
   const user = useSelector((state) => state.userReducer);
 
@@ -86,6 +89,23 @@ function Profile() {
 
           <Text style={s.nickName}>{user.username}</Text>
         </View>
+        <Spinner
+                visible={loading}
+                textContent={'Loading...'}
+                size={'large'}
+                overlayColor={'rgba(0, 0, 0, 0.8)'}
+                color={'#4b81e7'}
+                animation={'fade'}
+                textContent={'Un momento, por favor...'}
+                textStyle={{
+                    color: 'white',
+                    fontFamily: 'RedHatText_Regular',
+                    fontWeight: 'normal'
+                }}
+                customIndicator={
+                    <ActivityIndicator size={60} color={'#4b81e7'}/>
+                }
+            />
       </KeyboardAvoidingView>
 
       <View style={s.infoContainer}>
@@ -113,6 +133,7 @@ function Profile() {
       >
         <ProfileEdit
           showModal={showModal}
+          setLoading={setLoading}
         />
       </Modal>
     </Container>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Container, Button } from 'native-base';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
 import { refresh } from '../../redux/actions/userActions';
 import { getTransactions } from '../../redux/actions/transactions';
@@ -10,17 +10,22 @@ import s from './style.js';
 import TransactionItem from '../TransactionItem/TransactionItem';
 import { useState } from 'react';
 import axios from 'axios';
+import Modal from 'react-native-modal';
 const API_URL = "192.168.1.12:3000";
 
 const PrincipalScreen = ({ navigation }) => {
     const user = useSelector((state) => state.userReducer);
-    const transactionHistory = useSelector((state) => state.transactions.transactionHistory);
+    const transactionHistory = useSelector((state) => state.transactions.transactionHistory).reverse()
     const dispatch = useDispatch();
 
     const [initialDate, setInitialDate] = useState(new Date());
     const [limitDate, setLimitDate] = useState(new Date());
     const [showInitial, setShowInitial] = useState(false);
     const [showLimit, setShowLimit] = useState(false);
+    const [visible, setVisible] = useState(false);
+
+    const [dateOne, setDateOne] = useState('');
+    const [dateTwo, setDateTwo] = useState('');
 
     const getResources = async () => {
         await dispatch(refresh(user.id));
@@ -31,12 +36,14 @@ const PrincipalScreen = ({ navigation }) => {
         let currentDate = selectedDate || initialDate
         setShowInitial(Platform.OS === 'ios');
         setInitialDate(currentDate);
+        setDateOne(currentDate.toLocaleDateString('en-US'));
     };
 
     const onChangeTwo = (event, selectedDate) => {
-        let currentDate = selectedDate|| limitDate
+        let currentDate = selectedDate || limitDate
         setShowLimit(Platform.OS === 'ios');
         setLimitDate(currentDate);
+        setDateTwo(currentDate.toLocaleDateString('en-US'));
     };
 
     const showModeOne = () => {
@@ -54,14 +61,14 @@ const PrincipalScreen = ({ navigation }) => {
     const GetLeaks = () => {
         console.log('Fecha inicial', initialDate.toLocaleDateString('en-US'), 'fecha final', limitDate.toLocaleDateString('en-US'));
         console.log('ID USER:', user.id)
-        axios.post(`http://${API_URL}/transaction/getRangoFecha`, 
-            {    
+        axios.post(`http://${API_URL}/transaction/getRangoFecha`,
+            {
                 id: user.id,
-                fechaInicio : initialDate.toLocaleDateString('en-US'),
+                fechaInicio: initialDate.toLocaleDateString('en-US'),
                 fechaFin: limitDate.toLocaleDateString('en-US')
             }
         ).then(resp => console.log('UUUUUUUUUUU', resp))
-        .catch(() => console.log('algo se rompio'))
+            .catch(() => console.log('algo se rompio'))
     };
 
 
@@ -72,35 +79,52 @@ const PrincipalScreen = ({ navigation }) => {
                 <Text style={s.headerTitle}>Balance total de la cuenta</Text>
                 <Text style={s.balance}>{user.balanceArs.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} ARS</Text>
                 <Text style={s.balance}>{user.balanceUds ? user.balanceUdstoFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : 0} USD</Text>
+                <TouchableOpacity style={s.button2} onPress={() => setVisible(!visible)}>
+                    <Icon style={s.icon2} name='feature-search' color='white' size={25} />
+                </TouchableOpacity>
             </View>
 
-            <View style={s.dateContainer}>
-                <TouchableOpacity  style={s.optionDate} onPress={() => showModeOne()}>
-                    {/* {
-                        typeof initialDate !== "object" ?
-                        <Text style={s.textDate}>{initialDate}</Text>
-                        : */}
+            <Modal
+                isVisible={visible}
+                animationIn='zoomIn'
+                animationInTiming={800}
+                animationOut='zoomOut'
+                animationOutTiming={800}
+                onBackdropPress={() => setVisible(!visible)}
+            >
+
+                <View style={s.dateContainer}>
+                    <Text style={s.titleModal}>Selecciona un intervalo</Text>
+                    <Button style={s.optionDate} onPress={() => showModeOne()}>
                         <Text style={s.textDate}>Fecha inicial</Text>
+                    </Button>
+                    {
+                        dateOne === '' ?
+                            <Text style={s.date}>------</Text>
+                            :
+                            <Text style={s.date}>{dateOne}</Text>
 
-                   {/*  } */}
-                </TouchableOpacity>
-                <TouchableOpacity style={s.optionDate} onPress={() => showModeTwo()}>
-                   {/*  {
-                        typeof limitDate !== "object" ?
-                        <Text style={s.textDate}>{limitDate}</Text>
-                        : */}
+                    }
+                    <Button style={s.optionDate} onPress={() => showModeTwo()}>
                         <Text style={s.textDate}>Fecha Límite</Text>
-
-                    {/* } */}
-                </TouchableOpacity>
-            </View>
-
-            <Button onPress={() => GetLeaks()}>
-                <Text>
-                    hola
-                </Text>
-            </Button>
-
+                    </Button>
+                    {
+                        dateTwo === '' ?
+                            <Text style={s.date}>------</Text>
+                            :
+                            <Text style={s.date}>{dateTwo}</Text>
+                    }
+                    
+                    <View style={s.buttonsCC}>
+                        <TouchableOpacity style={s.optionModal} onPress={() => GetLeaks()}>
+                            <Text style={s.textDate1}>Aceptar</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={s.optionModal} onPress={() => setVisible(!visible)}>
+                            <Text style={s.textDate1}>Cancelar</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
 
             {/* INITIAL DATE */}
             <View>
