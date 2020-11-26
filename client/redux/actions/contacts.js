@@ -3,7 +3,7 @@ export const  LIST_CONTACTS = "LIST_CONTACTS";
 export const DELETE_CONTACTS = "DELETE_CONTACTS"
 export const UPDATE_CONTACTS = "UPDATE_CONTACTS"
 export const ADD_CONTACTO = "ADD_CONTACTO"
-const API_URL ="192.168.0.209:3000"
+const API_URL ="192.168.0.42:3000";
 
 export function allContacts(id){
 
@@ -58,6 +58,13 @@ export function addContact(contacto){
             console.log('Soy el error', err)
         })
     };
+};
+
+export function addContactWithPhone(contacto){
+            return {
+                type:ADD_CONTACTO,
+                contacto:contacto.data
+            }
 };
 
 export function updateContact(id,data){

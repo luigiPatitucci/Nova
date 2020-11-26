@@ -64,8 +64,8 @@ const DirectionRegister = ({route, navigation}) => {
             }
         }
         
-        console.log(`https://apis.datos.gob.ar/georef/api/direcciones?direccion=${data.calle}%20${data.nro}&provincia=${data.provincia}&departamento=${data.departamento}&localidad=${data.localidad}&aplanar=true&campos=basico&max=10&exacto=true`)
-        axios.get(`https://apis.datos.gob.ar/georef/api/direcciones?direccion=${data.calle}%20${data.nro}&provincia=${data.provincia}&departamento=${data.departamento}&localidad=${data.localidad}&aplanar=true&campos=basico&max=10&exacto=true`)
+        console.log(`https://apis.datos.gob.ar/georef/api/direcciones?direccion=${data.calle}%20${data.nro}&provincia=${data.provincia}&departamento=${data.departamento}&localidad=${data.localidad}&aplanar=true&campos=basico&max=10`)
+        axios.get(`https://apis.datos.gob.ar/georef/api/direcciones?direccion=${data.calle}%20${data.nro}&provincia=${data.provincia}&departamento=${data.departamento}&localidad=${data.localidad}&aplanar=true&campos=basico&max=10`)
         .then( info => {
             console.log(info.data.direcciones[0].nomenclatura)
             if (info.data.direcciones[0].nomenclatura) {

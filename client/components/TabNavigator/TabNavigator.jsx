@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import PrincipalScreen from '../PrincipalScreen/PrincipalScreen';
 import Statistics from '../Statistics/Statistics';
-import ContactList from '../Contacts/ContactList';
+import ContactsTopNavigator from '../Contacts/ContactsTopNavigator';
 /* import Movement from '../Movement/Movement'; */
 import SendMoney from '../SendMoney/SendMoney';
 import Profile from '../UserProfile/Profile';
@@ -51,7 +51,7 @@ const TabNavigator = () => {
             <Tab.Screen name="Mi cuenta" component={Profile} />
             <Tab.Screen name="Movimiento" component={SendMoney} />
             <Tab.Screen name="Estadisticas" component={Statistics} />
-            <Tab.Screen name="Contactos" component={ContactList} />
+            <Tab.Screen name="Contactos" component={ContactsTopNavigator} />
         </Tab.Navigator>
     );
 };

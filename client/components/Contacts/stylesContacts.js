@@ -134,6 +134,26 @@ modalDelete:{
     shadowRadius: 4,
     elevation:5
   },
+  addButton2: {
+    width: 65,
+    height: 65,
+    borderRadius:100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: 20,
+    left:20,
+    backgroundColor:"#000000",
+    shadowColor: "#0000",
+    shadowOffset: {
+        width: 0,
+        height: 4,
+    },
+    shadowOpacity: 2,
+    shadowRadius: 4,
+    elevation:5
+  },
+
   addUser:{
     left:-2,
     color:"white",
