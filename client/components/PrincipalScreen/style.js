@@ -6,7 +6,7 @@ export default {
         alignSelf: 'center', 
         marginTop: '5%', 
         paddingTop: '5%', 
-        marginBottom: '3%'
+        marginBottom: '1%'
     },
     fakeTopHeader: {
         flexDirection: 'row', 
@@ -34,6 +34,24 @@ export default {
         textAlign: 'center', 
         fontFamily: 'RedHatText_Regular',
         marginBottom: '3%'
+    },
+    dateContainer: {
+        flexDirection: 'row',
+        width: '90%',
+        alignSelf: 'center',
+        justifyContent: 'space-around',
+        backgroundColor: '#242835',
+        borderRadius: 10,
+        height: '7%',
+        marginBottom: '1%'
+    },
+    optionDate: {
+        alignSelf: 'center',
+    },
+    textDate: {
+        color: 'white',
+        fontFamily: 'RedHatText_Regular',
+        fontSize: 20,
     }
 
 }
