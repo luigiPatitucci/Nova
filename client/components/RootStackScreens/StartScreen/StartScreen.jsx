@@ -1,11 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Image } from 'react-native';
 import { Button, Text, View, Container } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import s from './styles.js'
-
-
+import AsyncStorage from '@react-native-community/async-storage';
+import { useDispatch, useSelector } from 'react-redux';
+import { isEmptyArray } from 'formik';
 const StartScreen = ({ navigation }) => {
+    AsyncStorage.getItem("userData", (err, result)=>{
+        const data = JSON.parse(result)
+        if(data !== null){
+            navigation.navigate("Touch")
+        }
+        console.log("POOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",data)
+    })
+   
     return (
         <Container style={s.contianer}>
             <View style={s.imageContainer}>
