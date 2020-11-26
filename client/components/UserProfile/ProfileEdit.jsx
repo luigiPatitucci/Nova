@@ -5,7 +5,7 @@ import { TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native
 import { update, refresh } from '../../redux/actions/userActions'
 import s from './stylesEdit';
 
-const ProfileEdit = ({ showModal }) => {
+const ProfileEdit = ({ showModal, setLoading }) => {
 
   const user = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
@@ -18,8 +18,10 @@ const ProfileEdit = ({ showModal }) => {
   });
 
   async function Handleup() {
+    setLoading(true);
     await dispatch(update(updateInfo, user.id))
     await dispatch(refresh(user.id))
+    setLoading(false);
     showModal();
   };
 

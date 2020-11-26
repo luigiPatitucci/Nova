@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Container, Text, Button } from 'native-base';
-import { Image, TouchableOpacity, KeyboardAvoidingView, Keyboard } from "react-native";
+import { Image, TouchableOpacity, KeyboardAvoidingView, Keyboard, ActivityIndicator } from "react-native";
 import ProfileEdit from './ProfileEdit';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './styles';
@@ -10,18 +10,26 @@ import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker';
 import Modal from 'react-native-modal';
+import Spinner from 'react-native-loading-spinner-overlay';
+import Cvu from './Cvu';
+
 import { updateAvatar } from '../../redux/actions/userActions'
 
 const Profile = ({navigation}) => {
   const imgUser = require('../../assets/logoUser.png');
   const dispatch = useDispatch();
 
+  const cvu = useSelector((state) => state.userReducer);
+
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [CvuModal, setCvuModal] = useState(false);
 
   const showModal = () => {
     visible ? null : Keyboard.dismiss();
     setVisible(!visible);
   };
+
 
   const user = useSelector((state) => state.userReducer);
 
@@ -79,8 +87,8 @@ const Profile = ({navigation}) => {
             <Icon2 name='pencil' size={30} style={s.pencilIcon} />
           </TouchableOpacity>
           
-          <TouchableOpacity onPress={openGallery} style={s.shareCvuIconContainer}>
-            <Icon2 name='share-variant' size={30} style={s.shareCvuIcon} />
+          <TouchableOpacity onPress={() => setCvuModal(!CvuModal)} style={s.shareCvuIconContainer}>
+            <Icon name='share-variant' size={28} style={s.shareCvuIcon} />
           </TouchableOpacity>
 
           <Image style={s.avatar} source={user.avatar ? { uri: `${user.avatar}` } : imgUser} />
@@ -90,6 +98,23 @@ const Profile = ({navigation}) => {
           
           <Text style={s.nickName}>{user.username}</Text>
         </View>
+        <Spinner
+                visible={loading}
+                textContent={'Loading...'}
+                size={'large'}
+                overlayColor={'rgba(0, 0, 0, 0.8)'}
+                color={'#4b81e7'}
+                animation={'fade'}
+                textContent={'Un momento, por favor...'}
+                textStyle={{
+                    color: 'white',
+                    fontFamily: 'RedHatText_Regular',
+                    fontWeight: 'normal'
+                }}
+                customIndicator={
+                    <ActivityIndicator size={60} color={'#4b81e7'}/>
+                }
+            />
       </KeyboardAvoidingView>
 
       <View style={s.infoContainer}>
@@ -120,6 +145,22 @@ const Profile = ({navigation}) => {
       >
         <ProfileEdit
           showModal={showModal}
+          setLoading={setLoading}
+        />
+      </Modal>
+
+      <Modal
+        isVisible={CvuModal}
+        animationIn='zoomIn'
+        animationInTiming={500}
+        animationOut='zoomOut'
+        animationOutTiming={500}
+        onBackdropPress={() => setCvuModal(!CvuModal)}
+      >
+        <Cvu
+          phone_number={user.phone_number}
+          cvu={cvu.cvu}
+          alias={cvu.username}
         />
       </Modal>
     </Container>

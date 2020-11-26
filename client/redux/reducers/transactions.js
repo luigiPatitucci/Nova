@@ -1,4 +1,4 @@
-import { RECHARGE, RECHARGE_CARD, TRANSFER, GET_TRANSACTIONS } from '../actions/transactions.js';
+import {RECHARGE , TRANSFER, GET_TRANSACTIONS,GET_SUMATORIA, RECHARGE_CARD } from '../actions/transactions.js';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const initialState = {  
@@ -10,7 +10,8 @@ const initialState = {
     currency: "",
     createdAt: "",
     income: 0,
-    transactionHistory: []
+    transactionHistory: [],
+    sumatoria:{}
 };
 
 export default (state = initialState, action) => {
@@ -41,6 +42,11 @@ export default (state = initialState, action) => {
                     currency: action.transaction.currency,
                     createdAt: action.transaction.createdAt,
                     income: state.income + action.transaction.amount
+                }
+        case GET_SUMATORIA :
+                return {
+                    ...state,
+                    sumatoria:action.obj
                 }
 
         default:

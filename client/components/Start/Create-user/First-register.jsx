@@ -18,7 +18,7 @@ const CreateUser = ({navigation}) => {
     });
 
     const createUser =  () => {
-        return axios.post("http://192.168.0.211:3000/user/", data)
+        return axios.post("http://192.168.1.12:3000/user/", data)
         .then(resp=>{
             console.log('SOY LA RESPUESTA', resp.data)
         })
