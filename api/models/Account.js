@@ -12,13 +12,9 @@ const db = require('../dbConfig');
         allowNull: true,
         default: 0,
       },
-    cbu:{
-        type: DataTypes.BIGINT,
-        allowNull: true,
-        unique: false,
-        validate: {
-            isNumeric: true 
-        }  
+    cvu: {
+        type: DataTypes.TEXT,
+        allowNull: true, 
     },
     code:{
         type: DataTypes.STRING,

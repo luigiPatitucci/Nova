@@ -6,7 +6,7 @@ import s from './stylesEdit';
 
 const Cvu = ({ phone_number,cvu,alias}) => {
 const handleCallPress = async () =>{
-  await Linking.openURL(`https://wa.me/${phone_number}?text= CVU: ${cvu} Alias: ${alias}`)
+  await Linking.openURL(`https://wa.me/99999?text= CVU: ${cvu} Alias: ${alias}`)
  // await Linking.openURL(`sms:${phone_number}+?body= CVU: ${cvu} Alias: ${alias}`)
 }
   return (

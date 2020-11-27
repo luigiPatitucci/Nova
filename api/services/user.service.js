@@ -76,14 +76,19 @@ module.exports = {
 	
 	//CREO LA CUENTA 
 	let codigo = Math.floor(Math.random() * 100000000)
+	let cod = Math.floor(Math.random() * 100000000000)
+	let cvu = cod.toString() + cod.toString()
+	console.log("ESTE ES EL cvu ",cvu)
 	const cuenta = Account.create({
 		code:codigo,
-		userId:newuser.id
+		userId:newuser.id,
+		cvu:cvu
 	})
 	//GENERAR PIN PARA DAR ALTA DE CLIENTE 
 		const newToken = await Token.create({
 			pin:Math.floor((Math.random() * 1000000)),
-			userId:newuser.id
+			userId:newuser.id,
+			
 			})
 	//SE ENVIA EMAIL CON EL CODIGO DE VERIFICACION
 

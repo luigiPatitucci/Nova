@@ -28,7 +28,7 @@ const MenuStackScreens = () => {
             <MenuStack.Screen name='TabNavigator' component={TabNavigator} options={{headerShown: false}}/>
             <MenuStack.Screen name='RechargeBalance' component={RechargeBalance} options={{headerShown: false}}/>
             <MenuStack.Screen name='RechargeWithCard' component={RechargeWithCard} options={{headerShown: false}}/>
-            <MenuStack.Screen name='SendMoney' component={SendMoney} options={{headerShown: false}} />
+            <MenuStack.Screen name='SendMoney' component={SendMoney} options={{headerShown: false}}/>
         </MenuStack.Navigator>
     );
 };
