@@ -27,7 +27,7 @@ const Movement = ({ navigation }) => {
                     <Text style={s.textButton}>Enviar dinero</Text>
                 </Button>
                 <Button style={s.button}>
-                    <Icon2 name='sync' size={30} color='white'/>
+                    <Icon2 name='sync' size={30} color='white' onPress={() => navigation.navigate('CurrencyConverter')}/>
                     <Text style={s.textButton}>Comprar dolares</Text>
                 </Button>
             </View>

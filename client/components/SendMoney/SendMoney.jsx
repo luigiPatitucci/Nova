@@ -61,13 +61,13 @@ const SendMoney = ({ navigation }) => {
       <View style={s.infoContainer}>
         <View style={s.main1}>
           <Header style={s.header}>
-            {{/* <Body
+             <Body
               style={{ flex: 1, flexDirection: "row", alignSelf: "flex-start", alignItems: 'center' }}>
                
-
+              <Button>
                 <Icon style={{ color: "black" }} />
               </Button>
-            </Body> */}}
+            </Body>
             <Text style={{ color: '#242835',fontFamily: 'RedHatText_Regular', textAlign: "center"}}>Selecciona un contacto</Text>
             <View style={s.picker}>
               
