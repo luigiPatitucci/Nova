@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { allContacts, deleteContact, addContact } from '../../redux/actions/contacts'
+import { allContacts } from '../../redux/actions/contacts'
 import { tranfer } from '../../redux/actions/transactions'
 import { refresh } from '../../redux/actions/userActions.js';
 import { useDispatch, useSelector } from "react-redux";
@@ -12,19 +12,15 @@ import {
   Picker,
   Icon,
   Header,
-  Title,
   Label,
   ListItem,
-  Content,
-  Card
 } from "native-base";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import s from "./SendMoneyStyle";
 import { Alert, View, CheckBox, StyleSheet, Image } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
 
-export default SendMoney = ({ navigation }) => {
+const SendMoney = ({ navigation }) => {
   const dispatch = useDispatch()
   const contactos = useSelector((state) => state.contactos);
   const user = useSelector((state) => state.userReducer);
@@ -39,14 +35,7 @@ export default SendMoney = ({ navigation }) => {
   const [fromContacts, setFromContacts] = useState(false);
   const [message, setMessage] = useState("");
   const [checkBox, setCheckBox] = useState(false);
-  // const [data, setData] = useState({
-  //   selectContact: '',
-  //   money: '',
-  //   error: false,
-  //   fromContacts: false,
-  //   message: '',
-  //   checkBox: false,
-  // })
+
   const format = amount => {
     return Number(amount)
       .toFixed(2)
@@ -75,14 +64,7 @@ export default SendMoney = ({ navigation }) => {
             {{/* <Body
               style={{ flex: 1, flexDirection: "row", alignSelf: "flex-start", alignItems: 'center' }}>
                
-              <Button transparent onPress={() => {
-                setError(false);
-                setMoney("");
-                setSelectContact("");
-                setFromContacts(false);
-                setCheckBox(false);
-                navigation.navigate("Inicio");
-              }}>
+
                 <Icon style={{ color: "black" }} />
               </Button>
             </Body> */}}
@@ -123,14 +105,6 @@ export default SendMoney = ({ navigation }) => {
                 style={styles.input}
               />
             </View>
-            {/* <TextInput
-              placeholder="Ingrese un monto (Mínimo $10)"
-              keyboardType="numeric"
-              name="money"
-              value={inputMoney}
-              onChangeText={(value) => setInputMoney(value)}
-              style={styles.input}
-            /> */}
           </Item>
           <Item style={{ height: 100, fontFamily: 'RedHatText_Regular'}}>
             <Input
@@ -157,7 +131,9 @@ export default SendMoney = ({ navigation }) => {
           <Button style={s.buttom} dark block onPress={handleSubmit}>
             <Text>Enviar</Text>
           </Button>
-
+          <Button style={[s.buttom, s.space ]} dark block onPress={ ( ) => navigation.navigate( 'Inicio' ) }>
+					      <Text>Volver al inicio</Text>
+          </Button>
         </View>
 
       </View>
@@ -185,3 +161,5 @@ const styles = StyleSheet.create({
     color: '#4b81e7',
   }
 });
+
+export default SendMoney;
