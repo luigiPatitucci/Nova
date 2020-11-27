@@ -19,6 +19,7 @@ const initialState = {
     balanceUsd: 0,
     code: "0",
     idAccount: null,
+    cvu: ""
       
       
     
@@ -63,6 +64,7 @@ export default (state = initialState, action) => {
                 balanceUsd: action.user.account.balanceUsd,
                 code: action.user.account.code,
                 idAccount: action.user.account.id,
+                cvu:action.user.account.cvu,
             }
         case UPDATE_AVATAR:
             console.log("SOY LA RESPUESTA AVATAR ",action.avatar)
