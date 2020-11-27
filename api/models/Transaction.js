@@ -18,6 +18,10 @@ const db = require('../dbConfig');
         type: DataTypes.FLOAT,
         allowNull: true,
     },
+    balanceType:{
+        type: DataTypes.ENUM(["positivo","negativo"]),
+        allowNull: true,
+    },
     refernece: {
         type: DataTypes.STRING,
         allowNull: true,

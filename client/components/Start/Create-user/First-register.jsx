@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../../redux/actions/userActions.js'
 import s from './Styles.js';
 
-import { API_URL } from '../../variables'
+import  API_URL  from '../../variables'
 
 const CreateUser = ({navigation}) => {
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { allContacts } from '../../redux/actions/contacts'
+import { allContacts, deleteContact, addContact } from '../../redux/actions/contacts'
 import { tranfer } from '../../redux/actions/transactions'
 import { refresh } from '../../redux/actions/userActions.js';
 import { useDispatch, useSelector } from "react-redux";
@@ -12,13 +12,17 @@ import {
   Picker,
   Icon,
   Header,
+  Title,
   Label,
   ListItem,
+  Content,
+  Card
 } from "native-base";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import s from "./SendMoneyStyle";
 import { Alert, View, CheckBox, StyleSheet, Image } from "react-native";
+import { TextInput } from "react-native-gesture-handler";
 
 const SendMoney = ({ navigation }) => {
   const dispatch = useDispatch()
@@ -60,14 +64,17 @@ const SendMoney = ({ navigation }) => {
 
       <View style={s.infoContainer}>
         <View style={s.main1}>
+        <View style={{}}>
+                    <Image source={require('../../../client/assets/nova.png')} style={{width: '100%', height: '100%'}} />
+                </View>
           <Header style={s.header}>
-            {{/* <Body
+            <Body
               style={{ flex: 1, flexDirection: "row", alignSelf: "flex-start", alignItems: 'center' }}>
                
 
                 <Icon style={{ color: "black" }} />
-              </Button>
-            </Body> */}}
+           
+            </Body>
             <Text style={{ color: '#242835',fontFamily: 'RedHatText_Regular', textAlign: "center"}}>Selecciona un contacto</Text>
             <View style={s.picker}>
               
