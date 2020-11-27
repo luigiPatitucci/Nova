@@ -18,7 +18,7 @@ export default {
     },
     buttonsContainer: {
         justifyContent: 'center',
-        top: '-35%'
+        top: '-30%'
     },
     button: {
         backgroundColor: '#4b81e7',
@@ -28,7 +28,7 @@ export default {
         justifyContent: 'center',
         marginBottom: '3%',
         flexDirection: 'column',
-        height: '14%',
+        height: '17%',
         paddingTop: '4%',
         
     },

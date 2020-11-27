@@ -87,7 +87,7 @@ const PrincipalScreen = ({ navigation }) => {
             <View style={s.container}>
                 <Text style={s.headerTitle}>Balance total de la cuenta</Text>
                 <Text style={s.balance}>{user.balanceArs ? user.balanceArs.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : 0} ARS</Text>
-                <Text style={s.balance}>{user.balanceUds ? user.balanceUdstoFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : 0} USD</Text>
+                {/* <Text style={s.balance}>{user.balanceUds ? user.balanceUdstoFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : 0} USD</Text> */}
                 <TouchableOpacity style={s.button2} onPress={() => setVisible(!visible)}>
                     <Icon style={s.icon2} name='feature-search' color='white' size={25} />
                 </TouchableOpacity>

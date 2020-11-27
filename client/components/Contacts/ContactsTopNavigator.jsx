@@ -4,14 +4,22 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 import ContactList from './ContactList';
 import ImportList from './ImportList';
+import style from '../PrincipalScreen/style';
 
 const Tab = createMaterialTopTabNavigator();
 
 function ContactsTopNavigator() {
   return (
-    <Tab.Navigator swipeEnabled={false}>
-      <Tab.Screen name="Contacts" component={ContactList} />
-      <Tab.Screen name="Import" component={ImportList} />
+    <Tab.Navigator swipeEnabled={false}
+      tabBarOptions = {{
+        activeTintColor: '#4b81e7',
+        labelStyle: {
+          fontFamily: 'RedHatText_Regular',
+        }
+      }}
+    >
+      <Tab.Screen name="Contactos" component={ContactList} />
+      <Tab.Screen name="Importar" component={ImportList} />
     </Tab.Navigator>
   );
 }
