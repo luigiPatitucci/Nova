@@ -5,6 +5,7 @@ import RechargeBalance from "../RechargeBalance/RechargeBalance";
 import RechargeWithCard from "../RechargeWithCard/RechargeWithCard";
 import SendMoney from '../SendMoney/SendMoney'
 import TabNavigator from '../TabNavigator/TabNavigator';
+import CurrencyConverter from '../CurrencyConverter/CurrencyConverter';
 
 const MenuStack = createStackNavigator();
 
@@ -29,6 +30,7 @@ const MenuStackScreens = () => {
             <MenuStack.Screen name='RechargeBalance' component={RechargeBalance} options={{headerShown: false}}/>
             <MenuStack.Screen name='RechargeWithCard' component={RechargeWithCard} options={{headerShown: false}}/>
             <MenuStack.Screen name='SendMoney' component={SendMoney} options={{headerShown: false}}/>
+            <MenuStack.Screen name='CurrencyConverter' component={CurrencyConverter} options={{headerShown: false}}/>
         </MenuStack.Navigator>
     );
 };
