@@ -10,7 +10,7 @@ import s from './styles.js';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import { API_URL } from '../../components/variables';
+import  API_URL  from '../../variables';
 
 
 const Touch = ({ navigation }) =>{

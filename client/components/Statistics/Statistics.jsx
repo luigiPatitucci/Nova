@@ -29,73 +29,30 @@ const Statistics = () => {
   const [type, setSendData] = useState("") 
   
   useEffect(() => {
-   dispatch(sumarPeriodo({id:user.id,dias:30}))
+   dispatch(sumarPeriodo({id:user.id,dias:30,periodo:1}))
   }, []) 
-  
+  console.log("NUEVO FILTROOOOO ", transactionSum.montos ) 
   const handlerType = (type) => {
     setSendData(type);
   };
-
   let dataConstructor = {
     
-    labels: transactionSum.periodo ? transactionSum.periodo.dates:[],
+    labels: transactionSum.fechas ? transactionSum.fechas:[],
     datasets: [
       {
-        data: transactionSum.periodo ? transactionSum.periodo.amounts : [],
+        data: transactionSum.montos ? transactionSum.montos : [],
         color: (opacity = 1) => `rgba(75, 129, 231, ${opacity})`,
         strokeWidth: 2,
       }
     ],
   };
 
-  /* const onChangeOne = (event, selectedDate) => {
-    let currentDate = selectedDate || initialDate;
-    setShowInitial(Platform.OS === 'ios');
-    setInitialDate(currentDate);
-  };
-
-  const onChangeTwo = (event, selectedDate) => {
-    let currentDate = selectedDate || limitDate;
-    setShowLimit(Platform.OS === 'ios');
-    setLimitDate(currentDate);
-  };
-
-  const showModeOne = () => {
-    setShowInitial(true);
-  };
-
-  const showModeTwo = () => {
-    setShowLimit(true);
-  }; */
-
- /*  const StatisticsPerDay = () => {
-    let dates = [];
-    let amounts = [];
-    transactionHistory.map(transaction => {
-      dates.push(transaction.createdAt.substring(5, 10).split('-').reverse().join('/'));
-      amounts.push(transaction.amount)
-    });
-
-    let dataPerDay = {
-
-      labels: dates,
-      datasets: [
-        {
-          data: amounts,
-          color: (opacity = 1) => `rgba(75, 129, 231, ${opacity})`,
-          strokeWidth: 2,
-        }
-      ],
-    };
-
-    return dataPerDay;
-  } */
 
   const chartConfig = {
     backgroundGradientFromOpacity: 0,
     backgroundGradientToOpacity: 0,
     color: (opacity = 1) => `rgba(72, 129, 231, ${opacity})`,
-    labelColor: (opacity = 1) => `rgba(72, 129, 231 , ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(72, 129, 131 , ${opacity})`,
     strokeWidth: 2,
     barPercentage: 1.5,
     useShadowColorFromDataset: false,
@@ -139,55 +96,26 @@ const Statistics = () => {
         <View style={s.optionTimeContainer}>
           <Button style={s.timeButton} onPress={() =>{
 
-            dispatch(sumarPeriodo({id:user.id,dias:30,type:type}))
+            dispatch(sumarPeriodo({id:user.id,dias:30,type:type,periodo:1}))
             setSendData("")
           } }>
             <Text style={s.textButton}>Diario</Text>
           </Button>
           <Button style={s.timeButton} onPress={() => {
-            dispatch(sumarPeriodo({id:user.id,dias:90,type:type}))
+            dispatch(sumarPeriodo({id:user.id,dias:90,type:type,periodo:7}))
             setSendData("")
             }}>
             <Text style={s.textButton}>3 Meses</Text>
           </Button>
           <Button style={s.timeButton} onPress={() => {
-            dispatch(sumarPeriodo({id:user.id,dias:182,type:type}))
+            dispatch(sumarPeriodo({id:user.id,dias:182,type:type,periodo:30}))
              setSendData("")
             }}>
             <Text style={s.textButton}>6 Meses</Text>
           </Button>
         </View>
       </View>
-     {/*  INITIAL DATE
-      <View>
-        {
-          showInitial && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={initialDate}
-              mode='date'
-              is24Hour={true}
-              display="default"
-              onChange={onChangeOne}
-            />
-          )
-        }
-      </View>
-      LIMIT DATE
-      <View>
-        {
-          showLimit && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={limitDate}
-              mode='date'
-              is24Hour={true}
-              display="default"
-              onChange={onChangeTwo}
-            />
-          )
-        }
-      </View> */}
+
     </View>
   );
 };

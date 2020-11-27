@@ -6,10 +6,8 @@ import { KeyboardAvoidingView, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../../redux/actions/userActions.js'
 import s from './Styles.js';
-const API_URL = "192.168.0.209:3000"
 
-
-import { API_URL } from '../../variables'
+import  API_URL  from '../../variables'
 
 const CreateUser = ({navigation}) => {
 

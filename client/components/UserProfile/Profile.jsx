@@ -12,7 +12,6 @@ import * as ImagePicker from 'expo-image-picker';
 import Modal from 'react-native-modal';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Cvu from './Cvu';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { updateAvatar } from '../../redux/actions/userActions'
 
 const Profile = ({navigation}) => {

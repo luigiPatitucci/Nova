@@ -29,7 +29,7 @@ const TransactionItem = ({ type, date, name, amount, referenceCode }) => {
                     </View>
                 </View>
                 {
-                    type === 'send' ?
+                    type === 'transfer' ?
 
                         <View style={s.amountContainerNegative}>
                             <Text style={s.amountNegative}>- {amount} ARS</Text>
@@ -64,7 +64,7 @@ const TransactionItem = ({ type, date, name, amount, referenceCode }) => {
 
                                     :
 
-                                    type === 'send' ?
+                                    type === 'transfer' ?
 
                                         <View>
                                             <Text style={s.modalTitleText}>Envio</Text>

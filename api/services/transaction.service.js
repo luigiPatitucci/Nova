@@ -125,6 +125,7 @@ module.exports = {
 
 				const transaction1= await Transaction.create(
 					{
+						title:toUser.name,
 						amount:amount,
 						currency:"ARS",
 						transactionType:"transfer",
@@ -136,6 +137,7 @@ module.exports = {
 				)
 				 const transaction2= await Transaction.create(
 					{
+						title:User.name,
 						amount:amount,
 						currency:"ARS",
 						transactionType:"received",
@@ -161,7 +163,10 @@ module.exports = {
 				const amount = Math.floor(Math.random()  * 1000 + 50)
 				const fecha = data.fecha ? new Date(data.fecha) : Date()
 
+				var nombres=["Rapipago","Pago facil", "Cobro Express", "Cobro Express","Provincia Pagos","Pronto Pago","Ripsa"]
+
                const transaction= await Transaction.create({
+				    title:nombres[Math.floor(Math.random()*nombres.length)],
                     amount:amount,
                     currency:"ARS",
                     transactionType:"recharge",
@@ -223,7 +228,10 @@ module.exports = {
 				const transaction = await Transaction.findAll({
 					where:{
 						accountId:id
-					}
+					},
+					order: [
+						['createdAt', 'DESC'],
+					],
 					
 				})
 				console.log(ctx.params)
@@ -269,7 +277,7 @@ module.exports = {
 						accountId:data.id,
 						balanceType: data.type,
 						createdAt: {
-							[Op.gt]: fechaInicio
+							[Op.between]: [fechaInicio, fechaFin]
 						  },
 					}
 				}:
@@ -277,38 +285,38 @@ module.exports = {
 					where:{
 						accountId:data.id,
 						createdAt: {
-							[Op.gt]: fechaInicio
+							[Op.between]: [fechaInicio, fechaFin]
 						  },
 					}
 				})
+
 
  				const  sumarPeriodo =  (dias,per) => {
 					var periodo={
 						dates:[],
 						amounts:[]
 					} 
-					let tiempo=86400000*per; 
-					let diaAct = Date.now()
-					let tiempo2 = dias*86400000
-					let val = dias == 31 ? 31:13
+					//90 dias  12 semanas 1 semana
+					let tiempo=86400000*per; //periodo de tiempo ejem 1semana
+					let diaAct = Date.now() //dia actual
+					let tiempo2 = dias*86400000  //rango total
+					 //
 					let diasfecha=[]
-					for(let i=0;i<val ;i++){
+					for(let i=0; tiempo2>0 ;i++){
 						periodo.amounts.push(0)
-						diasfecha.push((new Date((Date.now()-tiempo2)).toString())
-						.split(" ")
-						.slice(1,3)
-						.join())
+						periodo.dates.push((new Date((Date.now()-tiempo2)+(86400000)).toString()))
 						tiempo2 = tiempo2 - tiempo
 					}
-					for(let j=0;j<transacciones.length;j++){
+					 for(let j=0;j<transacciones.length;j++){
+						 console.log(" TRANSACCIONES ",transacciones[j].createdAt)
 						let diasR = Date.parse(transacciones[j].createdAt)
 						let pos = Math.floor(periodo.amounts.length - ((diaAct - diasR)/tiempo))
 						if(!data.type){
-							periodo.dates[pos] = diasfecha[pos]
+							
 							if(transacciones[j].transactionType == "recharge" ||transacciones[j].transactionType == "received" || transacciones[j].transactionType =="conversionArs"){
 								periodo.amounts[pos] = periodo.amounts[pos] + transacciones[j].amount
 							}else{
-								periodo.amounts[pos] + transacciones[j].amount
+								periodo.amounts[pos] = periodo.amounts[pos] - transacciones[j].amount
 							} 
 							if(data.type){
 							periodo.dates[pos] = diasfecha[pos]
@@ -316,15 +324,35 @@ module.exports = {
 							}
 						}
 					}
-			 		/*  periodo.dates = periodo.dates.filter(fechas=> fechas !== null)
-					periodo.amounts = periodo.amounts.filter(fechas=> fechas !== 0) */  
 					
-					return {periodo}
-					
+					return {periodo} 
 				}  
-		      	if(data.dias == 90) return sumarPeriodo(90,7)
-				if(data.dias == 182) return sumarPeriodo(182,30)
-				if(data.dias == 30) return sumarPeriodo(30,1)
+
+				   function ordenadoValores(dias,periodo){
+					var montos =[]
+					var fechas =[]
+					   var obj =sumarPeriodo(dias,periodo)
+					  for(let i = 0; i<obj.periodo.dates.length;i++){
+							if(obj.periodo.amounts[i] !==0){
+								montos.push(obj.periodo.amounts[i])
+								if(dias == 182){
+									fechas.push(obj.periodo.dates[i]
+									.split(" ")
+									.slice(1,2)
+									.join())
+								}else{
+									fechas.push(obj.periodo.dates[i]
+									.split(" ")
+									.slice(1,3)
+									.join())
+								}
+							}
+
+					  }
+					  return {montos,fechas}
+
+					}
+					return ordenadoValores(data.dias,data.periodo)
 			}
 		}
     },
