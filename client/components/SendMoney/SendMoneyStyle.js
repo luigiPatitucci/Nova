@@ -29,6 +29,21 @@ export default StyleSheet.create({
     
     
   },
+  header1: {
+    backgroundColor: '#242835',
+    alignSelf: 'center',
+    color: 'white',
+    fontSize: 25,
+    marginTop: '5%',
+    top: "-5%",
+    marginBottom: '5%',
+    textAlign: 'center',
+    borderRadius: 10,
+    width: '90%',
+    height: '60%',
+    textAlignVertical: 'center',
+    fontFamily: 'RedHatText_Regular',
+},
   title: {
     flex: 1,
     color: "#ffff57",
@@ -108,11 +123,10 @@ export default StyleSheet.create({
 
   infoContainer: {
     backgroundColor: 'white',
-    width: '85%',
+    width: '100%',
     height:'100%',
     alignSelf: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
     paddingBottom: '10%',
     fontFamily: 'RedHatText_Regular',
     
