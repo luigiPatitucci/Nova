@@ -26,10 +26,10 @@ const Movement = ({ navigation }) => {
                     <Icon2 name='paper-plane' size={30} color='white'/>
                     <Text style={s.textButton}>Enviar dinero</Text>
                 </Button>
-                <Button style={s.button}>
+                {/* <Button style={s.button}>
                     <Icon2 name='sync' size={30} color='white' onPress={() => navigation.navigate('CurrencyConverter')}/>
                     <Text style={s.textButton}>Comprar dolares</Text>
-                </Button>
+                </Button> */}
             </View>
         </View>
     )

@@ -79,20 +79,20 @@ const Statistics = () => {
           fromZero={true}
             data={dataConstructor}
             width={480}
-            height={310}
+            height={360}
             chartConfig={chartConfig}
           />
         </ScrollView>
       </View>
       <View style={s.optionsContainer}>
-        <View style={s.optionTypeContainer}>
+        {/* <View style={s.optionTypeContainer}>
           <Button style={s.button} onPress={() => handlerType('positivo')}>
             <Text style={s.textButton}>Ingresos</Text>
           </Button>
           <Button style={s.button} onPress={() => handlerType('negativo')}>
             <Text style={s.textButton}>Gastos</Text>
           </Button>
-        </View>
+        </View> */}
         <View style={s.optionTimeContainer}>
           <Button style={s.timeButton} onPress={() =>{
 

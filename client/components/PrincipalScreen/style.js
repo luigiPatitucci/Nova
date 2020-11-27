@@ -33,7 +33,6 @@ export default {
         color: 'white', 
         textAlign: 'center', 
         fontFamily: 'RedHatText_Regular',
-        marginBottom: '3%'
     },
     dateContainer: {
         width: '90%',

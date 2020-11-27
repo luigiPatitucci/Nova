@@ -1,3 +1,3 @@
 ////API LOCALHOST/////
-export const API_URL = '192.168.0.209:3000';
+export const API_URL = '192.168.1.12:3000';
 
