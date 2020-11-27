@@ -6,28 +6,21 @@ const styles = StyleSheet.create( {
 		backgroundColor: "#f3f3f3"
 	},
 	
-	headerBackground: {
-		justifyContent: "center",
-		alignItems: "center",
-		backgroundColor: "#4b81e7",
-		width: "200%",
-		position: "absolute",
-		height: 500,
-		top: -415,
+	header: {
 		alignSelf: "center",
-		borderBottomRightRadius: 900,
-		borderBottomLeftRadius: 900
+		width: "90%",
+		marginTop: 20,
+		marginBottom: 25,
+		padding: 7,
+		borderRadius: 10,
+		backgroundColor: "#242835"
 	},
 	
 	headerText:
 	{
-		alignSelf: "center",
 		color: "white",
-		fontSize: 32,
-		fontWeight: "bold",
-		textTransform: "uppercase",
-		marginTop: 5,
-		marginBottom: 75,
+		fontSize: 25,
+        fontFamily: 'RedHatText_Regular',
 		textAlign: "center"
 	},
 	
@@ -49,6 +42,8 @@ const styles = StyleSheet.create( {
 		width: "100%",
 		maxWidth: 298,
 		marginBottom: 15,
+		borderRadius: 10
+		,
 		shadowColor: "#000",
 		shadowOffset: { width: 0, height: 3 },
 		shadowOpacity: 0.27,
@@ -83,6 +78,13 @@ const styles = StyleSheet.create( {
 		color: "#eee",
 	},
 	
+	cameraIcon:
+	{
+		marginRight: 10,
+		fontSize: 22,
+		color: "#fff"
+	},
+	
 	amountContainer:
 	{
 		alignSelf: "center",
@@ -92,8 +94,8 @@ const styles = StyleSheet.create( {
 		marginRight: 10,
 		marginTop: 45,
 		marginBottom: 30,
-		borderRadius: 10,
-		backgroundColor: "#8b40ed"
+		borderRadius: 20,
+		backgroundColor: "#4b81e7"
 	},
 	
 	amountLabel:
@@ -134,7 +136,7 @@ const styles = StyleSheet.create( {
 		fontWeight: "bold",
 		textAlign: "center",
 		color: "#fff",
-		backgroundColor: "#6515cf"
+		backgroundColor: "#1451c4"
 	}
 } );
 

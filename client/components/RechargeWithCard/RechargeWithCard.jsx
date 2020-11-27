@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { View, Text, Platform, Alert } from "react-native";
 import { Button, Content, Container, Item, Input, Label } from "native-base";
 import { CreditCardInput } from "react-native-credit-card-input";
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import axios from "axios";
@@ -42,8 +43,8 @@ function RechargeWithCard( { navigation } )
 			return;
 		}
 		
-		await dispatch( rechargeCard( { id: user.idAccount, amount } ) );
-		await dispatch( refresh( user.id ) );
+		dispatch( rechargeCard( { id: user.idAccount, amount } ) );
+		dispatch( refresh( user.id ) );
 		
 		Alert.alert( 
 			"Recarga exitosa",
@@ -147,12 +148,12 @@ function RechargeWithCard( { navigation } )
 	return (
 		<Container style={ styles.container }>
 			<Content>
-				<View style={ styles.headerBackground }></View>
-				
-				<Text style={ styles.headerText }>Recarga</Text>
-				<Text style={ styles.subHeaderText }>con tarjeta</Text>
+				<View style={ styles.header }>
+					<Text style={ styles.headerText }>Recarga con tarjeta</Text>
+				</View>
 				
 				<Button disabled={ !scanAvailable } style={ [ styles.button, scanAvailable ? styles.scanButton : null ] } block onPress={ handleScanButton }>
+					<Icon size={ 30 } name="camera" style={ styles.cameraIcon } />
 					<Text style={ [ styles.buttonText, styles.scanButtonText ] }>Escanear tarjeta</Text>
 				</Button>
 				
