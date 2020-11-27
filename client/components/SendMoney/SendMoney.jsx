@@ -71,11 +71,8 @@ export default SendMoney = ({ navigation }) => {
 
       <View style={s.infoContainer}>
         <View style={s.main1}>
-        <View style={{}}>
-                    <Image source={require('../../../client/assets/nova.png')} style={{width: '100%', height: '100%'}} />
-                </View>
           <Header style={s.header}>
-            <Body
+            {{/* <Body
               style={{ flex: 1, flexDirection: "row", alignSelf: "flex-start", alignItems: 'center' }}>
                
               <Button transparent onPress={() => {
@@ -88,7 +85,7 @@ export default SendMoney = ({ navigation }) => {
               }}>
                 <Icon style={{ color: "black" }} />
               </Button>
-            </Body>
+            </Body> */}}
             <Text style={{ color: '#242835',fontFamily: 'RedHatText_Regular', textAlign: "center"}}>Selecciona un contacto</Text>
             <View style={s.picker}>
               
