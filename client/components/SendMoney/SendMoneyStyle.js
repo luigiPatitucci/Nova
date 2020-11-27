@@ -117,5 +117,7 @@ export default StyleSheet.create({
     fontFamily: 'RedHatText_Regular',
     
 },
-
+space: {
+  top: 40,
+},
 });
