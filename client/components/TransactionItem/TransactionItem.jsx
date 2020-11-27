@@ -20,7 +20,15 @@ const TransactionItem = ({ type, date, name, amount, referenceCode }) => {
                         type === 'recharge' ?
 
                             <Icon name='wallet-plus-outline' size={50} color='#FFD700' style={{ marginTop: '2%' }} />
+                            
                             :
+                
+                            /* type === 'conversionArs' || 'conversionUsd' ?
+
+                            <Icon2 name='sync-alt' size={50} color='#27AE60' style={{ marginTop: '2%' }} />
+
+                            : */
+                            
                             <Icon name='account-circle' size={50} color='#4b81e7' style={{ marginTop: '2%' }} />
                     }
                     <View style={s.subInfoContainer}>
@@ -64,7 +72,7 @@ const TransactionItem = ({ type, date, name, amount, referenceCode }) => {
 
                                     :
 
-                                    type === 'send' ?
+                                    type === 'transfer' ?
 
                                         <View>
                                             <Text style={s.modalTitleText}>Envio</Text>

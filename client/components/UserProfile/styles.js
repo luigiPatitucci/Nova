@@ -52,7 +52,7 @@ export default {
         color: 'white'
     },
     pencilContainer: {
-        bottom: -165,
+        bottom: -180,
         backgroundColor: '#242835',
         padding: 10,
         borderRadius: 100,
@@ -63,7 +63,7 @@ export default {
     },
     
     shareCvuIconContainer: {
-        bottom: -112,
+        bottom: -129,
         backgroundColor: '#242835',
         padding: 10,
         borderRadius: 100,
