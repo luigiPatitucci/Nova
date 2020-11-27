@@ -81,7 +81,6 @@ const  Contactos = ()=>{
     dispatch(addContact({id:user.id,email:input.email,nickname:input.nickname}))
   };
 
-  let  keyExtractor = (item, index) => index.toString()
   let renderItem = ({ item }) => (
 
   <ListItem bottomDivider containerStyle={s.item}>

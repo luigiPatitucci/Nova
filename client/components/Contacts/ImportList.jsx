@@ -73,9 +73,9 @@ const ContactImport = () => {
       <Text style={s.header}>Importar contactos</Text>
       <ScrollView>
         {
-          contactList && contactList.map((contact) => 
+          contactList && contactList.map((contact, i) => 
             ( contact.phoneNumbers &&
-              <ListItem bottomDivider containerStyle={s.item} onPress={(() => handleSubmitAdd(contact.phoneNumbers[0].number, contact.name))}>
+              <ListItem key={i} bottomDivider containerStyle={s.item} onPress={(() => handleSubmitAdd(contact.phoneNumbers[0].number, contact.name))}>
                 <Image source={require('../../assets/logoUser.png')} style={{ width: 40, height: 40 }} />
                 <ListItem.Content>
                   <ListItem.Title>{contact.name}</ListItem.Title>
