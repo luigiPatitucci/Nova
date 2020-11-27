@@ -197,7 +197,7 @@ module.exports = {
 			async handler(ctx){
 				const {id,amount} = ctx.params
                const transaction= await Transaction.create({
-                    amount:amount,
+                    amount:parseInt(amount),
                     currency:"ARS",
                     transactionType:"recharge",
 					description:"recarga con tarjeta",
@@ -211,7 +211,7 @@ module.exports = {
                     where: { id: id },
                 });
             
-                account.balanceArs = account.balanceArs + amount;
+                account.balanceArs = parseInt(account.balanceArs) + parseInt(amount);
                 await account.save(); 
 
                 return transaction;

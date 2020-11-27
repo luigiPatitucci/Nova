@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { allContacts, deleteContact, addContact } from '../../redux/actions/contacts'
+import { allContacts } from '../../redux/actions/contacts'
 import { tranfer } from '../../redux/actions/transactions'
 import { refresh } from '../../redux/actions/userActions.js';
 import { useDispatch, useSelector } from "react-redux";
@@ -12,34 +12,30 @@ import {
   Picker,
   Icon,
   Header,
-  Title,
   Label,
   ListItem,
-  Content,
-  Card
 } from "native-base";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import s from "./SendMoneyStyle";
 import { Alert, View, CheckBox, StyleSheet, Image } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
 
 const SendMoney = ({ navigation }) => {
   const dispatch = useDispatch()
   const contactos = useSelector((state) => state.contactos);
   const user = useSelector((state) => state.userReducer);
 
-  useEffect(() => {
-    dispatch(allContacts(user.id))
-  }, [])
-
-  const [selectContact, setSelectContact] = useState("");
+  const [selectContact, setSelectContact] = useState(contactos.listaContactos.length ? contactos.listaContactos[0] : "");
   const [money, setMoney] = useState(0);
   const [error, setError] = useState(false);
   const [fromContacts, setFromContacts] = useState(false);
   const [message, setMessage] = useState("");
   const [checkBox, setCheckBox] = useState(false);
-
+  useEffect(() => {
+    dispatch(allContacts(user.id))
+    
+  }, [])
+  
   const format = amount => {
     return Number(amount)
       .toFixed(2)
@@ -50,32 +46,25 @@ const SendMoney = ({ navigation }) => {
     await dispatch(tranfer({
       id: user.id,
       toEmail: selectContact.email,
-      amount: parseInt(setMoney),
+      amount: parseInt(money),
       description: message
     }))
+    console.log("Usuario seleccionado ",selectContact)
     await dispatch(refresh(user.id))
-    alert("Se han transferido $" + setMoney + " a " + selectContact.nickname)
+    alert("Se han transferido $" + money + " a " + selectContact.nickname)
   }
-
-  console.log(selectContact)
 
   return (
     <KeyboardAwareScrollView style={{  backgroundColor: '#242835'}}>
 
       <View style={s.infoContainer}>
         <View style={s.main1}>
-        <View style={{}}>
-                    <Image source={require('../../../client/assets/nova.png')} style={{width: '100%', height: '100%'}} />
-                </View>
           <Header style={s.header}>
-            <Body
+             <Body
               style={{ flex: 1, flexDirection: "row", alignSelf: "flex-start", alignItems: 'center' }}>
-               
-
-                <Icon style={{ color: "black" }} />
-           
+             <Text style={s.header1}>Enviar dinero</Text>
             </Body>
-            <Text style={{ color: '#242835',fontFamily: 'RedHatText_Regular', textAlign: "center"}}>Selecciona un contacto</Text>
+            <Text style={{ color: 'white',fontFamily: 'RedHatText_Regular', textAlign: "center"}}>Selecciona un contacto</Text>
             <View style={s.picker}>
               
               <Picker
@@ -127,9 +116,7 @@ const SendMoney = ({ navigation }) => {
             <CheckBox
               style={styles.color}
               value={checkBox}
-              onValueChange={setCheckBox}
-
-            />
+              onValueChange={setCheckBox}/>
             <Body>
               <Text style={{ color: '#4b81e7', fontFamily: 'RedHatText_Regular'}}> Acepto usar la seleccion amigo solo con fines personales, no comerciales</Text>
             </Body>
