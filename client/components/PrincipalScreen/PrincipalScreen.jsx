@@ -17,7 +17,7 @@ import { API_URL } from '../../components/variables';
 
 const PrincipalScreen = ({ navigation }) => {
     const user = useSelector((state) => state.userReducer);
-    const transactionHistory = useSelector((state) => state.transactions.transactionHistory).reverse()
+    const transactionHistory = useSelector((state) => state.transactions.transactionHistory)
     const dispatch = useDispatch();
 
     const [initialDate, setInitialDate] = useState(new Date());
@@ -172,7 +172,7 @@ const PrincipalScreen = ({ navigation }) => {
                         transactionHistory.map((transaction, i) => (
 
                             <TransactionItem
-                                name={transaction.name}
+                                name={transaction.title}
                                 amount={transaction.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
                                 date={transaction.createdAt}
                                 type={transaction.transactionType}

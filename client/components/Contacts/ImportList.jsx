@@ -15,7 +15,6 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { API_URL } from '../../components/variables';
 
 const ContactImport = () => {
-
   const user = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const [currentContact, setCurrent] = useState()

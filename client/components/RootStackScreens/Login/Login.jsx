@@ -14,8 +14,6 @@ import { API_URL } from '../../variables';
 
 
 const Login = ({ navigation }) => {
-
-
     const dispatch = useDispatch();
 
     const [input, setInput] = useState({
