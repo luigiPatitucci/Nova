@@ -1,11 +1,16 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import LottieView from 'lottie-react-native';
 
 
 const Loader = () => {
     return (
-        <LottieView source={require('../../assets/5215-loading-checkmark.json')} autoPlay loop />
+        <View style={{ marginRight: 35}}>
+            <Image source={require('../../assets/NovaBg_1.gif')}
+        style={{width:380, height:'104%', bottom:50}} 
+        />
+        </View>
+        
     )
 };
 

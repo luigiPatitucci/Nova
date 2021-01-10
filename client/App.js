@@ -20,7 +20,7 @@ const App = () => {
     native_base();
     setTimeout(() => {
       setReady(true);
-    }, 1000);
+    }, 6000);
   });
 
 
@@ -34,7 +34,7 @@ const App = () => {
         < NavigationContainer>
           <StatusBar 
             barStyle='light-content'
-            backgroundColor='#171717'
+            backgroundColor='#242835'
           />
           <RootStackScreens />
 
@@ -51,6 +51,7 @@ async function native_base() {
   await Font.loadAsync({
     Roboto: require("native-base/Fonts/Roboto.ttf"),
     Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+    RedHatText_Regular: require('./assets/RedHatText-Regular.ttf'),
     ...Ionicons.font,
   });
 };

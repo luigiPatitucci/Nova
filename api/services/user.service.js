@@ -76,14 +76,19 @@ module.exports = {
 	
 	//CREO LA CUENTA 
 	let codigo = Math.floor(Math.random() * 100000000)
+	let cod = Math.floor(Math.random() * 100000000000)
+	let cvu = cod.toString() + cod.toString()
+	console.log("ESTE ES EL cvu ",cvu)
 	const cuenta = Account.create({
 		code:codigo,
-		userId:newuser.id
+		userId:newuser.id,
+		cvu:cvu
 	})
 	//GENERAR PIN PARA DAR ALTA DE CLIENTE 
 		const newToken = await Token.create({
 			pin:Math.floor((Math.random() * 1000000)),
-			userId:newuser.id
+			userId:newuser.id,
+			
 			})
 	//SE ENVIA EMAIL CON EL CODIGO DE VERIFICACION
 
@@ -181,6 +186,63 @@ module.exports = {
 
 		},
 	},
+	updateAvatar:{
+		rest: {
+			method:"PUT",
+			path:"/avatar/:_id"
+		},
+		async handler(ctx){
+
+			const data=ctx.params;
+			console.log(data)
+			await User.update({
+				avatar:data.avatar
+			},
+			{
+				where:{
+					id:data._id
+				}
+			}
+			)
+			return data.avatar;
+		}
+	},
+		//MODIFICAR DATOS DEL USUARIO
+		updateUser:{
+			rest: {
+				method:"PUT",
+				path:"/update/:_id"
+			},
+			async handler(ctx){
+	
+			const data = ctx.params;
+				console.log(ctx.params._id)
+				console.log(ctx.params.avatar)
+				await User.update(
+					
+					{  
+						email:data.email,
+						username:data.username,
+						surname:data.surname,
+						birthday:data.birthday,
+						phone_number:data.phone_number,
+						adress:data.adress,
+					},
+	
+					{
+					where:{
+						id:data._id
+						}
+					}
+				);
+				const user = await User.findOne({
+					where:{id:data._id},
+	
+				})
+				return user
+			}
+		},
+		
 	validarToken:{
 		rest: {
 			method:"POST",

@@ -1,20 +1,18 @@
 import React from 'react';
 
-import { createStackNavigator, TransitionPresets, CardStyleInterpolators } from '@react-navigation/stack';
-
-import StartScreen from './StartScreen/StartScreen.jsx'
-import Login from './Login/Login.jsx'
-import CreateUser from '.././Start/Create-user/Create-user.jsx';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
+import StartScreen from './StartScreen/StartScreen';
+import Login from './Login/Login';
+import CreateUser from '.././Start/Create-user/Create-user';
 import FirstRegister from '.././Start/Create-user/First-register';
 import Validation from '.././Start/Create-user/ValidationToken';
 import DirectionRegister from '.././Start/Create-user/Direction-register';
-import MyDrawer from '../Drawer/drawer.jsx'
-import { Easing } from 'react-native';
-
-
+import MenuStackScreens from '../MenuStackScreens/MenuStackScreens';
+import Touch from './Biometric/Huella'
+import Loader from '../Loader/Loader'
+import SendMoney from '../SendMoney/SendMoney'
 const RootStack = createStackNavigator();
-
-const RootStackScreens = ({ navigation }) => {
+const RootStackScreens = () => {
 
     const options = {
         headerStyle: {
@@ -28,16 +26,18 @@ const RootStackScreens = ({ navigation }) => {
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         headerTintColor: 'white' 
     }
-
+    
     return (
         <RootStack.Navigator screenOptions={options} headerMode='float'>
-            <RootStack.Screen name='Inicio' component={StartScreen} options={{headerShown: false}}/>
-            <RootStack.Screen name='Ingresar' component={Login} />
+            
+            <RootStack.Screen name='Comienzo' component={StartScreen} options={{headerShown: false}}/>
+            <RootStack.Screen name='Touch' component={Touch} options={{headerShown: false}}/>
+            <RootStack.Screen name='Ingresar' component={Login} options={{headerShown: false}}/>
             <RootStack.Screen name='Registrarse' component ={FirstRegister}/>
             <RootStack.Screen name='Verificacion' component={Validation} /> 
             <RootStack.Screen name='Crear Usuario' component={CreateUser} />
             <RootStack.Screen name='DirectionRegister' component={DirectionRegister} />
-            <RootStack.Screen name='Home' component={MyDrawer} options={{headerShown: false}}/>   
+            <RootStack.Screen name='Home' component={MenuStackScreens} options={{headerShown: false}}/>   
         </RootStack.Navigator>
     );
 };
