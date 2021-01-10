@@ -5,10 +5,12 @@ import Loader from './components/Loader/Loader.jsx';
 import { Provider } from "react-redux";
 import store from './redux/store/store.js';
 import { Ionicons } from "@expo/vector-icons";
+
+
 import { StatusBar } from 'react-native'
 
 import { NavigationContainer } from '@react-navigation/native';
-
+import Touch from './components/TouchId/TouchIdAuth.js'
 
 const App = () => {
 
@@ -35,6 +37,10 @@ const App = () => {
             backgroundColor='#242835'
           />
           <RootStackScreens />
+
+          <Touch />
+          {/* <MyDrawer/> */}
+
         </NavigationContainer >
       </Provider>
     );
