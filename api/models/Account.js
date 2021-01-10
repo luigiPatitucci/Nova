@@ -2,18 +2,19 @@ const { DataTypes } = require('sequelize');
 const db = require('../dbConfig');
 
  const Account = db.conexion.define('account', {
-    balance:{
+    balanceArs:{
       type: DataTypes.BIGINT,
       allowNull: true,
-      defaultValue: 0,
+      default: 0,
     },
-    cbu:{
+    balanceUsd:{
         type: DataTypes.BIGINT,
         allowNull: true,
-        unique: false,
-        validate: {
-            isNumeric: true 
-        }  
+        default: 0,
+      },
+    cvu: {
+        type: DataTypes.TEXT,
+        allowNull: true, 
     },
     code:{
         type: DataTypes.STRING,
@@ -27,7 +28,6 @@ const db = require('../dbConfig');
         type: DataTypes.BOOLEAN,
         allowNull: true,
         defaultValue:false
-
     }
   
 })

@@ -1,63 +1,47 @@
-import React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import React, {useEffect} from 'react';
+import { Image } from 'react-native';
 import { Button, Text, View, Container } from 'native-base';
-
-
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import s from './styles.js'
+import AsyncStorage from '@react-native-community/async-storage';
+import { useDispatch, useSelector } from 'react-redux';
+import { isEmptyArray } from 'formik';
 const StartScreen = ({ navigation }) => {
+    AsyncStorage.getItem("userData", (err, result)=>{
+        const data = JSON.parse(result)
+        if(data !== null){
+            navigation.navigate("Touch")
+        }
+        console.log("POOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",data)
+    })
+   
     return (
-        <Container style={styles.default}>
-            <View>
-                <Image source={{ uri: 'https://i.imgur.com/SGFslqf.png' }}
-                    style={styles.imagen} />
+        <Container style={s.contianer}>
+            <View style={s.imageContainer}>
+                <Image source={require('../../../assets/nova.png')} style={s.image} />
             </View>
-            <View style={styles.container}>
+            <View style={s.containerOptions}>
                 <Button
                     block
                     dark
-                    style={styles.button}
+                    style={s.button}
                     onPress={() => navigation.navigate('Ingresar')}
                 >
-                    <Text>Ingresar</Text>
+                    <Icon size={35} name='login' style={s.icon}/>
+                    <Text style={s.textButton}>Ingresar</Text>
                 </Button>
                 <Button
                     block
                     dark
-                    style={styles.button}
+                    style={s.button}
                     onPress={() => navigation.navigate('Registrarse')}
                 >
-                    <Text>Registrarme</Text>
+                    <Icon size={35} name='account-check' style={s.icon}/>
+                    <Text style={s.textButton}>Registrarme</Text>
                 </Button>
             </View>
         </Container>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'center',
-        width: 360,
-        height: 512,
-        alignSelf: 'center'
-    },
-    button: {
-        margin: 10,
-    },
-    icon: {
-        fontSize: 100,
-        textAlign: 'center',
-
-    },
-    default: {
-        backgroundColor: 'yellow'
-    },
-    imagen: {
-        width: 100,
-        height: 70,
-        alignSelf: 'center',
-        bottom:-120,
-        left:15
-    }
-
-});
 
 export default StartScreen;

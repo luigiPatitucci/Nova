@@ -6,8 +6,7 @@ const db = require('../dbConfig');
    const User =  db.conexion.define('user',{
         email:{
             type: DataTypes.STRING,
-            allowNull: true,
-            unique:true,
+            allowNull: false,
             validated:{
               isEmail: false,
             }
@@ -48,25 +47,9 @@ const db = require('../dbConfig');
             type: DataTypes.TEXT,
             allowNull: true,
         },
-        address_street: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        address_number: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-        locality: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        province: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        country: {
-            type: DataTypes.STRING,
-            allowNull: true,
+        adress:{
+            type:DataTypes.TEXT,
+            allowNull:true
         },
         role:{
             type: DataTypes.ENUM('user','admin'),
@@ -74,7 +57,7 @@ const db = require('../dbConfig');
         },
         verified: {
 			type: DataTypes.BOOLEAN,
-			default: false,
+			defaultValue: false,
 		},
     })
 module.exports={

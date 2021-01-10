@@ -1,96 +1,97 @@
 export default {
     container: {
-        /* backgroundColor: 'yellow', */
+        backgroundColor: '#242835',
+        width: '90%', 
+        borderRadius: 10, 
+        alignSelf: 'center', 
+        marginTop: '5%', 
+        paddingTop: '5%', 
+        marginBottom: '1%'
     },
-    headerAmount: {
-        flexDirection: 'row',
-        alignItems: 'center',
+    fakeTopHeader: {
+        flexDirection: 'row', 
+        alignSelf: 'center'
+    },
+    UDS: {
+        fontSize: 25,
+        fontFamily: 'RedHatText_Regular',
+        color: 'grey'
+    },
+    ARS: {
+        fontSize: 25, 
+        fontFamily: 'RedHatText_Regular', 
+        color: '#4b81e7'
+    },
+    headerTitle: {
+        color: 'white', 
+        fontSize: 20, 
+        alignSelf: 'center',
+        fontFamily: 'RedHatText_Regular'
+    },
+    balance: {
+        fontSize: 38, 
+        color: 'white', 
+        textAlign: 'center', 
+        fontFamily: 'RedHatText_Regular',
+    },
+    dateContainer: {
+        width: '90%',
+        alignSelf: 'center',
         justifyContent: 'space-around',
-        minHeight: 100,
+        borderRadius: 10,
+        marginBottom: '1%',
+        backgroundColor: 'white'
     },
-    balanceContainer: {
-        justifyContent: 'space-around',
-        backgroundColor: 'rgba(0, 0, 0, .5)',
-        borderRadius: 5,
-        padding: 10,
-        paddingLeft: 40,
-        paddingRight: 40
-
+    optionDate: {
+        alignSelf: 'center',
+        backgroundColor: '#4b81e7',
+        borderRadius: 10,
+        width: '70%',
+        justifyContent: 'center'
     },
-    amount: {
-        textAlign: 'center',
+    textDate: {
         color: 'white',
-        fontSize: 30,
+        fontFamily: 'RedHatText_Regular',
+        fontSize: 20,
+        /* textAlign: 'center' */
     },
-    amountDescription: {
+    icon2: {
+        alignSelf: 'center'
+    },
+    button2: {
+        alignSelf: 'flex-end',
+        marginRight: '1%',
+        marginBottom: '1%'
+    },
+    date: {
         textAlign: 'center',
-        color: 'white'
+        fontFamily: 'RedHatText_Regular',
+        fontSize: 20,
+        marginBottom: '7%'
     },
-    userImage: {
-        backgroundColor: 'transparent',
-        width: 70,
-        height: 70,
-        borderRadius: 35
-    },
-    generalContainer: {
-        backgroundColor: 'white',
-        borderRadius: 5,
-        margin: 5,
-        padding: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-
-        elevation: 4,
-
-    },
-    titleGeneral: {
+    titleModal:  {
+        fontSize: 25,
+        color: 'grey',
+        fontFamily: 'RedHatText_Regular',
         textAlign: 'center',
-        fontSize: 30,
-        marginBottom: 10
+        marginBottom: '4%',
+        marginTop: '4%'
     },
-    amountGeneral: {
-        fontSize: 20  
-    },
-    columnAmount: {
-        flexDirection: 'column',
-        alignItems: 'center'
-    },
-    amountsContainer: {
+    buttonsCC: {
         flexDirection: 'row',
         justifyContent: 'space-around'
     },
-    buttonsContainer: {
-        marginTop: 25,
-        flexDirection: 'row',
-        justifyContent: 'space-around'
+    otpionModal: {
+        backgroundColor: '#4b81e7',
+        borderRadius: 10,
 
     },
-    button: {
-        flexDirection: 'column',
-        height: 55,
-        borderRadius: 5,
-        margin: 4,
-        marginTop: -15,
-        marginBottom: -20,
-        width: 81,
-        backgroundColor: 'white'
+    textDate1: {
+        color: '#4b81e7',
+        fontSize: 20,
+        fontFamily: 'RedHatText_Regular',
+        marginBottom: '10%'
     },
-    secondaryButton: {
-        flexDirection: 'column',
-        height: 55,
-        borderRadius: 5,
-        margin: 4,
-        marginTop: -15,
-        width: 170,
-        backgroundColor: 'white'
-    },
-    textOption: {
-        fontSize: 11
-    }
+
 
 }
