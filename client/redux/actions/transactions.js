@@ -3,8 +3,11 @@ import axios from 'axios';
 export const RECHARGE = 'RECHARGE'; 
 export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
 export const TRANSFER = "TRANSFER";
+export const GET_SUMATORIA = "GET_SUMATORIA"
 
-const API_URL ="192.168.0.9:3000"
+
+import { API_URL } from '../../components/variables';
+
 
 export function recharge(transaction){
 
@@ -23,6 +26,36 @@ export function recharge(transaction){
     };
 };
 
+export function sumarPeriodo(data){
+    return function(dispatch){
+   axios.post(`http://${API_URL}/transaction/getbydate`,data)
+    .then(resp => {
+      //console.log("ENTRE A LA CONSULTA ", resp.data )
+          dispatch({
+            type: GET_SUMATORIA,
+            obj:resp.data
+          })    
+      }).catch(err=>{
+          console.log(err)
+      })
+    }
+}
+export function rechargeCard(transaction){
+
+    return function(dispatch){
+      
+        return axios.post(`http://${API_URL}/transaction/recharge_card`, transaction)
+        .then(resp=>{
+             dispatch({
+                type:RECHARGE_CARD,
+                transaction:resp.data
+            }) 
+        })
+        .catch(err=>{
+            console.log('ERROR AL RECARGAR', err)
+        })
+    };
+};
 
 export function getTransactions(userId){
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, View, Image } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button, Picker } from 'native-base';
-import { ScrollView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../../redux/actions/userActions.js'
+import s from './Styles.js';
 
 const CreateUser = ({navigation}) => {
 
@@ -20,11 +20,15 @@ const CreateUser = ({navigation}) => {
 
     return (
         <Container style={styles.container}>
-            <ScrollView>
+              <KeyboardAvoidingView 
+                behavior='position'>
+                <View style={s.imageContainerVT}>
+                    <Image source={require('../../../assets/nova.png')} style={s.image} />
+                </View>
                 <Form>
                     <Item floatingLabel>
-                        <Label>Validacion de Usuario</Label>
-                        <Input style={{color: 'white'}} onChangeText={pin => setData({ ...data, pin })}></Input>
+                        <Label style={s.labelForm}>Validacion de Usuario</Label>
+                        <Input style={s.inputForm} onChangeText={pin => setData({ ...data, pin })}></Input>
                     </Item>
                 </Form>
                 <Button
@@ -35,7 +39,7 @@ const CreateUser = ({navigation}) => {
                 >
                     <Text>Enviar</Text>
                 </Button>
-            </ScrollView>
+            </KeyboardAvoidingView>
         </Container>
 
     )
@@ -43,14 +47,14 @@ const CreateUser = ({navigation}) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#171717',
+        backgroundColor: '#242835',
     },
     button: {
         width: '90%',
         alignSelf: 'center',
-        marginTop: 50,
+        marginTop: 60,
         justifyContent: 'center',
-        backgroundColor: '#4A1491',
+        backgroundColor: '#4b81e7',
         borderRadius: 10,
     },
     titulos: {

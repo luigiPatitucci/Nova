@@ -8,9 +8,10 @@ import FirstRegister from '.././Start/Create-user/First-register';
 import Validation from '.././Start/Create-user/ValidationToken';
 import DirectionRegister from '.././Start/Create-user/Direction-register';
 import MenuStackScreens from '../MenuStackScreens/MenuStackScreens';
-
+import Touch from './Biometric/Huella'
+import Loader from '../Loader/Loader'
+import SendMoney from '../SendMoney/SendMoney'
 const RootStack = createStackNavigator();
-
 const RootStackScreens = () => {
 
     const options = {
@@ -25,10 +26,12 @@ const RootStackScreens = () => {
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         headerTintColor: 'white' 
     }
-
+    
     return (
         <RootStack.Navigator screenOptions={options} headerMode='float'>
+            
             <RootStack.Screen name='Comienzo' component={StartScreen} options={{headerShown: false}}/>
+            <RootStack.Screen name='Touch' component={Touch} options={{headerShown: false}}/>
             <RootStack.Screen name='Ingresar' component={Login} options={{headerShown: false}}/>
             <RootStack.Screen name='Registrarse' component ={FirstRegister}/>
             <RootStack.Screen name='Verificacion' component={Validation} /> 

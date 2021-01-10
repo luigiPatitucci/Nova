@@ -73,15 +73,18 @@ export default {
         fontSize: 35,
         alignSelf: 'center',
         marginBottom: '5%',
-        color: 'grey'
+        color: 'grey',
+        fontFamily: 'RedHatText_Regular',
     },
     properties: {
         fontSize: 18,
-        marginLeft: '5%'
+        marginLeft: '5%',
+        fontFamily: 'RedHatText_Regular',
     },
     icon: {
         textAlign: 'right',
         marginRight: '2%',
+        marginTop: '2%'
     },
     animation: {
         marginTop: '27%'

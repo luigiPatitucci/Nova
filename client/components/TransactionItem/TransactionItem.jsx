@@ -20,7 +20,15 @@ const TransactionItem = ({ type, date, name, amount, referenceCode }) => {
                         type === 'recharge' ?
 
                             <Icon name='wallet-plus-outline' size={50} color='#FFD700' style={{ marginTop: '2%' }} />
+                            
                             :
+                
+                            /* type === 'conversionArs' || 'conversionUsd' ?
+
+                            <Icon2 name='sync-alt' size={50} color='#27AE60' style={{ marginTop: '2%' }} />
+
+                            : */
+                            
                             <Icon name='account-circle' size={50} color='#4b81e7' style={{ marginTop: '2%' }} />
                     }
                     <View style={s.subInfoContainer}>
@@ -29,7 +37,7 @@ const TransactionItem = ({ type, date, name, amount, referenceCode }) => {
                     </View>
                 </View>
                 {
-                    type === 'send' ?
+                    type === 'transfer' ?
 
                         <View style={s.amountContainerNegative}>
                             <Text style={s.amountNegative}>- {amount} ARS</Text>
@@ -45,7 +53,7 @@ const TransactionItem = ({ type, date, name, amount, referenceCode }) => {
                     isVisible={modalVisible}
                     animationIn='zoomIn'
                     animationInTiming={800}
-                    animationOut='fadeOut'
+                    animationOut='zoomOut'
                     animationOutTiming={800}
                     onBackdropPress={() => setModalVisible(!modalVisible)}
                 >
@@ -64,7 +72,7 @@ const TransactionItem = ({ type, date, name, amount, referenceCode }) => {
 
                                     :
 
-                                    type === 'send' ?
+                                    type === 'transfer' ?
 
                                         <View>
                                             <Text style={s.modalTitleText}>Envio</Text>
@@ -92,7 +100,7 @@ const TransactionItem = ({ type, date, name, amount, referenceCode }) => {
 
                         <Text style={s.properties}>Monto: {amount} ARS</Text>
                         <Text style={s.properties}>Código de referencia: {referenceCode}</Text>
-                        <LottieView style={s.animation} source={require('../../assets/lf30_editor_0qoqgqll.json')} autoPlay loop={false} />
+                        <LottieView style={s.animation} source={require('../../assets/lf30_editor_4tc8fsjh.json')} autoPlay loop={false} />
                     </View>
                 </Modal>
             </View>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { Alert, KeyboardAvoidingView, TouchableOpacity, Keyboard } from 'react-native';
 import { Container, Form, Item, Input, Label, Text, Button } from 'native-base';
 import { Image, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,11 +8,16 @@ import * as LocalAuthentication from 'expo-local-authentication';
 import LottieView from 'lottie-react-native';
 import s from './styles.js';
 import axios from 'axios';
+
 const API_URL ="192.168.0.9:3000";
 
+import AsyncStorage from '@react-native-community/async-storage';
+
+
+import { API_URL } from '../../variables';
+
+
 const Login = ({ navigation }) => {
-
-
     const dispatch = useDispatch();
 
     const [input, setInput] = useState({
@@ -33,30 +38,25 @@ const Login = ({ navigation }) => {
                 alert("Tu dispositivo no es compatible")
             })
     }, []);
-
-    function handleLogin() {
-        const config = {
-            promptMessage: "Autenticacion Touch ID",
-            color: "#FF0000",
-            fallbackLabel: 'Touch ID invalido'
-        };
-        LocalAuthentication.authenticateAsync(config)
-            .then(success => {
-                setNombre("Penelope")
-            })
-            .catch(error => {
-                console.log('La auntenticacion fallo: ' + error)
-            })
-    }
-
+    const tiempo = setTimeout(async() => {
+        await AsyncStorage.setItem("userData", JSON.stringify(user))
+        
+    }, 8000);
+   
+   
     const handleSubmit = async () => {
-        await dispatch(login(input));
+        dispatch(login(input));
         await axios.post(`http://${API_URL}/auth/login`, input)
-            .then(() => {
-                navigation.navigate('Home');
+
+            .then(async() => {
+            tiempo
+            console.log("LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", user)
+            if(user.id !== null){
+                navigation.navigate('Home'); 
+                Keyboard.dismiss();  }
             })
             .catch(() => {
-                return Alert.alert('Por favor, verifique que los datos ingresados son correctos.');
+                return Alert.alert("Datos incorrectos");
             })
     };
 
@@ -75,12 +75,14 @@ const Login = ({ navigation }) => {
                 <View style={s.optionsContainer}>
                     <Form style={s.form}>
                         <Item floatingLabel>
-                            <Label style={s.labelForm}>Email</Label>
-                            <Input style={s.inputForm} onChangeText={email => setInput({ ...input, email })} />
+                            <Label style={s.labelForm1}>Email</Label>
+                            <Input style={s.inputForm1} onChangeText={email => setInput({ ...input, email })} autoCapitalize= "none"/>
                         </Item>
-                        <Item floatingLabel>
-                            <Label style={s.labelForm}>Contraseña</Label>
-                            <Input style={s.inputForm}
+                    </Form>
+                    <Form style={s.form2}>
+                    <Item floatingLabel>
+                            <Label style={s.labelForm2}>Contraseña</Label>
+                            <Input style={s.inputForm2}
                                 onChangeText={password => setInput({ ...input, password })}
                                 secureTextEntry={true}
                             />
@@ -94,17 +96,15 @@ const Login = ({ navigation }) => {
                     >
                         <Text style={s.textButton}>Ingresar</Text>
                     </Button>
-                    <Button
+                    {/* <Button
                         style={s.reset}
                         transparent
                         onPress={() => recoverPassword()}
                     >
                         <Text style={s.textReset}>¿Olvidaste tu contraseña?</Text>
-                    </Button>
+                    </Button> */}
 
-                    <TouchableOpacity style={s.buttonBiometric} onPress={() => handleLogin()}>
-                        <LottieView style={s.fingerPrint} source={require('../../../assets/lf30_editor_ftmbz2nl.json')} autoPlay loop />
-                    </TouchableOpacity>
+                  
                 </View>
             </KeyboardAvoidingView>
         </Container>

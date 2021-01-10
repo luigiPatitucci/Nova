@@ -8,16 +8,17 @@ export default {
         color: 'white',
         fontSize: 25,
         marginTop: '5%',
-        marginBottom: '5%',
+        marginBottom: '2%',
         textAlign: 'center',
         borderRadius: 10,
         width: '90%',
-        height: '10.3%',
+        height: '7%',
         textAlignVertical: 'center',
         fontFamily: 'RedHatText_Regular',
     },
     buttonsContainer: {
-        justifyContent: 'center'
+        justifyContent: 'center',
+        top: '-30%'
     },
     button: {
         backgroundColor: '#4b81e7',
@@ -38,5 +39,8 @@ export default {
         paddingBottom: '2%'
     },
     icon: {
+        height: 400,
+        width: 400,
+        alignSelf: 'center'
     }
 }

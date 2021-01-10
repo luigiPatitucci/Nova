@@ -19,6 +19,7 @@ const initialState = {
     balanceUsd: 0,
     code: "0",
     idAccount: null,
+    cvu: ""
       
       
     
@@ -46,6 +47,9 @@ export default (state = initialState, action) => {
                 balanceUsd: action.user.logUser.account.balanceUsd,
                 code: action.user.logUser.account.code,
                 idAccount: action.user.logUser.account.id,
+                cvu:action.user.logUser.account.cvu,
+                adress:action.user.logUser.adress,
+                phone_number:action.user.logUser.phone_number,
             }
         case USER_BY_ID: 
             return {
@@ -63,6 +67,8 @@ export default (state = initialState, action) => {
                 balanceUsd: action.user.account.balanceUsd,
                 code: action.user.account.code,
                 idAccount: action.user.account.id,
+                identityNumber: action.user.identityNumber,
+                cvu:action.user.account.cvu,
             }
         case UPDATE_AVATAR:
             console.log("SOY LA RESPUESTA AVATAR ",action.avatar)

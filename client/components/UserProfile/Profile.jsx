@@ -1,27 +1,34 @@
 import React, { useState } from 'react';
-import { View, Container, Text } from 'native-base';
-import { Image, TouchableOpacity, KeyboardAvoidingView, Keyboard } from "react-native";
+import { View, Container, Text, Button } from 'native-base';
+import { Image, TouchableOpacity, KeyboardAvoidingView, Keyboard, ActivityIndicator } from "react-native";
 import ProfileEdit from './ProfileEdit';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './styles';
 import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker';
 import Modal from 'react-native-modal';
-
+import Spinner from 'react-native-loading-spinner-overlay';
+import Cvu from './Cvu';
 import { updateAvatar } from '../../redux/actions/userActions'
 
-function Profile() {
+const Profile = ({navigation}) => {
   const imgUser = require('../../assets/logoUser.png');
   const dispatch = useDispatch();
 
+  const cvu = useSelector((state) => state.userReducer);
+
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [CvuModal, setCvuModal] = useState(false);
 
   const showModal = () => {
     visible ? null : Keyboard.dismiss();
     setVisible(!visible);
   };
+
 
   const user = useSelector((state) => state.userReducer);
 
@@ -64,6 +71,10 @@ function Profile() {
 
     }
   }
+  const handleLogOut = async() => {
+    await AsyncStorage.clear();
+    navigation.navigate('Ingresar');
+  }
   return (
 
     <Container style={s.container}>
@@ -72,10 +83,10 @@ function Profile() {
         >
         <View style={s.imgContainer}>
           <TouchableOpacity onPress={() => showModal()} style={s.pencilContainer}>
-            <Icon name='pencil' size={28} style={s.pencilIcon} />
+            <Icon name='pencil' size={30} style={s.pencilIcon} />
           </TouchableOpacity>
           
-          <TouchableOpacity onPress={openGallery} style={s.shareCvuIconContainer}>
+          <TouchableOpacity onPress={() => setCvuModal(!CvuModal)} style={s.shareCvuIconContainer}>
             <Icon name='share-variant' size={28} style={s.shareCvuIcon} />
           </TouchableOpacity>
 
@@ -83,12 +94,32 @@ function Profile() {
           <TouchableOpacity onPress={openGallery} style={s.cameraContainer}>
             <Icon name='camera' size={25} style={s.cameraIcon} />
           </TouchableOpacity>
-
+          
           <Text style={s.nickName}>{user.username}</Text>
         </View>
+        <Spinner
+                visible={loading}
+                textContent={'Loading...'}
+                size={'large'}
+                overlayColor={'rgba(0, 0, 0, 0.8)'}
+                color={'#4b81e7'}
+                animation={'fade'}
+                textContent={'Un momento, por favor...'}
+                textStyle={{
+                    color: 'white',
+                    fontFamily: 'RedHatText_Regular',
+                    fontWeight: 'normal'
+                }}
+                customIndicator={
+                    <ActivityIndicator size={60} color={'#4b81e7'}/>
+                }
+            />
       </KeyboardAvoidingView>
 
       <View style={s.infoContainer}>
+      <TouchableOpacity onPress={handleLogOut} style={s.arrowContainer}>
+            <Icon name='arrow-collapse-left' size={30} style={s.arrowIcon} />
+          </TouchableOpacity>
         <Text style={s.infoCategory}>Nombre y Apellido:</Text>
         <Text style={s.infoUser}>{user.name}</Text>
         <Text style={s.infoCategory}>Email:</Text>
@@ -113,6 +144,22 @@ function Profile() {
       >
         <ProfileEdit
           showModal={showModal}
+          setLoading={setLoading}
+        />
+      </Modal>
+
+      <Modal
+        isVisible={CvuModal}
+        animationIn='zoomIn'
+        animationInTiming={500}
+        animationOut='zoomOut'
+        animationOutTiming={500}
+        onBackdropPress={() => setCvuModal(!CvuModal)}
+      >
+        <Cvu
+          phone_number={user.phone_number}
+          cvu={cvu.cvu}
+          alias={cvu.username}
         />
       </Modal>
     </Container>
