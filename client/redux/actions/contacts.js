@@ -3,7 +3,11 @@ export const  LIST_CONTACTS = "LIST_CONTACTS";
 export const DELETE_CONTACTS = "DELETE_CONTACTS"
 export const UPDATE_CONTACTS = "UPDATE_CONTACTS"
 export const ADD_CONTACTO = "ADD_CONTACTO"
+
+
+
 import { API_URL } from '../../components/variables';
+
 
 export function allContacts(id){
 

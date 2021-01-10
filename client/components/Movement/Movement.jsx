@@ -6,6 +6,7 @@ import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import LottieView from 'lottie-react-native';
 import s from './styles';
 
+
 const Movement = ({ navigation }) => {
     return (
         <View style={s.container}>
@@ -18,18 +19,33 @@ const Movement = ({ navigation }) => {
                     <Icon2 name='money-bill' size={30} color='white'/> 
                     <Text style={s.textButton}>Recargar mediante efectivo</Text>
                 </Button>
+
+                <Button style={s.button}>
+                    <Icon2 name='credit-card' size={40} color='white'/>
+                    <Text style={s.textButton} onPress={() => {navigation.navigate("Card");
+              }}>Recargar con tarjeta </Text>
+
                 <Button style={s.button} onPress={() => navigation.navigate('RechargeWithCard')}>
                     <Icon2 name='credit-card' size={30} color='white'/>
                     <Text style={s.textButton}>Recargar con tarjeta</Text>
+
                 </Button>
                 <Button style={s.button} onPress={() => navigation.navigate('SendMoney')}>
                     <Icon2 name='paper-plane' size={30} color='white'/>
                     <Text style={s.textButton}>Enviar dinero</Text>
                 </Button>
+
+                <Button style={s.button}>
+                    <Icon2 name='sync' size={40} color='white'/>
+                    <Text style={s.textButton} onPress={() => {navigation.navigate("Buydollar");
+              }}>Comprar dolares</Text>
+                </Button>
+
                 {/* <Button style={s.button}>
                     <Icon2 name='sync' size={30} color='white' onPress={() => navigation.navigate('CurrencyConverter')}/>
                     <Text style={s.textButton}>Comprar dolares</Text>
                 </Button> */}
+
             </View>
         </View>
     )

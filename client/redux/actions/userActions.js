@@ -4,7 +4,9 @@ export const LOGIN_USER = "LOGIN_USER";
 export const USER_BY_ID ="USER_BY_ID";
 export const UPDATE_AVATAR= "UPDATE_AVATAR"
 
+
 import { API_URL } from '../../components/variables';
+
 
 export function createUser(user){
 
